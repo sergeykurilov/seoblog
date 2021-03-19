@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
             type: String
         },
         role: {
-            type: "Number",
+            type: String,
             trim: true
         },
         photo: {
@@ -49,21 +49,17 @@ const userSchema = new mongoose.Schema({
             data: String,
             default: ""
         }
-    }, {timestamp: true})
+    }, {timestamps: true})
+
 
 
 userSchema.virtual("password")
     .set(function (password) {
-
-
-        //create a temprorary variable called password
+        // create a temporary variable called password
         this._password = password
-
-        //generate salt
+        // generate salt
         this.salt = this.makeSalt()
-
-        //encrypt Password
-
+        // encrypt Password
         this.hashed_password = this.encryptPassword(password)
     })
     .get(function () {
@@ -74,7 +70,7 @@ userSchema.virtual("password")
 
 userSchema.methods = {
     authenticate: function (plainText) {
-        return this.encryptPassword((plainText) === this.hashed_password)
+        return this.encryptPassword(plainText) === this.hashed_password;
     },
     encryptPassword: function (password) {
         if(!password) return ""
@@ -92,5 +88,3 @@ userSchema.methods = {
 }
 
 module.exports = mongoose.model("User", userSchema)
-
-

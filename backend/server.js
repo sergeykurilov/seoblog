@@ -4,16 +4,14 @@ const cookieParser = require("cookie-parser")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const mongoose = require("mongoose")
+const path = require('path')
+// require("dotenv").config({path: path.join(__dirname, "..", ".." ,  ".env")}) ToDo
 require("dotenv").config()
+
 /// bring routes
 
 const blogRoutes = require("./routes/blog")
 const authRoutes = require("./routes/auth")
-
-//db
-
-mongoose.connect(process.env.DATABASE_LOCAL, {useNewUrlParser: true, useUnifiedTopology:true ,useFindAndModify: false})
-.then(() => console.log(`DB connected`))
 
 
 //app
@@ -21,7 +19,8 @@ mongoose.connect(process.env.DATABASE_LOCAL, {useNewUrlParser: true, useUnifiedT
 const app = express()
 
 
-//middlewares
+// middlewares
+
 app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(cookieParser())
@@ -32,8 +31,6 @@ if(process.env.NODE_ENV === "development"){
 }
 app.use(cors())
 
-
-
 //routes middleware
 app.use("/api",blogRoutes)
 app.use("/api",authRoutes)
@@ -41,6 +38,26 @@ app.use("/api",authRoutes)
 //port
 
 const port = process.env.PORT || 8000
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-})
+async function start(){
+    try {
+        //db
+        await mongoose.connect(process.env.DATABASE_LOCAL, {useNewUrlParser: true, useUnifiedTopology:true ,useFindAndModify: false, useCreateIndex: true})
+        console.log("DB connected")
+
+        //app initiation
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`)
+        })
+
+    }catch (e) {
+        //resolve error
+        console.log(e.message)
+    }
+}
+
+start();
+
+
+
+
+
