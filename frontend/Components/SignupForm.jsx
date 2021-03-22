@@ -12,7 +12,7 @@ export const SigupForm = () => {
         "message": "",
         "showform": true
     })
-    const {name,email,password,error,loading,showform,message} = value
+    const {name, email, password, error, loading, showform, message} = value
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -22,20 +22,28 @@ export const SigupForm = () => {
         const user = {name, email, password}
         signup(user)
             .then(res => {
-                if(res.error){
+                if (res.error) {
                     setValue({...value, error: res.error})
-                }else{
-                    setValue({...value, loading: false, error: false, name: "", email: "", password: "", showform: false, message: res.message})
+                } else {
+                    setValue({
+                        ...value,
+                        loading: false,
+                        error: false,
+                        name: "",
+                        email: "",
+                        password: "",
+                        showform: false,
+                        message: res.message
+                    })
                 }
             })
 
 
     }
 
-    const showLoading = () => ( loading ? <div className="alert alert-info">Loading....</div> : "")
-    const showError = () => ( error ? <div className="alert alert-danger">{error}</div> : "")
-    const showMessage = () => ( message ? <div className="alert alert-info">{message}</div> : "")
-
+    const showLoading = () => (loading ? <div className="alert alert-info">Loading....</div> : "")
+    const showError = () => (error ? <div className="alert alert-danger">{error}</div> : "")
+    const showMessage = () => (message ? <div className="alert alert-info">{message}</div> : "")
 
 
     const onChangeHandler = name => e => {
@@ -45,21 +53,27 @@ export const SigupForm = () => {
     const Form = () => {
         return (
             <form onSubmit={handleSubmit}>
-                <input onChange={onChangeHandler("name")} placeholder={"your name"} value={value.name} type="text" className="form-control"/>
-                <input onChange={onChangeHandler("email")} placeholder={"your email"} value={value.email} type="text" className="form-control"/>
-                <input onChange={onChangeHandler("password")} placeholder={"your password"} value={value.password} type="password" className="form-control"/>
+                <input onChange={onChangeHandler("name")} placeholder={"your name"} value={value.name} type="text"
+                       className="form-control"/>
+                <br/>
+                <input onChange={onChangeHandler("email")} placeholder={"your email"} value={value.email} type="text"
+                       className="form-control"/>
+                <br/>
+                <input onChange={onChangeHandler("password")} placeholder={"your password"} value={value.password}
+                       type="password" className="form-control"/>
+                <br/>
                 <button className="btn btn-primary">Submit</button>
             </form>
         )
     }
 
     return (
-     <>
-         {showLoading()}
-         {showMessage()}
-         {showError()}
-         {showform && <Form/>}
-     </>
+        <>
+            {showLoading()}
+            {showMessage()}
+            {showError()}
+            {showform && <Form/>}
+        </>
     )
 
 }

@@ -4,8 +4,9 @@ import Link from "next/link";
 
 function HomePage() {
     return <Layout>
-
-        Welcome to Next.js!
+        <div className="container">
+            Welcome to Next.js!
+        </div>
     </Layout>
 }
 
