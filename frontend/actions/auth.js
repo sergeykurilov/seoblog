@@ -18,6 +18,7 @@ export const signup = (user) => {
         .catch(err => console.log(err))
 }
 
+
 export const signin = (user) => {
     return fetch(`${API}/signin`, {
         "method": "POST",
@@ -64,7 +65,10 @@ const setLocalStorage = (key,value) => {
         localStorage.setItem(key, JSON.stringify(value))
     }
 }
-const removeLocalStorage = (key) => {
+
+
+
+const  removeLocalStorage = (key) => {
     if (process.browser) {
         localStorage.removeItem(key)
     }
