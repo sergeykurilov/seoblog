@@ -54,7 +54,18 @@ const Example = (props) => {
                                 </NavItem>
 
                             </>}
-
+                            {/*{!isAuth() && <>*/}
+                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
+                            {/*        <Link href="/signin">*/}
+                            {/*            <NavLink>Signin</NavLink>*/}
+                            {/*        </Link>*/}
+                            {/*    </NavItem>*/}
+                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
+                            {/*        <Link href="/signup">*/}
+                            {/*            <NavLink>Signup</NavLink>*/}
+                            {/*        </Link>*/}
+                            {/*    </NavItem>*/}
+                            {/*</>}*/}
                             
                             {isAuth() &&   <NavItem style={{cursor: "pointer"}}>   <NavLink onClick={() => {
                                 Signout(() => Router.replace("/signin"))

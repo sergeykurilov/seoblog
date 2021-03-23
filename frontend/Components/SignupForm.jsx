@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {signup} from "../actions/auth";
-
+import React, {useState, useEffect} from "react";
+import {isAuth, signup} from "../actions/auth";
+import Router from "next/router"
 export const SigupForm = () => {
 
     const [value, setValue] = useState({
@@ -40,7 +40,9 @@ export const SigupForm = () => {
 
 
     }
-
+    // useEffect(() => {
+    //     isAuth() && Router.push("/")
+    // })
     const showLoading = () => (loading ? <div className="alert alert-info">Loading....</div> : "")
     const showError = () => (error ? <div className="alert alert-danger">{error}</div> : "")
     const showMessage = () => (message ? <div className="alert alert-info">{message}</div> : "")
