@@ -54,9 +54,11 @@ const removeCookie = (key) => {
 
 const getCookie = (key) => {
     if (process.browser) {
-        cookie.get(key);
+       return cookie.get(key);
     }
 }
+
+
 
 //localstorage
 
@@ -65,6 +67,7 @@ const setLocalStorage = (key,value) => {
         localStorage.setItem(key, JSON.stringify(value))
     }
 }
+//signout
 
 
 
@@ -72,6 +75,21 @@ const  removeLocalStorage = (key) => {
     if (process.browser) {
         localStorage.removeItem(key)
     }
+}
+export const Signout = (next) => {
+    removeCookie("token");
+    removeLocalStorage("user");
+    next();
+
+    return fetch(`${API}/signout`, {
+        method: "GET"
+    })
+        .then(() => {
+            console.log("Logout Successful")
+        })
+        .catch((err) => {
+            console.log(`Error: ${err}`)
+        })
 }
 
 //authenticate user by pass data to localstorage and cookie
