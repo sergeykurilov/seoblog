@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {APP_NAME} from "../config";
 import Router from "next/router";
 
@@ -36,20 +36,27 @@ const Example = (props) => {
                     <NavbarToggler onClick={toggle}/>
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            {!isAuth() && <>
-                            <NavItem>
-                                <Link href="/signin">
-                                    <NavLink>Signin</NavLink>
-                                </Link>
-                            </NavItem>
-                            <NavItem>
-                                <Link href="/signup">
-                                    <NavLink>Signup</NavLink>
-                                </Link>
-                            </NavItem>
+                            {isAuth() ?  useEffect(() => {
+                                const {pathname} = Router
+                                if(pathname == '/signin' || pathname == '/signup'){
+                                    Router.replace('/')
+                                }
+                            }) :  <>
+                                <NavItem style={{cursor: "pointer"}}>
+                                    <Link href="/signin">
+                                        <NavLink>Signin</NavLink>
+                                    </Link>
+                                </NavItem>
+                                <NavItem style={{cursor: "pointer"}}>
+                                    <Link href="/signup">
+                                        <NavLink>Signup</NavLink>
+                                    </Link>
+                                </NavItem>
 
                             </>}
-                            {isAuth() &&  <NavItem>   <NavLink onClick={() => {
+
+                            
+                            {isAuth() &&   <NavItem style={{cursor: "pointer"}}>   <NavLink onClick={() => {
                                 Signout(() => Router.replace("/signin"))
                             }}>Signout</NavLink> </NavItem>}
 
