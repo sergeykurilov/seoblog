@@ -1,7 +1,6 @@
 import React from "react"
 import {Layout} from "../Components/Layout";
-import {Navbar, NavLink} from "reactstrap";
-import Link from "next/link";
+
 import {SigupForm} from "../Components/SignupForm";
 
 const Signup = () => {

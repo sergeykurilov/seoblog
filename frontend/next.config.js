@@ -4,13 +4,13 @@ module.exports = {
         "APP_DEVELOPMENT": "http://localhost:8000/api/",
         "PRODUCTION": false
     },
-    async redirects() {
-        return [
-            {
-                source: '/',
-                destination: '/',
-                permanent: true,
-            },
-        ]
-    },
+    // async redirects() {
+    //     return [
+    //         {
+    //             source: '/',
+    //             destination: '/',
+    //             permanent: true,
+    //         },
+    //     ]
+    // },
 }

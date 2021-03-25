@@ -6,15 +6,9 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
 } from 'reactstrap';
 import Link from "next/link";
 import {isAuth, Signout} from "../actions/auth";
@@ -36,25 +30,12 @@ const Example = (props) => {
                     <NavbarToggler onClick={toggle}/>
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            {isAuth() ?  useEffect(() => {
-                                const {pathname} = Router
-                                if(pathname == '/signin' || pathname == '/signup'){
-                                    Router.replace('/')
-                                }
-                            }) :  <>
-                                <NavItem style={{cursor: "pointer"}}>
-                                    <Link href="/signin">
-                                        <NavLink>Signin</NavLink>
-                                    </Link>
-                                </NavItem>
-                                <NavItem style={{cursor: "pointer"}}>
-                                    <Link href="/signup">
-                                        <NavLink>Signup</NavLink>
-                                    </Link>
-                                </NavItem>
-
-                            </>}
-                            {/*{!isAuth() && <>*/}
+                            {/*{isAuth() ?  useEffect(() => {*/}
+                            {/*    const {pathname} = Router*/}
+                            {/*    if(pathname == '/signin' || pathname == '/signup'){*/}
+                            {/*        Router.replace('/')*/}
+                            {/*    }*/}
+                            {/*}) :  <>*/}
                             {/*    <NavItem style={{cursor: "pointer"}}>*/}
                             {/*        <Link href="/signin">*/}
                             {/*            <NavLink>Signin</NavLink>*/}
@@ -65,7 +46,20 @@ const Example = (props) => {
                             {/*            <NavLink>Signup</NavLink>*/}
                             {/*        </Link>*/}
                             {/*    </NavItem>*/}
+
                             {/*</>}*/}
+                            {!isAuth() && <>
+                                <NavItem style={{cursor: "pointer"}}>
+                                    <Link href="/signin">
+                                        <NavLink>Signin</NavLink>
+                                    </Link>
+                                </NavItem>
+                                <NavItem style={{cursor: "pointer"}}>
+                                    <Link href="/signup">
+                                        <NavLink>Signup</NavLink>
+                                    </Link>
+                                </NavItem>
+                            </>}
                             
                             {isAuth() &&   <NavItem style={{cursor: "pointer"}}>   <NavLink onClick={() => {
                                 Signout(() => Router.replace("/signin"))

@@ -41,7 +41,7 @@ export const SigupForm = () => {
 
     }
     // useEffect(() => {
-    //     isAuth() && Router.push("/")sssss
+    //     isAuth() && Router.push("/")
     // })
     const showLoading = () => (loading ? <div className="alert alert-info">Loading....</div> : "")
     const showError = () => (error ? <div className="alert alert-danger">{error}</div> : "")

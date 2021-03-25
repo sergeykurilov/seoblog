@@ -13,9 +13,9 @@ export const SiginForm = () => {
     })
     const {email,password,error,loading,showform,message} = value
 
-    // useEffect(() => {
-    //     isAuth() && Router.push("/")
-    // })
+    useEffect(() => {
+        isAuth() && Router.push("/")
+    })
 
 
     const handleSubmit = (e) => {
@@ -35,9 +35,7 @@ export const SiginForm = () => {
                     })
 
                     //save user token to cookie
-
                     //save user info to localstorage
-
                     //authenticate user
                 }
             })

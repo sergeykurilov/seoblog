@@ -6,7 +6,7 @@ import {SiginForm} from "../Components/SigninForm";
 import {SigupForm} from "../Components/SignupForm";
 
 const Signin = () => {
-//commentsnjnjnj asdasd
+
     return (
         <Layout>
             <div className="container">

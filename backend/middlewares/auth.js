@@ -19,10 +19,3 @@ exports.authToken = async (req, res, next) => {
 } 
 
 
-exports.isAdmin = async (req,res,next) => {
-    if(!req.user._id === "admin"){
-        res.status(401).json({error: "Not an admin"})
-    }else{
-         next()
-    }
-}
