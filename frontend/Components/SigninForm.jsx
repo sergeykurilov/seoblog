@@ -31,7 +31,11 @@ export const SiginForm = () => {
                 }else{
 
                     authenticate(res, () => {
-                        Router.push(`/`)
+                        if(isAuth() && isAuth().role === 1){
+                            Router.push(`/admin`)
+                        }else{
+                            Router.push(`/user`)
+                        }
                     })
 
                     //save user token to cookie

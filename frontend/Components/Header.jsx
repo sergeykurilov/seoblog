@@ -25,7 +25,7 @@ const Example = (props) => {
             <Navbar color="light" light expand="md">
                 <div className="container">
                     <Link href="/">
-                        <NavLink className="text-muted font-weight-bold">{APP_NAME}</NavLink>
+                       <h5><NavLink style={{color: "black", cursor: "pointer"}} className="font-weight-bold">{APP_NAME}</NavLink></h5>
                     </Link>
                     <NavbarToggler onClick={toggle}/>
                     <Collapse isOpen={isOpen} navbar>
