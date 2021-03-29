@@ -5,7 +5,9 @@ import {Admin} from "../../actions/Admin";
     return(
         <Layout>
             <Admin>
-                <h1>Admin Page</h1>
+                <div className="container">
+                    <h1>Admin Page</h1>
+                </div>
             </Admin>
         </Layout>
     )

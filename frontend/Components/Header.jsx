@@ -69,23 +69,9 @@ const Example = (props) => {
                             </NavItem> }
                             {isAuth() && isAuth().role !== 0 &&  <NavItem style={{cursor: "pointer"}}>
                                 <Link href="/admin">
-                                    <NavLink>Admin Dashboard</NavLink>
+                                    <NavLink>{isAuth().name}'s Admin Dashboard</NavLink>
                                 </Link>
                             </NavItem> }
-
-
-                            {/*{isAuth() && <>*/}
-                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
-                            {/*        <Link href="/admin">*/}
-                            {/*            <NavLink>Admin</NavLink>*/}
-                            {/*        </Link>*/}
-                            {/*    </NavItem>*/}
-                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
-                            {/*        <Link href="/user">*/}
-                            {/*            <NavLink>User</NavLink>*/}
-                            {/*        </Link>*/}
-                            {/*    </NavItem>*/}
-                            {/*</>}*/}
 
                             {isAuth() &&   <NavItem style={{cursor: "pointer"}}>   <NavLink onClick={() => {
                                 Signout(() => Router.replace("/signin"))
