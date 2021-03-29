@@ -19,7 +19,7 @@ const Example = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
-//222sssss
+
     return (
         <div>
             <Navbar color="light" light expand="md">
@@ -60,7 +60,33 @@ const Example = (props) => {
                                     </Link>
                                 </NavItem>
                             </>}
-                            
+
+
+                            {isAuth() && isAuth().role !== 1 &&  <NavItem style={{cursor: "pointer"}}>
+                                <Link href="/user">
+                                    <NavLink>{isAuth().name}'s Dashboard</NavLink>
+                                </Link>
+                            </NavItem> }
+                            {isAuth() && isAuth().role !== 0 &&  <NavItem style={{cursor: "pointer"}}>
+                                <Link href="/admin">
+                                    <NavLink>Admin Dashboard</NavLink>
+                                </Link>
+                            </NavItem> }
+
+
+                            {/*{isAuth() && <>*/}
+                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
+                            {/*        <Link href="/admin">*/}
+                            {/*            <NavLink>Admin</NavLink>*/}
+                            {/*        </Link>*/}
+                            {/*    </NavItem>*/}
+                            {/*    <NavItem style={{cursor: "pointer"}}>*/}
+                            {/*        <Link href="/user">*/}
+                            {/*            <NavLink>User</NavLink>*/}
+                            {/*        </Link>*/}
+                            {/*    </NavItem>*/}
+                            {/*</>}*/}
+
                             {isAuth() &&   <NavItem style={{cursor: "pointer"}}>   <NavLink onClick={() => {
                                 Signout(() => Router.replace("/signin"))
                             }}>Signout</NavLink> </NavItem>}

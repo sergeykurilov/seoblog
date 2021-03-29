@@ -1,9 +1,12 @@
 import {Layout} from "../../Components/Layout";
+import {Admin} from "../../actions/Admin";
 
  function AdminPage() {
     return(
         <Layout>
-            <h1>Admin Page</h1>
+            <Admin>
+                <h1>Admin Page</h1>
+            </Admin>
         </Layout>
     )
 }
