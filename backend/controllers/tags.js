@@ -1,13 +1,13 @@
 require("dotenv").config()
 const slugify = require("slugify");
-const Category = require('../models/category')
+const Tags = require('../models/tags')
 const {dbErrorHandler} = require("../helpers/dbErrosHelper")
 
 exports.create = (req, res) => {
     const {name} = req.body
     let slug = slugify(name).toLowerCase()
-    let category = new Category({name, slug})
-    category.save((err, data) => {
+    let tags = new Tags({name, slug})
+    tags.save((err, data) => {
         if(err){
             return res.status(400).json({
                 error: dbErrorHandler(err)
@@ -18,8 +18,8 @@ exports.create = (req, res) => {
 }
 
 exports.readAll = (req,res) => {
-    let slug = req.params.slug
-    Category.find(slug).exec((err, data) => {
+    let tag = req.params.tag
+    Tags.find({tag}).exec((err, data) => {
         if(err){
             return res.status(400).json({
                 error: dbErrorHandler(err)
@@ -30,8 +30,8 @@ exports.readAll = (req,res) => {
 }
 
 exports.readOne = (req,res) => {
-    let slug = req.params.slug.toLowerCase()
-    Category.findOne({slug}).exec((err,data) => {
+    let tag = req.params.tag
+    Tags.findOne({tag}).exec((err,data) => {
         if(err){
             return res.status(400).json({
                 error: dbErrorHandler(err)
@@ -42,15 +42,15 @@ exports.readOne = (req,res) => {
 }
 
 exports.deleteOne = (req,res) => {
-    let slug = req.params.slug.toLowerCase()
-    Category.findOneAndDelete({slug}).exec((err,data) => {
+    let tag = req.params.tag
+    Tags.findOneAndDelete({tag}).exec((err,data) => {
         if(err){
             return res.status(400).json({
                 error: dbErrorHandler(err)
             })
         }
         res.json({
-            message: "Category successfully removed."
+            message: "Tag successfully removed."
         })
     })
 }
