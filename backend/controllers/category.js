@@ -17,3 +17,40 @@ exports.create = (req, res) => {
     })
 }
 
+exports.readAll = (req,res) => {
+    let slug = req.params.slug.toLowerCase()
+    Category.find(slug).exec((err, data) => {
+        if(err){
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            })
+        }
+        res.json(data)
+    })
+}
+
+exports.readOne = (req,res) => {
+    let slug = req.params.slug.toLowerCase()
+    Category.findOne({slug}).exec((err,data) => {
+        if(err){
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            })
+        }
+        res.json(data)
+    })
+}
+
+exports.deleteOne = (req,res) => {
+    let slug = req.params.slug.toLowerCase()
+    Category.findOneAndDelete({slug}).exec((err,data) => {
+        if(err){
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            })
+        }
+        res.json({
+            message: "Category successfully removed."
+        })
+    })
+}
