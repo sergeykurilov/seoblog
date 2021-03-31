@@ -1,4 +1,4 @@
-import {Layout} from "../../Components/Layout";
+import {Layout} from "../../components/Layout";
 import {Admin} from "../../actions/Admin";
 
  function AdminPage() {

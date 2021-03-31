@@ -1,7 +1,7 @@
 import React from "react"
-import {Layout} from "../Components/Layout";
+import {Layout} from "../components/Layout";
 
-import {SigupForm} from "../Components/SignupForm";
+import {SigupForm} from "../components/SignupForm";
 
 const Signup = () => {
     return (

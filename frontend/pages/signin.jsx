@@ -1,9 +1,9 @@
 import React from "react"
-import {Layout} from "../Components/Layout";
+import {Layout} from "../components/Layout";
 import {NavLink} from "reactstrap";
 import Link from "next/link";
-import {SiginForm} from "../Components/SigninForm";
-import {SigupForm} from "../Components/SignupForm";
+import {SiginForm} from "../components/SigninForm";
+import {SigupForm} from "../components/SignupForm";
 
 const Signin = () => {
 

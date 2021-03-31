@@ -1,4 +1,6 @@
-module.exports = {
+const withCSS = require("@zeit/next-css")
+
+module.exports = withCSS({
     publicRuntimeConfig: {
         "APP_NAME": "SEOBLOG",
         "APP_DEVELOPMENT": "http://localhost:8000/api/",
@@ -13,4 +15,4 @@ module.exports = {
     //         },
     //     ]
     // },
-}
+})

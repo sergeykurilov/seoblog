@@ -1,4 +1,4 @@
-import {Layout} from "../../Components/Layout";
+import {Layout} from "../../components/Layout";
 import {Private} from "../../actions/Private";
 import {Admin} from "../../actions/Admin";
 
