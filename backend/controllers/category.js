@@ -50,7 +50,7 @@ exports.deleteOne = (req,res) => {
             })
         }
         res.json({
-            message: "Category successfully removed."
+            message: "Category.js successfully removed."
         })
     })
 }

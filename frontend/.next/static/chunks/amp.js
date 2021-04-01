@@ -51,7 +51,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/category-tag.js ***!
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

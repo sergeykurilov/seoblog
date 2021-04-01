@@ -52,7 +52,7 @@ const removeCookie = (key) => {
 }
 //get cookie
 
-const getCookie = (key) => {
+export const getCookie = (key) => {
     if (process.browser) {
        return cookie.get(key);
     }
