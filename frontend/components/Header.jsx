@@ -12,7 +12,6 @@ import {
 import Link from "next/link";
 import {isAuth, Signout} from "../actions/auth";
 import {APP_NAME} from "../config";
-import '.././node_modules/nprogress/nprogress.css';
 
 
 Router.onRouteChangeStart = url => NProgress.start();

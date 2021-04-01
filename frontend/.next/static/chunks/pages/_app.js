@@ -445,7 +445,7 @@ module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ "./node_modules/@babel/runtime/regenerator/index.js":
 /*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  !*** ./node_modules/@babel/runtime/regenerator/category-tag.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5078,7 +5078,7 @@ exports.typeOf = typeOf;
 
 /***/ "./node_modules/react-is/index.js":
 /*!****************************************!*\
-  !*** ./node_modules/react-is/index.js ***!
+  !*** ./node_modules/react-is/category-tag.js ***!
   \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -6016,7 +6016,7 @@ function escapeUserProvidedKey(text) {
  * Generate a key string that identifies a element within a set.
  *
  * @param {*} element A element that could contain a manual key.
- * @param {number} index Index that is used if a manual key is not provided.
+ * @param {number} index CategoryTag that is used if a manual key is not provided.
  * @return {string}
  */
 
@@ -7440,7 +7440,7 @@ exports.version = ReactVersion;
 
 /***/ "./node_modules/react/index.js":
 /*!*************************************!*\
-  !*** ./node_modules/react/index.js ***!
+  !*** ./node_modules/react/category-tag.js ***!
   \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

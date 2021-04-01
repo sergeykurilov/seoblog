@@ -1,5 +1,5 @@
 import Document, {Html, Head, Main, NextScript} from 'next/document'
-import css from "../static/css/style.css"
+
 
 
 class MyDocument extends Document {
@@ -13,7 +13,8 @@ class MyDocument extends Document {
                     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
                     <link rel="stylesheet"
                           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
-                    <link rel="stylesheet" href={css}/>
+                    <link rel="stylesheet" href="/static/css/style.css"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"/>
                 </Head>
                 <body>
                 <Main/>
