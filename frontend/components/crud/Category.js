@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {create} from "../../actions/category";
+import {create, deleteCategory, getAllCategories} from "../../actions/category";
 import {isAuth, getCookie, signup} from "../../actions/auth";
 import Router from "next/router";
 
@@ -9,12 +9,56 @@ const Category = () => {
         "error": false,
         "categories": [],
         "success": false,
-        "removed": false
+        "removed": false,
+        "reload": false
     })
 
-    const {name, success, error , removed, categories} = value
+    const {name, success, error, removed, categories, reload} = value
 
     const token = getCookie("token")
+
+
+    const AllCategories = () => {
+        getAllCategories().then(data => {
+            if (data.err) {
+                setValue({...value, error: data.err, success: false})
+            } else {
+                setValue({...value, categories: data, success: true})
+            }
+        })
+    }
+
+    useEffect(() => {
+        AllCategories()
+    },[reload])
+
+
+
+
+    const DeleteCategory = (slug) => {
+        console.log("delete" ,slug)
+        deleteCategory(slug, token).then(data => {
+            if(data.error){
+                setValue({...value, error: data.error})
+            }else{
+                setValue({...value, error: false, success: false, reload: !reload, removed: !removed, name: ""})
+            }
+        })
+    }
+    const deleteConfirm = (slug) => {
+        let answer = window.confirm("Are you sure that you want to delete this category?")
+        if(answer){
+            DeleteCategory(slug)
+        }
+    }
+    function CategoryBlock() {
+
+        return categories.map((c, i) => {
+            return <button onDoubleClick={() => deleteConfirm(c.slug)} title={"Double click to delete"} key={i} className="btn btn-outline-primary mr-1 ml-1 mt-3">{c.name}</button>
+        })
+    }
+
+
 
 
     const handleChange = (e) => {
@@ -35,6 +79,23 @@ const Category = () => {
 
     }
 
+    const showSuccess = () => {
+        if(success){
+            return <p className="text-success">Category successfully created.</p>
+        }
+    }
+    const showError = () => {
+        if(error) {
+            return <p className="text-danger">Category already exist!</p>
+        }
+    }
+    const showRemoved = () => {
+        if(removed){
+            return <p className="text-danger">Category successfully removed.</p>
+        }
+    }
+
+
     const CategoryForm = () => (
         <form onSubmit={onSubmit}>
             <label className="text-muted">Create Category</label>
@@ -47,7 +108,8 @@ const Category = () => {
 
 
     return <>
-        {CategoryForm()}
+        <CategoryForm/>
+        <CategoryBlock/>
     </>
 }
 
