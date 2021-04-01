@@ -1,24 +1,19 @@
-const express = require("express")
-const {deleteOne} = require("../controllers/tags");
-const {readOne} = require("../controllers/tags");
-const {readAll} = require("../controllers/tags");
-const {create} = require("../controllers/tags");
-const {adminMiddleWare} = require("../middlewares/user");
+const express = require('express');
+const {list, read, remove, create} = require("../controllers/tags");
 const {requireSignin} = require("../controllers/auth");
+const {adminMiddleWare} = require("../middlewares/user")
+const router = express.Router();
 
-const router = express.Router()
+// controllers
 
+// validators
+const { runValidation } = require('../validators');
+const { createTagValidator } = require('../validators/tags');
 
-//validators
-const {runValidation} = require("../validators")
-const {createTagValidator} = require("../validators/tags")
+// only difference is methods not name 'get' | 'post' | 'delete'
+router.post('/tag', createTagValidator, runValidation, requireSignin, adminMiddleWare, create);
+router.get('/tags', list);
+router.get('/tag/:slug', read);
+router.delete('/tag/:slug', requireSignin, adminMiddleWare, remove);
 
-router.post('/tags', createTagValidator, runValidation, requireSignin, adminMiddleWare, create)
-//get all tags
-router.get("/tags", readAll)
-//get one tag
-router.get("/tags/:tags", readOne)
-//delete tag
-router.delete("/tags/:tags", requireSignin, adminMiddleWare, deleteOne);
-
-module.exports = router
+module.exports = router;

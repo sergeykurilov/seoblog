@@ -1,56 +1,59 @@
-require("dotenv").config()
-const slugify = require("slugify");
-const Tags = require('../models/tags')
+const Tag = require('../models/tags');
+const slugify = require('slugify');
 const {dbErrorHandler} = require("../helpers/dbErrosHelper")
 
 exports.create = (req, res) => {
-    const {name} = req.body
-    let slug = slugify(name).toLowerCase()
-    let tags = new Tags({name, slug})
-    tags.save((err, data) => {
-        if(err){
-            return res.status(400).json({
-                error: dbErrorHandler(err)
-            })
-        }
-        res.json(data)
-    })
-}
+    const { name } = req.body;
+    let slug = slugify(name).toLowerCase();
 
-exports.readAll = (req,res) => {
-    let tag = req.params.tag
-    Tags.find({tag}).exec((err, data) => {
-        if(err){
-            return res.status(400).json({
-                error: dbErrorHandler(err)
-            })
-        }
-        res.json(data)
-    })
-}
+    let tag = new Tag({ name, slug });
 
-exports.readOne = (req,res) => {
-    let tag = req.params.tag
-    Tags.findOne({tag}).exec((err,data) => {
-        if(err){
+    tag.save((err, data) => {
+        if (err) {
+            console.log(err);
             return res.status(400).json({
                 error: dbErrorHandler(err)
-            })
+            });
         }
-        res.json(data)
-    })
-}
+        res.json(data); // dont do this res.json({ tag: data });
+    });
+};
 
-exports.deleteOne = (req,res) => {
-    let tag = req.params.tag
-    Tags.findOneAndDelete({tag}).exec((err,data) => {
-        if(err){
+exports.list = (req, res) => {
+    Tag.find({}).exec((err, data) => {
+        if (err) {
             return res.status(400).json({
                 error: dbErrorHandler(err)
-            })
+            });
+        }
+        res.json(data);
+    });
+};
+
+exports.read = (req, res) => {
+    const slug = req.params.slug.toLowerCase();
+
+    Tag.findOne({ slug }).exec((err, tag) => {
+        if (err) {
+            return res.status(400).json({
+                error: 'Tag not found'
+            });
+        }
+        res.json(tag);
+    });
+};
+
+exports.remove = (req, res) => {
+    const slug = req.params.slug.toLowerCase();
+
+    Tag.findOneAndRemove({ slug }).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: "error"
+            });
         }
         res.json({
-            message: "Tag successfully removed."
-        })
-    })
-}
+            message: 'Tag deleted successfully'
+        });
+    });
+};
