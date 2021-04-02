@@ -20,49 +20,47 @@ const Category = () => {
 
     const AllCategories = () => {
         getAllCategories().then(data => {
-            if (data.err) {
-                setValue({...value, error: data.err, success: false})
+            if (data.error) {
+                setValue({...value, error: data.error, success: false})
             } else {
-                setValue({...value, categories: data, success: true})
+                setValue({...value, categories: data})
             }
         })
     }
 
     useEffect(() => {
         AllCategories()
-    },[reload])
-
-
+    }, [reload])
 
 
     const DeleteCategory = (slug) => {
-        console.log("delete" ,slug)
+        console.log("delete", slug)
         deleteCategory(slug, token).then(data => {
-            if(data.error){
+            console.log(data)
+            if (data.error) {
                 setValue({...value, error: data.error})
-            }else{
-                setValue({...value, error: false, success: false, reload: !reload, removed: !removed, name: ""})
+            } else {
+                setValue({...value, error: false, success: false, reload: !reload, removed: true})
             }
         })
     }
-    const deleteConfirm = (slug) => {
+    const DeleteConfirm = (slug) => {
         let answer = window.confirm("Are you sure that you want to delete this category?")
-        if(answer){
+        if (answer) {
             DeleteCategory(slug)
         }
     }
-    function CategoryBlock() {
 
+    function CategoryBlock() {
         return categories.map((c, i) => {
-            return <button onDoubleClick={() => deleteConfirm(c.slug)} title={"Double click to delete"} key={i} className="btn btn-outline-primary mr-1 ml-1 mt-3">{c.name}</button>
+            return <button onDoubleClick={() => DeleteConfirm(c.slug)} title={"Double click to delete"} key={i}
+                           className="btn btn-outline-primary mr-1 ml-1 mt-3">{c.name}</button>
         })
     }
 
 
-
-
     const handleChange = (e) => {
-        setValue({...value, name: e.target.value, success: false, removed: "", error: false})
+        setValue({...value, name: e.currentTarget.value, success: false, removed: false, error: false})
     }
 
     const onSubmit = (e) => {
@@ -73,24 +71,24 @@ const Category = () => {
                 if (res.error) {
                     setValue({...value, error: res.error, success: false})
                 } else {
-                    setValue({...value, name: '', error: false, success: true})
+                    setValue({...value, error: false, success: true, reload: !reload, removed: false, name: ""})
                 }
             })
 
     }
 
     const showSuccess = () => {
-        if(success){
+        if (success) {
             return <p className="text-success">Category successfully created.</p>
         }
     }
     const showError = () => {
-        if(error) {
+        if (error) {
             return <p className="text-danger">Category already exist!</p>
         }
     }
     const showRemoved = () => {
-        if(removed){
+        if (removed) {
             return <p className="text-danger">Category successfully removed.</p>
         }
     }
@@ -106,10 +104,19 @@ const Category = () => {
         </form>
     )
 
+    const mouseHandler = () => {
+        setValue({...value, error: false, success: false, removed: false})
+    }
+
 
     return <>
-        <CategoryForm/>
-        <CategoryBlock/>
+        <div onMouseMove={mouseHandler}>
+            {showRemoved()}
+            {showError()}
+            {showSuccess()}
+        </div>
+        {CategoryForm()}
+        {CategoryBlock()}
     </>
 }
 

@@ -28,7 +28,7 @@ export const getAllCategories = () => {
         .then(res => {
             return res.json()
         })
-        .catch(err => console.log(err))
+        .catch(error => console.log(error))
 }
 
 export const getOneCategory = (slug) => {
@@ -38,22 +38,20 @@ export const getOneCategory = (slug) => {
         .then(res => {
             return res.json()
         })
-        .catch(err => console.log(err))
+        .catch(error => console.log(error))
 }
 
-export const deleteCategory = (category, token) => {
-    return fetch(`${API}/category/${category}`, {
+export const deleteCategory = (slug, token) => {
+    return fetch(`${API}/category/${slug}`, {
         "method": "DELETE",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
-
-        },
-        body: JSON.stringify(category)
+        }
     })
         .then(res => {
             return res.json()
         })
-        .catch(err => console.log(err))
+        .catch(error => console.log(error))
 }

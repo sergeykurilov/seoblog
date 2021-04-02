@@ -1,6 +1,7 @@
 import {API} from "../config";
 import fetch from "isomorphic-fetch"
 import cookie from "js-cookie"
+import {getAllCategories} from "./category";
 
 
 export const create = (tag, token) => {
@@ -18,4 +19,42 @@ export const create = (tag, token) => {
             return res.json()
         })
         .catch(err => console.log(err))
+}
+
+
+export const getAllTags = () => {
+    return fetch(`${API}/tags`, {
+        "method": "GET",
+    })
+        .then(res => {
+            return res.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const getSingleTag = (slug) => {
+    return fetch(`${API}/tag/${slug}`, {
+        "method": "GET",
+    })
+        .then(res => {
+            return res.json()
+        })
+        .catch(error => console.log(error))
+}
+
+
+export const deleteSingleTag = (slug, token) => {
+    return fetch(`${API}/tag/${slug}`, {
+        "method": "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+
+        }
+    })
+        .then(res => {
+            return res.json()
+        })
+        .catch(error => console.log(error))
 }
