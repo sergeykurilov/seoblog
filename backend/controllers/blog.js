@@ -20,14 +20,29 @@ exports.create = (req,res) => {
 
         const {title, body, categories, tags} = fields
         let blog = new Blog()
-        blog.mtitle = title
+        blog.mtitle = `${title} | ${process.env.APP_NAME}`
         blog.mcategories = categories
+        blog.mdesc = stripHtml(body.substr(0, 160))
         blog.body = body
-
         blog.tags = tags
         blog.slug = slugify(title).toLowerCase()
+        blog.postedBy = req.user._id
+
+        if(files.photo > 10000000){
+            return res.status(400).json({
+                error: "Image cannot be less than 1mb"
+            });
+            blog.phone.data = fs.readFileSync(files.photo.path)
+            blog.photo.contentType = files.photo.type
+        }
 
 
-        res.json({ fields, files });
+        blog.save((err, blog) => {
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            });
+            res.json(blog);
+        })
+
     });
 }
