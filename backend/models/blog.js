@@ -22,10 +22,10 @@ const blogSchema = new mongoose.Schema({
             min: 20,
             max: 2000000,
         },
-        mDesc: {
+        mdesc: {
             type: String,
         },
-        mTitle: {
+        mtitle: {
             type: String,
         },
         exerpt: {
