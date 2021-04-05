@@ -22,6 +22,6 @@
     "nodemon": "^2.0.7",
     "shortid": "^2.2.16",
     "slugify": "^1.4.7",
-    "string-strip-html": "^8.2.5"
+    "string-strip-html": "4.1.1"
   }
 }
