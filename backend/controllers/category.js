@@ -40,7 +40,7 @@ exports.readOne = (req,res) => {
         res.json(data)
     })
 }
-///asdasdasd
+
 exports.deleteOne = (req,res) => {
     let slug = req.params.slug.toLowerCase()
     Category.findOneAndDelete({slug}).exec((err,data) => {

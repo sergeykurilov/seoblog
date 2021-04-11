@@ -18,24 +18,17 @@ exports.create = (req, res) => {
             });
         }
 
-        const { title, body, categories, tags, excerpt, mtitle, mdesc, postedBy } = fields;
+        const { title, body, categories, tags } = fields;
 
         let blog = new Blog();
-        // blog.title = title;
-        // blog.body = body;
-        // blog.slug = slugify(title).toLowerCase();
-        // blog.mtitle = `${title} | ${process.env.APP_NAME}`;
-        // blog.mdesc = stripHtml(body.substring(0, 160));
-        // blog.postedBy = req.user._id;
         blog.title = title
         blog.body = body
-        blog.slug = slugify(title).toLowerCase();
-        blog.categories = categories
-        blog.tags = tags
-        blog.excerpt = excerpt
-        blog.mtitle = `${title} | ${process.env.APP_NAME}`;
-        blog.mdesc = stripHtml(body.substring(0, 160));
-        blog.postedBy = req.user._id;
+        blog.slug = slugify(title).toLowerCase()
+        blog.category = categories
+        blog.tag = tags
+        blog.mtitle = `${title} | ${process.env.APP_NAME}`
+        blog.mdesc = stripHtml(body.substring(0, 160))
+        blog.postedBy = req.user._id
 
         if (files.photo) {
             if (files.photo.size > 10000000) {
