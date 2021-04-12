@@ -29,7 +29,7 @@ exports.create = (req, res) => {
         blog.mtitle = `${title} | ${process.env.APP_NAME}`
         blog.mdesc = stripHtml(body.substring(0, 160))
         blog.postedBy = req.user._id
-
+        //asdsad
         if (files.photo) {
             if (files.photo.size > 10000000) {
                 return res.status(400).json({
