@@ -14,6 +14,7 @@ class MyDocument extends Document {
                     <link rel="stylesheet"
                           href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"/>
                     <link rel="stylesheet" href="/static/css/style.css"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css"/>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"/>
                 </Head>
                 <body>
