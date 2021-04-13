@@ -3,9 +3,9 @@ const Category = require('../models/category');
 const Tag = require('../models/tags');
 const formidable = require('formidable');
 const slugify = require('slugify');
-const stripHtml  = require("string-strip-html");
+const stripHtml = require("string-strip-html");
 const _ = require('lodash');
-const { dbErrorHandler } = require('../helpers/dbErrosHelper');
+const {dbErrorHandler} = require('../helpers/dbErrosHelper');
 const fs = require('fs');
 
 exports.create = (req, res) => {
@@ -18,7 +18,29 @@ exports.create = (req, res) => {
             });
         }
 
-        const { title, body, categories, tags } = fields;
+        const {title, body, categories, tags} = fields;
+
+        if (!body || body.length < 200) {
+            return res.status(400).json({
+                error: 'Body should be at least 200 symbols'
+            });
+        }
+
+        if (!title || title.length === 0) {
+            return res.status(400).json({
+                error: 'Title is required'
+            });
+        }
+
+        if (!tags || tags.length === 0) {
+            return res.status(400).json({
+                error: 'Tags is required'
+            });
+        }
+
+        let arrayOfCategories = categories.split(",")
+        let arrayOfTags = tags.split(",")
+
 
         let blog = new Blog();
         blog.title = title
@@ -39,14 +61,30 @@ exports.create = (req, res) => {
             blog.photo.data = fs.readFileSync(files.photo.path);
             blog.photo.contentType = files.photo.type;
         }
-
+///kknjsdnsknk
         blog.save((err, result) => {
             if (err) {
                 return res.status(400).json({
                     error: dbErrorHandler(err)
                 });
             }
-            res.json(result);
-        });
-    });
-};
+            Blog.findByIdAndUpdate(result._id, {$push: {categories: arrayOfCategories}}, {new: true}).exec((err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: "213"
+                    });
+                } else {
+                    Blog.findByIdAndUpdate(result._id, {$push: {tags: arrayOfTags}}, {new: true}).exec((err, result) => {
+                        if (err) {
+                            return res.status(400).json({
+                                error: "3393"
+                            })
+                        }else {
+                            res.json(result);
+                        }
+                    });
+                }
+            })
+        })
+    })
+}
