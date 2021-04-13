@@ -7,6 +7,8 @@ const stripHtml = require("string-strip-html");
 const _ = require('lodash');
 const {dbErrorHandler} = require('../helpers/dbErrosHelper');
 const fs = require('fs');
+const {smartTrim} = require("../helpers/blog")
+
 
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm();
@@ -38,8 +40,8 @@ exports.create = (req, res) => {
             });
         }
 
-        let arrayOfCategories = categories.split(",")
-        let arrayOfTags = tags.split(",")
+        let arrayOfCategories = categories && categories.split(",")
+        let arrayOfTags = tags && tags.split(",")
 
 
         let blog = new Blog();
@@ -48,10 +50,11 @@ exports.create = (req, res) => {
         blog.slug = slugify(title).toLowerCase()
         blog.category = categories
         blog.tag = tags
+        blog.excerpt = smartTrim(body, 100," ",  "...")
         blog.mtitle = `${title} | ${process.env.APP_NAME}`
         blog.mdesc = stripHtml(body.substring(0, 160))
         blog.postedBy = req.user._id
-        //asdsad
+
         if (files.photo) {
             if (files.photo.size > 10000000) {
                 return res.status(400).json({
@@ -61,30 +64,34 @@ exports.create = (req, res) => {
             blog.photo.data = fs.readFileSync(files.photo.path);
             blog.photo.contentType = files.photo.type;
         }
-///kknjsdnsknk
         blog.save((err, result) => {
             if (err) {
                 return res.status(400).json({
                     error: dbErrorHandler(err)
                 });
             }
-            Blog.findByIdAndUpdate(result._id, {$push: {categories: arrayOfCategories}}, {new: true}).exec((err, result) => {
-                if (err) {
-                    return res.status(400).json({
-                        error: "213"
-                    });
-                } else {
-                    Blog.findByIdAndUpdate(result._id, {$push: {tags: arrayOfTags}}, {new: true}).exec((err, result) => {
-                        if (err) {
-                            return res.status(400).json({
-                                error: "3393"
-                            })
-                        }else {
-                            res.json(result);
-                        }
-                    });
+            // res.json(result);
+            Blog.findByIdAndUpdate(result._id, { $push: { categories: arrayOfCategories } }, { new: true }).exec(
+                (err, result) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: dbErrorHandler(err)
+                        });
+                    } else {
+                        Blog.findByIdAndUpdate(result._id, { $push: { tags: arrayOfTags } }, { new: true }).exec(
+                            (err, result) => {
+                                if (err) {
+                                    return res.status(400).json({
+                                        error: dbErrorHandler(err)
+                                    });
+                                } else {
+                                    res.json(result);
+                                }
+                            }
+                        );
+                    }
                 }
-            })
-        })
-    })
-}
+            );
+        });
+    });
+};

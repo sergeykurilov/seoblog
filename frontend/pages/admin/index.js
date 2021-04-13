@@ -15,8 +15,18 @@ function AdminPage() {
                         <div className="col-md-4">
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <Link href="/admin/crud/category-tag">
+                                    <Link href="/admin/crud/category">
                                         <a>Create Category</a>
+                                    </Link>
+                                </li>
+                                <li className="list-group-item">
+                                    <Link href="/admin/crud/tag">
+                                        <a>Create Tag</a>
+                                    </Link>
+                                </li>
+                                <li className="list-group-item">
+                                    <Link href="/admin/crud/blog">
+                                        <a>Create Blog</a>
                                     </Link>
                                 </li>
                             </ul>
