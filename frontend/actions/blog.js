@@ -5,16 +5,16 @@ import cookie from "js-cookie"
 
 export const createBlog = (blog, token) => {
     return fetch(`${API}/blog`, {
-        "method": "POST",
+        method: 'POST',
         headers: {
-            "Accept": "application/json",
-            "Authorization": `Bearer ${token}`
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
         },
         body: blog
     })
-        .then(res => {
-            return res.json()
+        .then(response => {
+            return response.json();
         })
-        .catch(err => console.log(err))
-}
+        .catch(err => console.log(err));
+};
 
