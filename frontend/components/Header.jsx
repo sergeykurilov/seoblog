@@ -13,7 +13,7 @@ import Link from "next/link";
 import {isAuth, Signout} from "../actions/auth";
 import {APP_NAME} from "../config";
 
-
+//jnjmkmknjnj
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
 Router.onRouteChangeError = url => NProgress.done();

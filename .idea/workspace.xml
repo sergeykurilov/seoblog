@@ -24,12 +24,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a267e407-c615-4264-be74-6963537a7d24" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/admin/crud/blog.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/build-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/01/18/ba64aa270faff7c56e153e6c0bf18c0f397d0b66f72c6ce606617bf9921c" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/01/18/ba64aa270faff7c56e153e6c0bf18c0f397d0b66f72c6ce606617bf9921c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/01/30/9dca0395b03a8b23135218f2cc54e32c0de9b6e78e0eb882862fcff7cc63" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/01/30/9dca0395b03a8b23135218f2cc54e32c0de9b6e78e0eb882862fcff7cc63" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/a1/b6/fca16e12f309776949a26544f5975580f806a4cbd0217284ab2cc95a6f22" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/a1/b6/fca16e12f309776949a26544f5975580f806a4cbd0217284ab2cc95a6f22" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/a7/34/1c2f96ed5bda880899251fb1ad280b45c3097259fbde88dd0b2cba1ea1e1" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/a7/34/1c2f96ed5bda880899251fb1ad280b45c3097259fbde88dd0b2cba1ea1e1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/ab/33/b39958e969582e67f3d6890cd1150ea681bdb9a198cb30a1bad0c884e47a" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/cache/next-babel-loader/index-v5/ab/33/b39958e969582e67f3d6890cd1150ea681bdb9a198cb30a1bad0c884e47a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/react-loadable-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/react-loadable-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/admin/crud/blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/server/pages/admin/crud/blog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/7daba427d7367b187827.hot-update.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/crud/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/crud/Blog.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +135,7 @@
       <workItem from="1618394850445" duration="1169000" />
       <workItem from="1618507125113" duration="1243000" />
       <workItem from="1618780773848" duration="7285000" />
-      <workItem from="1618944330351" duration="74000" />
+      <workItem from="1618944330351" duration="2385000" />
     </task>
     <task id="LOCAL-00001" summary="front">
       <created>1616177028700</created>
@@ -397,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618791350730</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="blog">
+      <created>1618944412715</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1618944412715</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,9 +451,9 @@
     <MESSAGE value="api" />
     <MESSAGE value="blog api create" />
     <MESSAGE value="front" />
-    <MESSAGE value="blog" />
     <MESSAGE value="blog publish" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog publish" />
+    <MESSAGE value="blog" />
+    <option name="LAST_COMMIT_MESSAGE" value="blog" />
   </component>
   <component name="WindowStateProjectService">
     <state x="530" y="202" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617229773315">
@@ -459,10 +472,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="272" y="66" width="981" height="707" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1616541547977" />
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1618791385936">
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1618944416469">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1618791385936" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1618944416469" />
     <state x="318" y="110" width="1159" height="604" key="dock-window-1" timestamp="1617363098455">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
