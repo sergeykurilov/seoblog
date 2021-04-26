@@ -50,7 +50,7 @@ exports.create = (req, res) => {
         blog.slug = slugify(title).toLowerCase()
         blog.category = categories
         blog.tag = tags
-        blog.excerpt = smartTrim(body, 100," ",  "...")
+        blog.excerpt = smartTrim(body, 100, " ", "...")
         blog.mtitle = `${title} | ${process.env.APP_NAME}`
         blog.mdesc = stripHtml(body.substring(0, 160))
         blog.postedBy = req.user._id
@@ -71,14 +71,14 @@ exports.create = (req, res) => {
                 });
             }
             // res.json(result);
-            Blog.findByIdAndUpdate(result._id, { $push: { categories: arrayOfCategories } }, { new: true }).exec(
+            Blog.findByIdAndUpdate(result._id, {$push: {categories: arrayOfCategories}}, {new: true}).exec(
                 (err, result) => {
                     if (err) {
                         return res.status(400).json({
                             error: dbErrorHandler(err)
                         });
                     } else {
-                        Blog.findByIdAndUpdate(result._id, { $push: { tags: arrayOfTags } }, { new: true }).exec(
+                        Blog.findByIdAndUpdate(result._id, {$push: {tags: arrayOfTags}}, {new: true}).exec(
                             (err, result) => {
                                 if (err) {
                                     return res.status(400).json({
@@ -95,3 +95,84 @@ exports.create = (req, res) => {
         });
     });
 };
+
+//list,listAllBlogsCategoriesTags,read,remove,update
+
+exports.list = (req, res) => {
+    Blog.find({})
+        .populate('Category', '_id name slug')
+        .populate('Tag', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            console.log(err)
+            if (err) {
+                return res.json({
+                    error: dbErrorHandler(err)
+                });
+            }
+            res.json(data);
+        });
+};
+
+exports.listAllBlogsCategoriesTags = (req, res) => {
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10
+    let skip =  req.body.skip ? parseInt(req.body.skip) : 0
+
+    let blogs;
+    let categories;
+    let tags;
+
+
+    Blog.find({})
+        .populate('Category', '_id name slug')
+        .populate('Tag', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .sort({createdAt: -1})
+        .skip(skip)
+        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            console.log(err)
+            if (err) {
+                return res.json({
+                    error: dbErrorHandler(err)
+                });
+            }
+            blogs = data
+            Category.find({}).exec((err,category) => {
+                if (err) {
+                    return res.json({
+                        error: dbErrorHandler(err)
+                    });
+                }
+                categories = category
+                Tag.find({}).exec((err, tag) => {
+                    if (err) {
+                        return res.json({
+                            error: dbErrorHandler(err)
+                        });
+                    }
+                    tags = tag
+
+
+                    res.json({blogs, categories, tags, size: blogs.length})
+                })
+            })
+        });
+}
+
+exports.read = (req, res) => {
+
+}
+
+exports.remove = (req, res) => {
+
+}
+
+exports.update = (req, res) => {
+
+}
+
+exports.photo = (req, res) => {
+
+}
