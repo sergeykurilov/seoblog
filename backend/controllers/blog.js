@@ -117,7 +117,7 @@ exports.list = (req, res) => {
 
 exports.listAllBlogsCategoriesTags = (req, res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 10
-    let skip =  req.body.skip ? parseInt(req.body.skip) : 0
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0
 
     let blogs;
     let categories;
@@ -139,7 +139,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
                 });
             }
             blogs = data
-            Category.find({}).exec((err,category) => {
+            Category.find({}).exec((err, category) => {
                 if (err) {
                     return res.json({
                         error: dbErrorHandler(err)
@@ -162,16 +162,99 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
 }
 
 exports.read = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
 
+    Blog.findOne({slug})
+        .populate('Category', '_id name slug')
+        .populate('Tag', '_id name slug')
+        .populate('postedBy', '_id name username')
+        .select('_id title body mtitle mdesc slug excerpt categories tags postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            if (err) {
+                return res.json({
+                    error: dbErrorHandler(err)
+                });
+            }
+            res.json(data)
+        })
 }
 
 exports.remove = (req, res) => {
+    const slug = req.params.slug.toLowerCase()
 
+    Blog.findOneAndRemove({slug}).exec((err, data) => {
+        if (err) {
+            return res.json({
+                error: dbErrorHandler(err)
+            });
+        }
+        res.json({
+            message: `Blog deleted successfully`
+        })
+    })
 }
 
 exports.update = (req, res) => {
+    const slug = req.params.slug.toLowerCase();
 
-}
+    Blog.findOne({slug}).exec((err, oldBlog) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+
+        let form = new formidable.IncomingForm();
+        form.keepExtensions = true;
+
+        form.parse(req, (err, fields, files) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Image could not upload'
+                });
+            }
+
+            let slugBeforeMerge = oldBlog.slug;
+            oldBlog = _.merge(oldBlog, fields);
+            oldBlog.slug = slugBeforeMerge;
+
+            const {body, desc, categories, tags} = fields;
+
+            if (body) {
+                oldBlog.excerpt = smartTrim(body, 320, ' ', ' ...');
+                oldBlog.desc = stripHtml(body.substring(0, 160));
+            }
+
+            if (categories) {
+                oldBlog.categories = categories.split(',');
+            }
+
+            if (tags) {
+                oldBlog.tags = tags.split(',');
+            }
+
+            if (files.photo) {
+                if (files.photo.size > 10000000) {
+                    return res.status(400).json({
+                        error: 'Image should be less then 1mb in size'
+                    });
+                }
+                oldBlog.photo.data = fs.readFileSync(files.photo.path);
+                oldBlog.photo.contentType = files.photo.type;
+            }
+
+            oldBlog.save((err, result) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: errorHandler(err)
+                    });
+                }
+                res.json(result);
+            });
+        });
+    });
+};
+
 
 exports.photo = (req, res) => {
 
