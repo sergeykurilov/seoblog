@@ -116,68 +116,68 @@ exports.list = (req, res) => {
 };
 
 exports.listAllBlogsCategoriesTags = (req, res) => {
-    let limit = req.body.limit ? parseInt(req.body.limit) : 10
-    let skip = req.body.skip ? parseInt(req.body.skip) : 0
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
     let blogs;
     let categories;
     let tags;
 
-
     Blog.find({})
-        .populate('Category', '_id name slug')
-        .populate('Tag', '_id name slug')
-        .populate('postedBy', '_id name username')
-        .sort({createdAt: -1})
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .populate('postedBy', '_id name username profile')
+        .sort({ createdAt: -1 })
         .skip(skip)
+        .limit(limit)
         .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
-            console.log(err)
             if (err) {
                 return res.json({
                     error: dbErrorHandler(err)
                 });
             }
-            blogs = data
-            Category.find({}).exec((err, category) => {
+            blogs = data; // blogs
+            // get all categories
+            Category.find({}).exec((err, c) => {
                 if (err) {
                     return res.json({
                         error: dbErrorHandler(err)
                     });
                 }
-                categories = category
-                Tag.find({}).exec((err, tag) => {
+                categories = c; // categories
+                // get all tags
+                Tag.find({}).exec((err, t) => {
                     if (err) {
                         return res.json({
                             error: dbErrorHandler(err)
                         });
                     }
-                    tags = tag
-
-
-                    res.json({blogs, categories, tags, size: blogs.length})
-                })
-            })
+                    tags = t;
+                    // return all blogs categories tags
+                    res.json({ blogs, categories, tags, size: blogs.length });
+                });
+            });
         });
-}
+};
 
 exports.read = (req, res) => {
-    const slug = req.params.slug.toLowerCase()
-
-    Blog.findOne({slug})
-        .populate('Category', '_id name slug')
-        .populate('Tag', '_id name slug')
+    const slug = req.params.slug.toLowerCase();
+    Blog.findOne({ slug })
+        // .select("-photo")
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
         .populate('postedBy', '_id name username')
-        .select('_id title body mtitle mdesc slug excerpt categories tags postedBy createdAt updatedAt')
+        .select('_id title body slug mtitle mdesc categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if (err) {
                 return res.json({
                     error: dbErrorHandler(err)
                 });
             }
-            res.json(data)
-        })
-}
+            res.json(data);
+        });
+};
 
 exports.remove = (req, res) => {
     const slug = req.params.slug.toLowerCase()
@@ -200,7 +200,7 @@ exports.update = (req, res) => {
     Blog.findOne({slug}).exec((err, oldBlog) => {
         if (err) {
             return res.status(400).json({
-                error: errorHandler(err)
+                error: dbErrorHandler(err)
             });
         }
 
@@ -222,7 +222,7 @@ exports.update = (req, res) => {
 
             if (body) {
                 oldBlog.excerpt = smartTrim(body, 320, ' ', ' ...');
-                oldBlog.desc = stripHtml(body.substring(0, 160));
+                oldBlog.mdesc = stripHtml(body.substring(0, 160));
             }
 
             if (categories) {
@@ -246,7 +246,7 @@ exports.update = (req, res) => {
             oldBlog.save((err, result) => {
                 if (err) {
                     return res.status(400).json({
-                        error: errorHandler(err)
+                        error: dbErrorHandler(err)
                     });
                 }
                 res.json(result);
@@ -257,5 +257,16 @@ exports.update = (req, res) => {
 
 
 exports.photo = (req, res) => {
-
-}
+    const slug = req.params.slug.toLowerCase();
+    Blog.findOne({ slug })
+        .select('photo')
+        .exec((err, blog) => {
+            if (err || !blog) {
+                return res.status(400).json({
+                    error: dbErrorHandler(err)
+                });
+            }
+            res.set('Content-Type', blog.photo.contentType);
+            return res.send(blog.photo.data);
+        });
+};
