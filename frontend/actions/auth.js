@@ -76,21 +76,19 @@ const  removeLocalStorage = (key) => {
         localStorage.removeItem(key)
     }
 }
-export const Signout = (next) => {
-    removeCookie("token");
-    removeLocalStorage("user");
+export const signout = next => {
+    removeCookie('token');
+    removeLocalStorage('user');
     next();
 
     return fetch(`${API}/signout`, {
-        method: "GET"
+        method: 'GET'
     })
-        .then(() => {
-            console.log("Logout Successful")
+        .then(response => {
+            console.log('signout success');
         })
-        .catch((err) => {
-            console.log(`Error: ${err}`)
-        })
-}
+        .catch(err => console.log(err));
+};
 
 //authenticate user by pass data to localstorage and cookie
 

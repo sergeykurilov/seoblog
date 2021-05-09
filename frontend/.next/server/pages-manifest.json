@@ -3,5 +3,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/": "pages/index.js",
+  "/blogs/[slug]": "pages/blogs/[slug].js",
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
   "/blogs": "pages/blogs.js"
 }

@@ -10,7 +10,7 @@ import {
     NavLink,
 } from 'reactstrap';
 import Link from "next/link";
-import {isAuth, Signout} from "../actions/auth";
+import {isAuth, signout} from "../actions/auth";
 import {APP_NAME} from "../config";
 
 Router.onRouteChangeStart = url => NProgress.start();
