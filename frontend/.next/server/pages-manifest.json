@@ -2,8 +2,6 @@
   "/_document": "pages/_document.js",
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/blogs/[slug]": "pages/blogs/[slug].js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
-  "/blogs": "pages/blogs.js"
+  "/admin/crud/blogs": "pages/admin/crud/blogs.js",
+  "/admin": "pages/admin.js"
 }
