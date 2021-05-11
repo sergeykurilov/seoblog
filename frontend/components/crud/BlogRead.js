@@ -20,7 +20,7 @@ const BlogRead = () => {
             }
         })
     }
-
+//kmkmk
     useEffect(() => {
         loadBlogs()
     }, [])
