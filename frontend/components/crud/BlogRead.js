@@ -26,7 +26,7 @@ const BlogRead = () => {
     }, [])
 
 
-///uuhuhuhu
+
 
     const deleteBlog = (slug) => {
         removeBlog(slug, token).then(data => {
