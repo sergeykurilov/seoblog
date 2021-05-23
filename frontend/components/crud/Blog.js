@@ -110,7 +110,6 @@ const CreateBlog = () => {    const blogFromLS = () => {
         } else {
             all.splice(clickedCategory, 1);
         }
-        console.log(all);
         setChecked(all);
         formData.set('categories', all);
     };
