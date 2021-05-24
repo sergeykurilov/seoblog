@@ -1,8 +1,6 @@
 import React from "react";
 import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
-import Link from "next/link";
-import Category from "../../../components/crud/Category";
 import CreateBlog from "../../../components/crud/Blog";
 
 function Blog() {

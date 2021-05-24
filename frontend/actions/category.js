@@ -34,8 +34,8 @@ export const getAllCategories = () => {
 export const getOneCategory = (slug) => {
     return fetch(`${API}/category/${slug}`, {
         "method": "GET",
-    })
-        .then(res => {
+    }).then(res => {
+        console.log(res)
             return res.json()
         })
         .catch(error => console.log(error))

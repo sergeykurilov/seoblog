@@ -198,7 +198,7 @@ exports.remove = (req, res) => {
 
 exports.update = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-
+        
     Blog.findOne({ slug }).exec((err, oldBlog) => {
         if (err) {
             return res.status(400).json({
