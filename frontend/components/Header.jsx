@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import {isAuth, signout} from "../actions/auth";
 import {APP_NAME} from "../config";
+import Search from "./Blog/Search";
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -26,7 +27,7 @@ const Example = (props) => {
     };
 
     return (
-        <div>
+        <>
             <Navbar color="light" light expand="md">
                 <Link href="/">
                     <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
@@ -34,16 +35,16 @@ const Example = (props) => {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <React.Fragment>
+                        <>
                             <NavItem>
                                 <Link href="/blogs">
                                     <NavLink>Blogs</NavLink>
                                 </Link>
                             </NavItem>
-                        </React.Fragment>
+                        </>
 
                         {!isAuth() && (
-                            <React.Fragment>
+                            <>
                                 <NavItem>
                                     <Link href="/signin">
                                         <NavLink>Signin</NavLink>
@@ -54,7 +55,7 @@ const Example = (props) => {
                                         <NavLink>Signup</NavLink>
                                     </Link>
                                 </NavItem>
-                            </React.Fragment>
+                            </>
                         )}
 
                         {isAuth() && isAuth().role === 0 && (
@@ -83,7 +84,8 @@ const Example = (props) => {
                     </Nav>
                 </Collapse>
             </Navbar>
-        </div>
+            <Search/>
+        </>
     );
 }
 

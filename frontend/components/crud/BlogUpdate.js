@@ -14,7 +14,7 @@ import slugify from "slugify";
 const ReactQuill = dynamic(() => import("react-quill"), {ssr: false})
 const token = getCookie("token")
 
-const BlogUpdate = ({router}) => {
+const BlogUpdate = ({ router }) => {
     const [body, setBody] = useState('');
 
     const [categories, setCategories] = useState([]);
@@ -24,20 +24,18 @@ const BlogUpdate = ({router}) => {
     const [checkedTag, setCheckedTag] = useState([]); // tags
 
     const [values, setValues] = useState({
-        title: '',
         error: '',
         success: '',
         formData: '',
-        slug: '',
-        photo: '',
+        title: '',
         body: ''
     });
 
-    const {error, slug, success, formData, title} = values;
+    const { error, success, formData, title } = values;
     const token = getCookie('token');
 
     useEffect(() => {
-        setValues({...values, formData: new FormData()});
+        setValues({ ...values, formData: new FormData() });
         initBlog();
         initCategories();
         initTags();
@@ -49,7 +47,7 @@ const BlogUpdate = ({router}) => {
                 if (data.error) {
                     console.log(data.error);
                 } else {
-                    setValues({...values, slug: data.slug, title: data.title});
+                    setValues({ ...values, title: data.title });
                     setBody(data.body);
                     setCategoriesArray(data.categories);
                     setTagsArray(data.tags);
@@ -77,7 +75,7 @@ const BlogUpdate = ({router}) => {
     const initCategories = () => {
         getAllCategories().then(data => {
             if (data.error) {
-                setValues({...values, error: data.error});
+                setValues({ ...values, error: data.error });
             } else {
                 setCategories(data);
             }
@@ -87,7 +85,7 @@ const BlogUpdate = ({router}) => {
     const initTags = () => {
         getAllTags().then(data => {
             if (data.error) {
-                setValues({...values, error: data.error});
+                setValues({ ...values, error: data.error });
             } else {
                 setTags(data);
             }
@@ -95,7 +93,7 @@ const BlogUpdate = ({router}) => {
     };
 
     const handleToggle = c => () => {
-        setValues({...values, error: ''});
+        setValues({ ...values, error: '' });
         // return the first index or -1
         const clickedCategory = checked.indexOf(c);
         const all = [...checked];
@@ -111,7 +109,7 @@ const BlogUpdate = ({router}) => {
     };
 
     const handleTagsToggle = t => () => {
-        setValues({...values, error: ''});
+        setValues({ ...values, error: '' });
         // return the first index or -1
         const clickedTag = checkedTag.indexOf(t);
         const all = [...checkedTag];
@@ -182,40 +180,40 @@ const BlogUpdate = ({router}) => {
         // console.log(e.target.value);
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
         formData.set(name, value);
-        setValues({...values, [name]: value, formData, error: ''});
+        setValues({ ...values, [name]: value, formData, error: '' });
     };
 
     const handleBody = e => {
         setBody(e);
-        formData.set(body, e);
+        formData.set('body', e);
     };
 
     const editBlog = e => {
         e.preventDefault();
         updateBlog(formData, token, router.query.slug).then(data => {
-            // if (data.error) {
-            //     setValues({...values, error: data.error});
-            // } else {
-                setValues({...values, slug: slug ,title: '', success: `Blog titled "${data.title}" is successfully updated`});
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+            } else {
+                setValues({ ...values, title: '', success: `Blog titled "${data.title}" is successfully updated` });
                 if (isAuth() && isAuth().role === 1) {
-                    router.replace(`/admin/crud/${router.query.slug}`);
-                    // router.replace(`/admin`);
+                    // Router.replace(`/admin/crud/${router.query.slug}`);
+                    router.replace(`/admin`);
                 } else if (isAuth() && isAuth().role === 0) {
-                    Router.replace(`/user/crud/${router.query.slug}`);
-                    // router.replace(`/user`);
+                    // Router.replace(`/user/crud/${router.query.slug}`);
+                    router.replace(`/user`);
                 }
-            // }
+            }
         });
     };
 
     const showError = () => (
-        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
             {error}
         </div>
     );
 
     const showSuccess = () => (
-        <div className="alert alert-success" style={{display: success ? '' : 'none'}}>
+        <div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
             {success}
         </div>
     );
@@ -225,8 +223,7 @@ const BlogUpdate = ({router}) => {
             <form onSubmit={editBlog}>
                 <div className="form-group">
                     <label className="text-muted">Title</label>
-                    <input type="text" className="form-control" value={slug} onChange={handleChange('slug')}/>
-                    <input type="text" className="form-control" value={title} onChange={handleChange('title')}/>
+                    <input type="text" className="form-control" value={title} onChange={handleChange('title')} />
                 </div>
 
                 <div className="form-group">
@@ -260,7 +257,7 @@ const BlogUpdate = ({router}) => {
                     </div>
 
                     {body && (
-                        <img src={`${API}/blog/photo/${router.query.slug}`} alt={title} style={{width: '100%'}}/>
+                        <img src={`${API}/blog/photo/${router.query.slug}`} alt={title} style={{ width: '100%' }} />
                     )}
                 </div>
 
@@ -268,25 +265,26 @@ const BlogUpdate = ({router}) => {
                     <div>
                         <div className="form-group pb-2">
                             <h5>Featured image</h5>
-                            <hr/>
+                            <hr />
+
                             <small className="text-muted">Max size: 1mb</small>
-                            <br/>
+                            <br />
                             <label className="btn btn-outline-info">
                                 Upload featured image
-                                <input onChange={handleChange('photo')} type="file" accept="image/*" hidden/>
+                                <input onChange={handleChange('photo')} type="file" accept="image/*" hidden />
                             </label>
                         </div>
                     </div>
                     <div>
                         <h5>Categories</h5>
-                        <hr/>
+                        <hr />
 
-                        <ul style={{maxHeight: '200px', overflowY: 'scroll'}}>{showCategories()}</ul>
+                        <ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showCategories()}</ul>
                     </div>
                     <div>
                         <h5>Tags</h5>
-                        <hr/>
-                        <ul style={{maxHeight: '200px', overflowY: 'scroll'}}>{showTags()}</ul>
+                        <hr />
+                        <ul style={{ maxHeight: '200px', overflowY: 'scroll' }}>{showTags()}</ul>
                     </div>
                 </div>
             </div>
