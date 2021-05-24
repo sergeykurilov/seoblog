@@ -23,24 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a267e407-c615-4264-be74-6963537a7d24" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/.next/server/pages/signup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/signup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/.next/static/webpack/0901bb03aa3cd58521a4.hot-update.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/.next/static/webpack/6853a64daf7c6926078a.hot-update.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/build-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/react-loadable-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/react-loadable-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/admin/crud/[slug].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/admin/crud/blogs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/admin/crud/[slug].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/admin/crud/blogs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/blogs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/signin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages/signup.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/blogs.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/signin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/pages/signup.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/crud/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/crud/Blog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/0901bb03aa3cd58521a4.hot-update.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/6853a64daf7c6926078a.hot-update.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/bb610703952e11dda0f4.hot-update.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/ee466e58f30a2a6fcffc.hot-update.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.next/static/webpack/f446585cbbaf07972731.hot-update.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/crud/BlogUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/crud/BlogUpdate.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,14 +179,8 @@
       <workItem from="1621291014292" duration="2063000" />
       <workItem from="1621333009349" duration="11149000" />
       <workItem from="1621423112068" duration="600000" />
-      <workItem from="1621706054717" duration="2495000" />
-    </task>
-    <task id="LOCAL-00004" summary="signin">
-      <created>1616446412716</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1616446412716</updated>
+      <workItem from="1621706054717" duration="3147000" />
+      <workItem from="1621851514669" duration="192000" />
     </task>
     <task id="LOCAL-00005" summary="login">
       <created>1616454244552</created>
@@ -525,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621353588221</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="blog">
+      <created>1621730320720</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1621730320721</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,9 +568,9 @@
     <MESSAGE value="related blogs" />
     <MESSAGE value="admin - delete blog" />
     <MESSAGE value="blog update - admin" />
-    <MESSAGE value="blog" />
     <MESSAGE value="blog update" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog update" />
+    <MESSAGE value="blog" />
+    <option name="LAST_COMMIT_MESSAGE" value="blog" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1620307081300">
@@ -613,10 +613,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="386" y="160" width="981" height="707" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1619394313258" />
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1621353592485">
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1621730323665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1621353592485" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1621730323665" />
     <state x="318" y="110" width="1159" height="604" key="dock-window-1" timestamp="1617363098455">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

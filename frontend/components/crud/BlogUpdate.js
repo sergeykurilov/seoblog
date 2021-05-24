@@ -66,6 +66,7 @@ const BlogUpdate = ({router}) => {
     const editBlog = () => {
         console.log("update blog")
     }
+    ///sadxx
 
     const updateBlogForm = () => {
         return (
