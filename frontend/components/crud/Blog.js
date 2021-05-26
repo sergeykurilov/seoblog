@@ -176,6 +176,7 @@ const CreateBlog = () => {    const blogFromLS = () => {
 
                 <div className="form-group">
                     <ReactQuill
+                        theme="snow"
                         modules={QuillModules}
                         formats={QuillFormats}
                         value={body}

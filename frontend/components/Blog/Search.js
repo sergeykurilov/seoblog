@@ -10,7 +10,6 @@ const Search = () => {
         message: '',
         results: []
     });
-    // const [results, setResults] = useState([])
 
     const {search, results,searched, message} = values;
 
@@ -23,8 +22,6 @@ const Search = () => {
     };
 
     const handleChange = e => {
-        // console.log(e.target.value);
-        // setResults([])
         setValues({...values, results: [], search: e.target.value, searched: false});
     };
 
@@ -45,9 +42,6 @@ const Search = () => {
                             </div>
                         </>
                     )
-                    // return (
-
-                    // );
                 })}
             </div>
         );
