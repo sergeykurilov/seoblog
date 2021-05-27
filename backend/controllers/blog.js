@@ -5,8 +5,9 @@ const formidable = require('formidable');
 const slugify = require('slugify');
 const stripHtml = require("string-strip-html");
 const _ = require('lodash');
-const {dbErrorHandler} = require('../helpers/dbErrosHelper');
 const fs = require('fs');
+const {dbErrorHandler} = require('../helpers/dbErrosHelper');
+
 const {smartTrim} = require("../helpers/blog")
 
 
@@ -198,7 +199,7 @@ exports.remove = (req, res) => {
 
 exports.update = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-        
+
     Blog.findOne({ slug }).exec((err, oldBlog) => {
         if (err) {
             return res.status(400).json({
