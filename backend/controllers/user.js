@@ -35,7 +35,7 @@ exports.publicProfile = (req, res) => {
             .exec((err, data) => {
                 if (err) {
                     return res.status(400).json({
-                        error: errorHandler(err)
+                        error: dbErrorHandler(err)
                     });
                 }
                 user.photo = undefined;
@@ -51,6 +51,7 @@ exports.publicProfile = (req, res) => {
 
 exports.update = (req, res) => {
     let form = new formidable.IncomingForm()
+    form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
@@ -59,7 +60,7 @@ exports.update = (req, res) => {
         }
         let user = req.user
         user = _.extend(user, fields)
-
+        console.log(user)
         if (files.photo) {
             if (files.photo.size > 10000000) {
                 return res.status(400).json({
@@ -69,7 +70,7 @@ exports.update = (req, res) => {
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.contentType = files.photo.type;
 
-
+            console.log(user)
             user.save((err, result) => {
                 if (err) {
                     return res.status(400).json({
