@@ -4,7 +4,7 @@ import {Router} from "next/router";
 
 export const Private = ({children}) => {
     useEffect(() => {
-        if(!isAuth()){
+        if(!isAuth() && isAuth().role === 0){
             Router.push("/signin")
         }
     },[])

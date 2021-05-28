@@ -30,6 +30,8 @@ export const getProfile = (token) => {
 
 
 export const updateProfile = (user, token) => {
+
+
     return fetch(`${API}/user/update`, {
         method: 'PUT',
         headers: {
@@ -44,3 +46,13 @@ export const updateProfile = (user, token) => {
         .catch(err => console.log(err));
 };
 
+export const update = (user, next) => {
+    if(process.browser){
+        if(localStorage.getItem('user')){
+            let auth = JSON.parse(localStorage.getItem('user'))
+            auth = user
+            localStorage.setItem('user',JSON.stringify(auth))
+            next()
+        }
+    }
+}

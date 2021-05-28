@@ -3,5 +3,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/user": "pages/user.js",
-  "/user/crud/blog": "pages/user/crud/blog.js"
+  "/": "pages/index.js",
+  "/user/crud/[slug]": "pages/user/crud/[slug].js"
 }

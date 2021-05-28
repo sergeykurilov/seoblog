@@ -2,10 +2,18 @@ import {API} from "../config";
 import fetch from "isomorphic-fetch"
 import cookie from "js-cookie"
 import queryString from "querystring";
+import {isAuth} from "./auth";
 
 
 export const createBlog = (blog, token) => {
-    return fetch(`${API}/blog`, {
+    let url;
+    if (isAuth() && isAuth().role === 1) {
+        url = `${API}/blog`
+    } else {
+        url = `${API}/user/blog`
+    }
+
+    return fetch(`${url}`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -39,7 +47,6 @@ export const listBlogsWithCategoriesAndTags = (skip, limit) => {
 };
 
 
-
 export const singleBlog = slug => {
     return fetch(`${API}/blog/${slug}`, {
         method: 'GET'
@@ -65,8 +72,16 @@ export const listRelated = blog => {
         .catch(err => console.log(err));
 };
 
-export const list = () => {
-    return fetch(`${API}/blogs`, {
+export const list = (username) => {
+    let listBlogsEndpoint;
+
+    if (username) {
+        listBlogsEndpoint = `${API}/${username}/blogs`;
+    } else {
+        listBlogsEndpoint = `${API}/blogs`;
+    }
+
+    return fetch(`${listBlogsEndpoint}`, {
         method: 'GET'
     })
         .then(response => {
@@ -89,7 +104,15 @@ export const listSearch = params => {
 };
 
 export const removeBlog = (slug, token) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let url;
+    if (isAuth() && isAuth().role === 1) {
+        url = `${API}/blog/${slug}`
+    } else {
+        url = `${API}/user/blog/${slug}`
+    }
+
+
+    return fetch(`${url}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',
@@ -104,7 +127,15 @@ export const removeBlog = (slug, token) => {
 };
 
 export const updateBlog = (blog, token, slug) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let updateBlogEndpoint;
+
+    if (isAuth() && isAuth().role === 1) {
+        updateBlogEndpoint = `${API}/blog/${slug}`;
+    } else if (isAuth() && isAuth().role === 0) {
+        updateBlogEndpoint = `${API}/user/blog/${slug}`;
+    }
+
+    return fetch(`${updateBlogEndpoint}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',

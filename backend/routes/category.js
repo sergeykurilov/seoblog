@@ -7,7 +7,7 @@ const {adminMiddleWare} = require("../middlewares/user");
 //validators
 const {runValidation} = require("../validators")
 const {createCategoryValidator} = require("../validators/category")
-////jbhbhbhbhbh
+
 router.post('/category', createCategoryValidator, runValidation, requireSignin, adminMiddleWare, create)
 //get all categories
 router.get("/categories", readAll)

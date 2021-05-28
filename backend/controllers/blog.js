@@ -1,4 +1,5 @@
-const Blog = require('../models/blog');
+const Blog = require('../models/blog')
+const User = require('../models/user')
 const Category = require('../models/category');
 const Tag = require('../models/tags');
 const formidable = require('formidable');
@@ -21,7 +22,7 @@ exports.create = (req, res) => {
             });
         }
 
-        const { title, body, categories, tags } = fields;
+        const {title, body, categories, tags} = fields;
 
         if (!title || !title.length) {
             return res.status(400).json({
@@ -76,14 +77,14 @@ exports.create = (req, res) => {
                 });
             }
             // res.json(result);
-            Blog.findByIdAndUpdate(result._id, { $push: { categories: arrayOfCategories } }, { new: true }).exec(
+            Blog.findByIdAndUpdate(result._id, {$push: {categories: arrayOfCategories}}, {new: true}).exec(
                 (err, result) => {
                     if (err) {
                         return res.status(400).json({
                             error: dbErrorHandler(err)
                         });
                     } else {
-                        Blog.findByIdAndUpdate(result._id, { $push: { tags: arrayOfTags } }, { new: true }).exec(
+                        Blog.findByIdAndUpdate(result._id, {$push: {tags: arrayOfTags}}, {new: true}).exec(
                             (err, result) => {
                                 if (err) {
                                     return res.status(400).json({
@@ -111,7 +112,7 @@ exports.list = (req, res) => {
         .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if (err) {
-                return res.json({
+                return res.status(400).json({
                     error: dbErrorHandler(err)
                 });
             }
@@ -131,13 +132,13 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
         .populate('categories', '_id name slug')
         .populate('tags', '_id name slug')
         .populate('postedBy', '_id name username profile')
-        .sort({ createdAt: -1 })
+        .sort({createdAt: -1})
         .skip(skip)
         .limit(limit)
         .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if (err) {
-                return res.json({
+                return res.status(400).json({
                     error: dbErrorHandler(err)
                 });
             }
@@ -153,13 +154,13 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
                 // get all tags
                 Tag.find({}).exec((err, t) => {
                     if (err) {
-                        return res.json({
+                        return res.status(400).json({
                             error: dbErrorHandler(err)
                         });
                     }
                     tags = t;
                     // return all blogs categories tags
-                    res.json({ blogs, categories, tags, size: blogs.length });
+                    res.json({blogs, categories, tags, size: blogs.length});
                 });
             });
         });
@@ -167,7 +168,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
 
 exports.read = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-    Blog.findOne({ slug })
+    Blog.findOne({slug})
         // .select("-photo")
         .populate('categories', '_id name slug')
         .populate('tags', '_id name slug')
@@ -175,7 +176,7 @@ exports.read = (req, res) => {
         .select('_id title body slug mtitle mdesc categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if (err) {
-                return res.json({
+                return res.status(400).json({
                     error: dbErrorHandler(err)
                 });
             }
@@ -185,9 +186,9 @@ exports.read = (req, res) => {
 
 exports.remove = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-    Blog.findOneAndRemove({ slug }).exec((err, data) => {
+    Blog.findOneAndRemove({slug}).exec((err, data) => {
         if (err) {
-            return res.json({
+            return res.status(400).json({
                 error: dbErrorHandler(err)
             });
         }
@@ -200,7 +201,7 @@ exports.remove = (req, res) => {
 exports.update = (req, res) => {
     const slug = req.params.slug.toLowerCase();
 
-    Blog.findOne({ slug }).exec((err, oldBlog) => {
+    Blog.findOne({slug}).exec((err, oldBlog) => {
         if (err) {
             return res.status(400).json({
                 error: dbErrorHandler(err)
@@ -221,7 +222,7 @@ exports.update = (req, res) => {
             oldBlog = _.merge(oldBlog, fields);
             oldBlog.slug = slugBeforeMerge;
 
-            const { body, desc, categories, tags } = fields;
+            const {body, desc, categories, tags} = fields;
 
             if (body) {
                 oldBlog.excerpt = smartTrim(body, 320, ' ', ' ...');
@@ -261,7 +262,7 @@ exports.update = (req, res) => {
 
 exports.photo = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-    Blog.findOne({ slug })
+    Blog.findOne({slug})
         .select('photo')
         .exec((err, blog) => {
             if (err || !blog) {
@@ -277,9 +278,9 @@ exports.photo = (req, res) => {
 exports.listRelated = (req, res) => {
     console.log(req.body.blog);
     let limit = req.body.limit ? parseInt(req.body.limit) : 3;
-    const { _id, categories } = req.body.blog;
+    const {_id, categories} = req.body.blog;
 
-    Blog.find({ _id: { $ne: _id }, categories: { $in: categories } })
+    Blog.find({_id: {$ne: _id}, categories: {$in: categories}})
         .limit(limit)
         .populate('postedBy', '_id name username profile')
         .select('title slug excerpt postedBy createdAt updatedAt')
@@ -297,11 +298,11 @@ exports.listRelated = (req, res) => {
 //
 exports.listSearch = (req, res) => {
     console.log(req.query);
-    const { search } = req.query;
+    const {search} = req.query;
     if (search) {
         Blog.find(
             {
-                $or: [{ title: { $regex: search, $options: 'i' } }, { body: { $regex: search, $options: 'i' } }]
+                $or: [{title: {$regex: search, $options: 'i'}}, {body: {$regex: search, $options: 'i'}}]
             },
             (err, blogs) => {
                 if (err) {
@@ -314,3 +315,28 @@ exports.listSearch = (req, res) => {
         ).select('-photo -body');
     }
 };
+
+
+exports.listByUser = (req, res) => {
+    User.findOne({ username: req.params.username }).exec((err, user) => {
+        if (err) {
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            });
+        }
+        let userId = user._id;
+        Blog.find({ postedBy: userId })
+            .populate('categories', '_id name slug')
+            .populate('tags', '_id name slug')
+            .populate('postedBy', '_id name username')
+            .select('_id title slug postedBy createdAt updatedAt')
+            .exec((err, data) => {
+                if (err) {
+                    return res.status(400).json({
+                        error: dbErrorHandler(err)
+                    });
+                }
+                res.json(data);
+            });
+    });
+}

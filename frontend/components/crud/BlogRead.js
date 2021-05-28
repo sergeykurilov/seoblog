@@ -6,21 +6,22 @@ import {list, removeBlog} from "../../actions/blog";
 import moment from "moment";
 
 
-const BlogRead = () => {
+const BlogRead = ({username}) => {
+
     const [blogs, setBlogs] = useState([])
     const [message, setMessage] = useState('')
     const token = getCookie("token")
 
     const loadBlogs = () => {
-        list().then((data) => {
-            if (data.error) {
+        list(username).then((data) => {
+            if (data.error || undefined) {
                 console.log(data.error)
             }else{
                 setBlogs(data)
             }
         })
     }
-//kmkmk
+
     useEffect(() => {
         loadBlogs()
     }, [])
@@ -49,14 +50,14 @@ const BlogRead = () => {
     const showUpdateButton = (blog) => {
         if(isAuth() && isAuth.role === 0){
             return(
-                <Link href={`/user/crud /${blog.slug}`}>
-                    <a className="btn btn-sm btn-warning">Update</a>
+                <Link href={`/admin/crud/${blog.slug}`}>
+                    <a className="ml-2 btn btn-sm btn-warning">Update</a>
                 </Link>
             )
         }else{
             return(
-                <Link href={`/admin/crud/${blog.slug}`}>
-                    <a className="ml-2 btn btn-sm btn-warning">Update</a>
+                <Link href={`/user/crud/${blog.slug}`}>
+                    <a className="btn btn-sm btn-warning">Update</a>
                 </Link>
             )
         }
