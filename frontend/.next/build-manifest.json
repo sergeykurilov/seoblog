@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/user.js"
     ],
-    "/user/update": [
+    "/user/crud/blog": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/user/update.js"
+      "static/chunks/pages/user/crud/blog.js"
     ]
   },
   "ampFirstPages": []

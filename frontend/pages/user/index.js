@@ -1,6 +1,5 @@
 import {Layout} from "../../components/Layout";
 import {Private} from "../../actions/Private";
-import {Admin} from "../../actions/Admin";
 import Link from "next/link";
 
  function UserPage() {
