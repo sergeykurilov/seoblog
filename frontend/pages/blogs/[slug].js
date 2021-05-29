@@ -9,6 +9,7 @@ import renderHTML from 'react-render-html';
 import moment from 'moment';
 import SmallCard from '../../components/Blog/Card/SmallCard';
 import SmallCards from "../../components/Blog/Card/SmallCard";
+import DisqusThread from "../../components/DisqusThread";
 
 const SingleBlog = ({blog, query}) => {
 
@@ -61,7 +62,12 @@ const SingleBlog = ({blog, query}) => {
             </Link>
         ));
 
-    console.log(related)
+    const showComments = () => {
+        return(
+            <DisqusThread id={blog.id} title={blog.title} path={`/blog/${blog.slug}`}/>
+        )
+    }
+
 
     const showRelatedBlog = () => {
         return related.map((blog, i) => (
@@ -124,7 +130,7 @@ const SingleBlog = ({blog, query}) => {
                         </div>
 
                         <div className="container pb-5">
-                            <p>show comments</p>
+                            {showComments()}
                         </div>
                     </article>
                 </main>

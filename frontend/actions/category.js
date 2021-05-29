@@ -1,6 +1,7 @@
 import {API} from "../config";
 import fetch from "isomorphic-fetch"
 import cookie from "js-cookie"
+import {handleResponse} from "./auth";
 
 
 export const create = (category, token) => {
@@ -14,8 +15,9 @@ export const create = (category, token) => {
         },
         body: JSON.stringify(category)
     })
-        .then(res => {
-            return res.json()
+        .then(response => {
+            handleResponse(response)
+            return response.json()
         })
         .catch(err => console.log(err))
 }
@@ -50,8 +52,9 @@ export const deleteCategory = (slug, token) => {
             "Authorization": `Bearer ${token}`
         }
     })
-        .then(res => {
-            return res.json()
+        .then(response => {
+            handleResponse(response)
+            return response.json()
         })
         .catch(error => console.log(error))
 }

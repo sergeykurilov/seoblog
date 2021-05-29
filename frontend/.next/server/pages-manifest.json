@@ -2,7 +2,6 @@
   "/_document": "pages/_document.js",
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/user": "pages/user.js",
-  "/": "pages/index.js",
-  "/user/crud/[slug]": "pages/user/crud/[slug].js"
+  "/user/crud/blogs": "pages/user/crud/blogs.js",
+  "/contact": "pages/contact.js"
 }

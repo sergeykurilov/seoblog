@@ -5,6 +5,7 @@ import {Layout} from '../../components/Layout';
 import {API, DOMAIN, APP_NAME, FB_APP_ID} from '../../config';
 import moment from 'moment';
 import {userPublicProfile} from "../../actions/user";
+import ContactForm from "../../components/form/contactForm";
 
 
 const UserProfile = ({ user, blogs, query }) => {
@@ -93,7 +94,7 @@ const UserProfile = ({ user, blogs, query }) => {
                                         Message {user.name}
                                     </h5>
                                     <br />
-                                    <p>contact form</p>
+                                    <ContactForm authorEmail={user.email}/>
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,8 @@ module.exports = withCSS({
         "PRODUCTION": false,
         "DOMAIN_DEVELOPMENT": "http://localhost:3000/",
         "DOMAIN_PRODUCTION": "http/seoblog.com",
-        "FB_APP_ID": "1003192733841680"
+        "FB_APP_ID": "1003192733841680",
+        DISQUS_SHORTNAME: "spozumi"
     },
     // async redirects() {
     //     return [

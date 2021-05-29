@@ -2,6 +2,7 @@ import {API} from "../config";
 import fetch from "isomorphic-fetch"
 import cookie from "js-cookie"
 import {getAllCategories} from "./category";
+import {handleResponse} from "./auth";
 
 
 export const create = (tag, token) => {
@@ -15,8 +16,9 @@ export const create = (tag, token) => {
         },
         body: JSON.stringify(tag)
     })
-        .then(res => {
-            return res.json()
+        .then(response => {
+            handleResponse(response)
+            return response.json()
         })
         .catch(err => console.log(err))
 }
@@ -53,8 +55,9 @@ export const deleteSingleTag = (slug, token) => {
 
         }
     })
-        .then(res => {
-            return res.json()
+        .then(response => {
+            handleResponse(response)
+            return response.json()
         })
         .catch(error => console.log(error))
 }

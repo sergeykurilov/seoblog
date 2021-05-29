@@ -2,7 +2,7 @@ import {API} from "../config";
 import fetch from "isomorphic-fetch"
 import cookie from "js-cookie"
 import queryString from "querystring";
-import {isAuth} from "./auth";
+import {handleResponse, isAuth} from "./auth";
 
 
 export const createBlog = (blog, token) => {
@@ -22,6 +22,7 @@ export const createBlog = (blog, token) => {
         body: blog
     })
         .then(response => {
+            handleResponse(response)
             return response.json();
         })
         .catch(err => console.log(err));
@@ -121,6 +122,7 @@ export const removeBlog = (slug, token) => {
         }
     })
         .then(response => {
+            handleResponse(response)
             return response.json();
         })
         .catch(err => console.log(err));
@@ -144,6 +146,7 @@ export const updateBlog = (blog, token, slug) => {
         body: blog
     })
         .then(response => {
+            handleResponse(response)
             return response.json();
         })
         .catch(err => console.log(err));
