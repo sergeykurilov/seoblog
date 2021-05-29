@@ -64,7 +64,6 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
     const showAllBlogs = () => {
 
         return blogs.map((blog, i) => {
-            // ()
             console.log(blog)
             return (
                 <article key={i}>

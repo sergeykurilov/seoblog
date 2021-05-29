@@ -2,7 +2,7 @@ import React from "react"
 import {Layout} from "../components/Layout";
 import ContactForm from "../components/form/contactForm";
 
-const Contact = () => {
+const Contact = (props) => {
     return (
         <Layout>
           <div className="container-fluid">

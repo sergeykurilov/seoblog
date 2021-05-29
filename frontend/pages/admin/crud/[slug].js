@@ -1,8 +1,6 @@
 import React from "react";
 import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
-import Link from "next/link";
-import Category from "../../../components/crud/Category";
 import BlogUpdate from "../../../components/crud/BlogUpdate";
 
 function Blog() {
@@ -20,7 +18,6 @@ function Blog() {
                             </li>
                         </div>
                     </div>
-
                 </div>
             </Admin>
         </Layout>

@@ -43,7 +43,7 @@ const UserProfile = ({ user, blogs, query }) => {
     };
 
     return (
-        <React.Fragment>
+        <>
             {head()}
             <Layout>
                 <div className="container">
@@ -101,17 +101,15 @@ const UserProfile = ({ user, blogs, query }) => {
                     </div>
                 </div>
             </Layout>
-        </React.Fragment>
+        </>
     );
 };
 
 UserProfile.getInitialProps = ({ query }) => {
-    // console.log(query);
     return userPublicProfile(query.username).then(data => {
         if (data.error) {
             console.log(data.error);
         } else {
-            // console.log(data);
             return { user: data.user, blogs: data.blogs, query };
         }
     });

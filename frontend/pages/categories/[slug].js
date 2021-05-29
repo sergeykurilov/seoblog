@@ -1,12 +1,6 @@
 import React from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
 import {Layout} from '../../components/Layout';
-import {useState, useEffect} from 'react';
-import {getAllCategories, getOneCategory} from '../../actions/category';
-import {API, DOMAIN, APP_NAME} from '../../config';
-import renderHTML from 'react-render-html';
-import moment from 'moment';
+import {getOneCategory} from '../../actions/category';
 import Card from "../../components/Blog/Card/Card";
 
 

@@ -1,8 +1,5 @@
 import {API} from "../config";
 import fetch from "isomorphic-fetch"
-import cookie from "js-cookie"
-import queryString from "querystring";
-import {handleResponse, isAuth} from "./auth";
 
 export const emailContactForm = (data) => {
     let emailEndpoint;

@@ -20,7 +20,6 @@ function Category1() {
                             </li>
                         </div>
                     </div>
-
                 </div>
             </Admin>
         </Layout>

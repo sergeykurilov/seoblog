@@ -131,9 +131,7 @@ const ProfileUpdate = () => {
 
     return (
         <>
-
             <div className="container">
-
                 <div className="row">
                     <div className="col-md-4 mb-5">
                         <img src={`${API}/user/photo/${username}`} alt={username} className="img img-fluid mb-3"/>
