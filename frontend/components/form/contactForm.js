@@ -20,12 +20,10 @@ const ContactForm = ({authorEmail}) => {
         e.preventDefault()
         setValues({ ...values, buttonText: "Sending..."})
         emailContactForm({authorEmail, name, email, message}).then(data => {
-            console.log(data)
             if (data.error){
                 setValues({ ...values, error: data.error})
             }else{
-                authorEmail = ""
-                setValues({ ...values, sent: true, name: "", email: "", message: "", buttonText: "Sent", success: data.success })
+                setValues({ ...values, sent: true, name: "", senderEmail: "", message: "", buttonText: "Sent", success: data.success })
             }
         })
     }

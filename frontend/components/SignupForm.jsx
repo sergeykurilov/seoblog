@@ -30,7 +30,7 @@ export const SigupForm = () => {
                         loading: false,
                         error: false,
                         name: "",
-                        email: "",
+                        senderEmail: "",
                         password: "",
                         showform: false,
                         message: res.message

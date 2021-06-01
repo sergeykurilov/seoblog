@@ -1,8 +1,9 @@
 import React from "react"
 import {Layout} from "../components/Layout";
-import ContactForm from "../components/form/contactForm";
+import WithoutAuthorEmail from "../components/form/withoutAuthorEmail";
 
 const Contact = (props) => {
+    console.log(props)
     return (
         <Layout>
           <div className="container-fluid">
@@ -10,7 +11,7 @@ const Contact = (props) => {
                   <div className="col-md-8 offset-md-2 ">
                       <h2>Contact form</h2>
                       <hr/>
-                      {ContactForm()}
+                      {WithoutAuthorEmail()}
                   </div>
               </div>
           </div>

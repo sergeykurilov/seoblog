@@ -48,12 +48,10 @@ async function start(){
         //db
         await mongoose.connect(process.env.DATABASE_LOCAL, {useNewUrlParser: true, useUnifiedTopology:true ,useFindAndModify: false, useCreateIndex: true})
         console.log("DB connected")
-
         //app initiation
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`)
         })
-
     }catch (e) {
         //resolve error
         console.log(e.message)

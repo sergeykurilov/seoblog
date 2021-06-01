@@ -9,7 +9,6 @@ import ContactForm from "../../components/form/contactForm";
 
 
 const UserProfile = ({ user, blogs, query }) => {
-    console.log(user)
     const head = () => (
         <Head>
             <title>
@@ -43,7 +42,7 @@ const UserProfile = ({ user, blogs, query }) => {
     };
 
     return (
-        <>
+        <React.Fragment>
             {head()}
             <Layout>
                 <div className="container">
@@ -52,7 +51,7 @@ const UserProfile = ({ user, blogs, query }) => {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-md-8">
+                                        <div className="col-md-6">
                                             <h5>{user.name}</h5>
                                             <p className="text-muted">Joined {moment(user.createdAt).fromNow()}</p>
                                         </div>
@@ -64,6 +63,10 @@ const UserProfile = ({ user, blogs, query }) => {
                                                 alt="user profile"
                                             />
                                         </div>
+                                    </div>
+                                    <div className="col-md-12">
+                                        <h5>Author email</h5>
+                                        <p>{user.email}</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,14 +97,14 @@ const UserProfile = ({ user, blogs, query }) => {
                                         Message {user.name}
                                     </h5>
                                     <br />
-                                    <ContactForm authorEmail={user.email}/>
+                                    <ContactForm authorEmail={user.email} />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </Layout>
-        </>
+        </React.Fragment>
     );
 };
 

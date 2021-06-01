@@ -32,7 +32,7 @@ const ProfileUpdate = () => {
                     ...values,
                     name: profile.name,
                     username: profile.username,
-                    email: profile.email,
+                    senderEmail: profile.email,
                     about: profile.about,
                 })
             }
@@ -60,7 +60,7 @@ const ProfileUpdate = () => {
                         ...values,
                         name: data.name,
                         username: data.username,
-                        email: data.email,
+                        senderEmail: data.email,
                         about: data.about,
                         success: true,
                         loading: false

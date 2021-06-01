@@ -8,7 +8,7 @@ export const emailContactForm = (data) => {
     } else {
         emailEndpoint = `${API}/contact`
     }
-
+    console.log(JSON.stringify(emailEndpoint))
     return fetch(`${emailEndpoint}`, {
         method: 'POST',
         headers: {
