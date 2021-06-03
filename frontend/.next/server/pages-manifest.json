@@ -1,7 +1,7 @@
 {
-  "/_document": "pages/_document.js",
   "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js",
-  "/contact": "pages/contact.js"
+  "/user/crud/[slug]": "pages/user/crud/[slug].js",
+  "/admin/crud/[slug]": "pages/admin/crud/[slug].js"
 }

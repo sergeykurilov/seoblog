@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect,useRef} from "react";
 import Link from "next/link";
 import {singleBlog, updateBlog} from "../../actions/blog";
 import {isAuth, getCookie} from "../../actions/auth";
 import router from "next/router";
+
 import dynamic from 'next/dynamic'
 import withRouter from "next/dist/client/with-router";
 import {getAllTags} from "../../actions/tags"
@@ -22,6 +23,7 @@ const BlogUpdate = ({ router }) => {
 
     const [checked, setChecked] = useState([]); // categories
     const [checkedTag, setCheckedTag] = useState([]); // tags
+
 
     const [values, setValues] = useState({
         error: '',
@@ -109,6 +111,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleTagsToggle = t => () => {
+        var formData = new FormData();
         setValues({ ...values, error: '' });
         // return the first index or -1
         const clickedTag = checkedTag.indexOf(t);
@@ -177,6 +180,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleChange = name => e => {
+        var formData = new FormData();
         // console.log(e.target.value);
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
         formData.set(name, value);
@@ -185,6 +189,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleBody = e => {
+        var formData = new FormData();
         setBody(e);
         formData.set('body', e);
     };

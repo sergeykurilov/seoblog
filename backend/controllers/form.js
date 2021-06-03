@@ -1,22 +1,39 @@
 const sgMail = require('@sendgrid/mail')
 const nodemailer = require('nodemailer');
-let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 465,
-    secure: true,
+const {google} = require('googleapis');
+
+// These id's and secrets should come from .env file.
+const CLIENT_ID = process.env.CLIENT_ID
+const CLEINT_SECRET = process.env.CLEINT_SECRET;
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
+
+const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        type: 'OAuth2',
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
-        clientId: process.env.OAUTH_CLIENTID,
-        clientSecret: process.env.OAUTH_CLIENT_SECRET,
-        refreshToken: process.env.OAUTH_REFRESH_TOKEN,
-        accessToken: process.env.OAUTH_ACCESS_TOKEN,
+        user: 'kurilovsergey15@gmail.com',
+        pass: 'q92e01kl'
     }
 });
 
-transporter.verify(function(error, success) {
+
+// let transporter = nodemailer.createTransport({
+//     host: "smtp.ethereal.email",
+//     port: 465,
+//     secure: true,
+//     service: 'gmail',
+//     auth: {
+//         type: 'OAuth2',
+//         user: process.env.MAIL_USERNAME,
+//         pass: process.env.MAIL_PASSWORD,
+//         clientId: process.env.OAUTH_CLIENTID,
+//         clientSecret: process.env.OAUTH_CLIENT_SECRET,
+//         refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+//         accessToken: process.env.OAUTH_ACCESS_TOKEN,
+//     }
+// });
+
+transporter.verify(function (error, success) {
     if (error) {
         console.log(error);
     } else {
@@ -27,10 +44,9 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
 exports.contactForm = (req, res) => {
-    const {authorEmail ,email, name, message, clientEmail} = req.body
+    const {authorEmail, email, name, message, clientEmail} = req.body
 
     // let maiList = [authorEmail, process.env.EMAIL_TO]
-
     const emailData = {
         to: process.env.MAIL_USERNAME,
         from: clientEmail,
@@ -47,17 +63,16 @@ exports.contactForm = (req, res) => {
             <p>https://blog.com</p>
         `
     };
-    transporter.sendMail(emailData, (err, data) => {
+    transporter.sendMail(emailData, function (err, data) {
         if (err) {
-            res.json({
-                success: false,
-            })
-        } else {
-            res.json({
+            return res.json({
                 success: true,
             })
+        } else {
+            console.log(err.response.body)
+            // console.log(error.response.body.errors[0].message)
         }
-    })
+    });
     // sgMail.send(emailData).then(() => {
     //     console.log('Message sent')
     //     return res.json({
@@ -70,7 +85,7 @@ exports.contactForm = (req, res) => {
 }
 
 
-exports.contactBlogAuthorForm = (req,res) => {
+exports.contactBlogAuthorForm = (req, res) => {
     const {email, name, message} = req.body
     const emailData = {
         to: process.env.EMAIL_TO,

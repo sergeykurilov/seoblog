@@ -36,6 +36,8 @@ const WithoutAuthorEmail = () => {
 
 
     const contactForm = () => (
+
+
         <form onSubmit={clickSubmit} className="pb-5">
             <div className="form-group">
                 <label className="lead">Message</label>
