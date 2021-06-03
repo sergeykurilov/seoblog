@@ -19,8 +19,6 @@ const ProfileUpdate = () => {
     const token = getCookie("token")
 
     let {username, name, email, password, success, error, loading, photo, userData, about} = values
-    console.log(photo)
-
 
 
     const init = () => {
@@ -55,6 +53,7 @@ const ProfileUpdate = () => {
             if (data.error) {
                 setValues({...values, error: data.error, success: false, loading: false});
             } else {
+
                 update(data, () => {
                     setValues({
                         ...values,
@@ -62,6 +61,7 @@ const ProfileUpdate = () => {
                         username: data.username,
                         senderEmail: data.email,
                         about: data.about,
+                        photo: data.photo,
                         success: true,
                         loading: false
                     })
@@ -69,6 +69,11 @@ const ProfileUpdate = () => {
             }
         })
     }
+
+    useEffect(() => {
+        init()
+    },[username, about, email,password, photo])
+
 
     const updateForm = () => (
         <form onSubmit={handleSubmit}>
@@ -124,9 +129,6 @@ const ProfileUpdate = () => {
     );
 
 
-    useEffect(() => {
-        init()
-    },[username, about, email,password,photo])
 
 
     return (

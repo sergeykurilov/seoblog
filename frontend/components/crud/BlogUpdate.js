@@ -111,7 +111,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleTagsToggle = t => () => {
-        var formData = new FormData();
+        let formData = new FormData();
         setValues({ ...values, error: '' });
         // return the first index or -1
         const clickedTag = checkedTag.indexOf(t);
@@ -180,7 +180,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleChange = name => e => {
-        var formData = new FormData();
+        let formData = new FormData();
         // console.log(e.target.value);
         const value = name === 'photo' ? e.target.files[0] : e.target.value;
         formData.set(name, value);
@@ -189,7 +189,7 @@ const BlogUpdate = ({ router }) => {
     };
 
     const handleBody = e => {
-        var formData = new FormData();
+        let formData = new FormData();
         setBody(e);
         formData.set('body', e);
     };
