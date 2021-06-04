@@ -49,8 +49,8 @@ exports.contactForm = (req, res) => {
     // let maiList = [authorEmail, process.env.EMAIL_TO]
     const emailData = {
         to: process.env.MAIL_USERNAME,
-        from: clientEmail,
-        subject: `Someone message you from ${process.env.APP_NAME}`,
+        from: email,
+        subject: `${name} message you from ${process.env.APP_NAME}`,
         text: `Email received from contact form \n Sender name: ${name} \n Sender email: ${clientEmail} \n Sender message: ${message}`,
         html: `
             <h4>Message received form: </h4>
@@ -63,15 +63,14 @@ exports.contactForm = (req, res) => {
             <p>https://blog.com</p>
         `
     };
-    transporter.sendMail(emailData, function (err, data) {
-        if (err) {
-            return res.json({
-                success: true,
-            })
-        } else {
-            console.log(err.response.body)
-            // console.log(error.response.body.errors[0].message)
-        }
+    transporter.sendMail(emailData).then(() => {
+        console.log('Message sent')
+        return res.json({
+            success: true,
+        })
+    }).catch((error) => {
+        console.log(error.response.body)
+        // console.log(error.response.body.errors[0].message)
     });
     // sgMail.send(emailData).then(() => {
     //     console.log('Message sent')
@@ -86,7 +85,7 @@ exports.contactForm = (req, res) => {
 
 
 exports.contactBlogAuthorForm = (req, res) => {
-    const {email, name, message} = req.body
+    const {email, name, message, lastName} = req.body
     const emailData = {
         to: process.env.EMAIL_TO,
         from: req.body.email,
@@ -95,6 +94,7 @@ exports.contactBlogAuthorForm = (req, res) => {
         html: `
             <h4>Email received from contact form: </h4>
             <p>Sender name: ${name}</p>
+            <p>Sender last name: ${lastName}</p>
             <p>Sender email: ${email}</p>
             <p>Sender message: ${message}</p>
             <hr/>
