@@ -23,13 +23,10 @@ export const BlogCard = ({blog}) => {
 
     return (
         <div
-            className="my-6 px-6 w-1/3 overflow-hidden sm:my-8 sm:px-8 sm:w-1/3 md:my-8 md:px-8 md:w-1/3 lg:my-6 lg:px-6 lg:w-1/3 xl:my-5 xl:px-5 xl:w-full">
+            className="my-6 px-6 min-w-min w-full overflow-hidden sm:my-8 sm:px-8 sm:w-1/3 md:my-8 md:px-8 md:w-full lg:w-full lg:px-6 lg:w-full xl:my-5 xl:px-5 xl:w-full">
             <div className="lead pb-4">
                 <div className="p-20">
-
                     <div className="rounded-lg shadow-lg flex h-auto">
-
-
                         <div
                             className="h-50 bg-cover bg-center rounded-tl-lg rounded-bl-lg overflow-hidden w-1/1 bg-blue-400 text-center"
                             style={{background: `${API}/blog/photo/${blog.slug}`}}><img
@@ -37,7 +34,8 @@ export const BlogCard = ({blog}) => {
                             style={{maxHeight: 'auto', width: '100rem', height: "100%"}}
                             src={`${API}/blog/photo/${blog.slug}`}
                             alt={blog.title}
-                        /></div>
+                        />
+                        </div>
 
 
                         <div className="flex-grow">

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {authenticate, isAuth, signin, signup} from "../actions/auth";
 import Router from "next/router"
+import Link from "next/link";
 export const SiginForm = () => {
 
     const [value, setValue] = useState({
@@ -76,6 +77,9 @@ export const SiginForm = () => {
          {showMessage()}
          {showError()}
          {showform && <Form/>}
+         <Link href="/auth/password/forgot">
+             <a className="btn btn-danger">Forgot Password</a>
+         </Link>
      </>
     )
 

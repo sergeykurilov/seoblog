@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 
 exports.forgot = (req, res) => {
     const {email} = req.body;
-
+    console.log(email)
     User.findOne({email}, (err, user) => {
         if (err || !user) {
             return res.status(401).json({
