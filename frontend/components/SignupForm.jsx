@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {isAuth, signup} from "../actions/auth";
+import {isAuth, signup, preSignup} from "../actions/auth";
 import Router from "next/router"
 export const SigupForm = () => {
 
@@ -20,7 +20,7 @@ export const SigupForm = () => {
         // console.table({...value})
         setValue({...value, loading: true, error: false})
         const user = {name, email, password}
-        signup(user)
+        preSignup(user)
             .then(res => {
                 if (res.error) {
                     setValue({...value, error: res.error})

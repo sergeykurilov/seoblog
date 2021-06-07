@@ -34,6 +34,22 @@ export const signup = (user) => {
 }
 
 
+export const preSignup = (user) => {
+    return fetch(`${API}/pre-signup`, {
+        "method": "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user)
+    })
+        .then(res => {
+            return res.json()
+        })
+        .catch(err => console.log(err))
+}
+
+
 export const signin = (user) => {
     return fetch(`${API}/signin`, {
         "method": "POST",
@@ -65,7 +81,6 @@ export const forgotPassword = (email) => {
         })
         .catch(error => console.log(error))
 }
-//mkmk
 
 
 export const resetPassword = (resetInfo) => {

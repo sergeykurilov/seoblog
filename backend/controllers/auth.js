@@ -67,6 +67,43 @@ exports.forgot = (req, res) => {
     })
 }
 
+exports.preSignup = (req, res) => {
+    const {name, email, password} = req.body;
+
+    User.findOne({email: email.toLowerCase()}, (err, user) => {
+        if (user) {
+            return res.status(401).json({
+                error: 'Email taken.'
+            });
+        }
+        const token = jwt.sign({name, email, password}, process.env.ACCOUNT_ACTIVATION, {expiresIn: "10m"})
+
+        const emailData = {
+            from: process.env.EMAIL_TO,
+            to: email,
+            subject: `Account activation`,
+            html: `
+            <p>Please use the following link to activate your account:</p>
+            <p>${process.env.CLIENT_URL}/auth/account/activation/${token}</p>
+            <hr />
+            <p>This email may contain sensetive information</p>
+            <p>https://seoblog.com</p>
+        `
+        };
+        transporter.sendMail(emailData).then(() => {
+            console.log('Message sent')
+            return res.json({
+                message: `Email has been sent to ${email}  /n Follow the instructions to reset your password. Link expires in 10 min.`
+            })
+        }).catch((error) => {
+            console.log(error.response.body)
+            // console.log(error.response.body.errors[0].message)
+        });
+
+    })
+}
+
+
 exports.reset = (req, res) => {
     const {newPassword, resetPasswordLink} = req.body
     if (resetPasswordLink) {
