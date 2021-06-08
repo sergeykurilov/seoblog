@@ -165,41 +165,24 @@ exports.reset = (req, res) => {
 // }
 
 exports.signup = (req, res) => {
-    const token = req.body.token
-    if(token){
-        jwt.verify(token, process.env.ACCOUNT_ACTIVATION, (err, decoded) => {
-            if(err){
-                res.status(401).json({
-                    message: "Expired Link. Please sign up again."
-                })
-            }
+    const {name, email, password} = req.body;
+    if (name || email || password) {
+            let username = shortid.generate();
+            let profile = `${process.env.CLIENT_URL}/profile/${username}`;
 
-            const {name, email, password} = jwt.decode(token)
-
-            let username = shortid.generate()
-            let profile = `${process.env.CLIENT_URL}/profile/${username}`
-
-
-            const user = new User({name, email, password, profile, username})
-
+            const user = new User({ name, email, password, profile, username });
             user.save((err, user) => {
-                if(err){
-                    res.status(400).json({
+                if (err) {
+                    return res.status(401).json({
                         error: dbErrorHandler(err)
-                    })
+                    });
                 }
                 return res.json({
-                    message: "Sign up success! Please sign in."
-                })
-            })
-
-        })
-    }else{
-        return res.json({
-            message: "Something went wrong try again."
-        })
-    }
-}
+                    message: 'Sing up success! Please signin'
+                });
+            });
+        }
+};
 
 
 exports.signin = (req, res) => {

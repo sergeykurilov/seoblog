@@ -76,7 +76,7 @@ export const SiginForm = () => {
          {showLoading()}
          {showMessage()}
          {showError()}
-         {showform && <Form/>}
+         {showform && Form()}
          <Link href="/auth/password/forgot">
              <a className="btn btn-danger">Forgot Password</a>
          </Link>

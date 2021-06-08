@@ -4,9 +4,9 @@ import Router from "next/router"
 export const SigupForm = () => {
 
     const [value, setValue] = useState({
-        "name": "Sergey",
-        "email": "kurilovsergey15@gmail.com",
-        "password": "q92e01kl",
+        "name": "",
+        "email": "",
+        "password": "",
         "error": false,
         "loading": false,
         "message": "",
@@ -40,9 +40,7 @@ export const SigupForm = () => {
 
 
     }
-    // useEffect(() => {
-    //     isAuth() && Router.push("/")
-    // })
+
     const showLoading = () => (loading ? <div className="alert alert-info">Loading....</div> : "")
     const showError = () => (error ? <div className="alert alert-danger">{error}</div> : "")
     const showMessage = () => (message ? <div className="alert alert-info">{message}</div> : "")
@@ -52,16 +50,17 @@ export const SigupForm = () => {
         setValue({...value, error: false, [name]: e.target.value})
     }
 
+
     const Form = () => {
         return (
             <form onSubmit={handleSubmit}>
-                <input onChange={onChangeHandler("name")} placeholder={"your name"} value={value.name} type="text"
+                <input onChange={onChangeHandler("name")} placeholder={"your name"} value={name} type="text"
                        className="form-control"/>
                 <br/>
-                <input onChange={onChangeHandler("email")} placeholder={"your email"} value={value.email} type="text"
+                <input onChange={onChangeHandler("email")} placeholder={"your email"} value={email} type="text"
                        className="form-control"/>
                 <br/>
-                <input onChange={onChangeHandler("password")} placeholder={"your password"} value={value.password}
+                <input onChange={onChangeHandler("password")} placeholder={"your password"} value={password}
                        type="password" className="form-control"/>
                 <br/>
                 <button className="btn btn-primary">Submit</button>
@@ -74,7 +73,7 @@ export const SigupForm = () => {
             {showLoading()}
             {showMessage()}
             {showError()}
-            {showform && <Form/>}
+            {showform && Form()}
         </>
     )
 
