@@ -21,8 +21,7 @@ Router.onRouteChangeError = url => NProgress.done();
 const navigation = [
     { name: 'Blog', href: '/blogs' },
     { name: 'Contact Us', href: '/contact' },
-    { name: 'About us', href: '#' },
-    { name: '', href: '#' },
+    { name: 'About us', href: '/about' },
 ]
 
 const Example = (props) => {

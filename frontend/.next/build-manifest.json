@@ -26,15 +26,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
+    "/auth/account/activation/[id]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/auth/account/activation/[id].js"
+    ],
     "/signin": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/signin.js"
-    ],
-    "/signup": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/signup.js"
     ]
   },
   "ampFirstPages": []

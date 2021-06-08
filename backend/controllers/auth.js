@@ -135,33 +135,70 @@ exports.reset = (req, res) => {
 }
 
 
+// exports.signup = (req, res) => {
+//     User.findOne({email: req.body.email}).exec((err, user) => {
+//         if (user) {
+//             return res.status(400).json({
+//                 error: "Email is taken"
+//             })
+//         }
+//
+//         const {name, email, password} = req.body
+//         let username = shortid.generate()
+//         let profile = `${process.env.CLIENT_URL}/profile/${username}`
+//
+//         let newUser = new User({name, email, password, profile, username})
+//         newUser.save((err, success) => {
+//             if (err) {
+//                 return res.status(400).json({
+//                     error: err
+//                 })
+//             }
+//             // res.json({
+//             //     user: success
+//             // })
+//             res.json({
+//                 message: "Signup success! Please sign in"
+//             })
+//         })
+//     })
+// }
+
 exports.signup = (req, res) => {
-    User.findOne({email: req.body.email}).exec((err, user) => {
-        if (user) {
-            return res.status(400).json({
-                error: "Email is taken"
-            })
-        }
-
-        const {name, email, password} = req.body
-        let username = shortid.generate()
-        let profile = `${process.env.CLIENT_URL}/profile/${username}`
-
-        let newUser = new User({name, email, password, profile, username})
-        newUser.save((err, success) => {
-            if (err) {
-                return res.status(400).json({
-                    error: err
+    const token = req.body.token
+    if(token){
+        jwt.verify(token, process.env.ACCOUNT_ACTIVATION, (err, decoded) => {
+            if(err){
+                res.status(401).json({
+                    message: "Expired Link. Please sign up again."
                 })
             }
-            // res.json({
-            //     user: success
-            // })
-            res.json({
-                message: "Signup success! Please sign in"
+
+            const {name, email, password} = jwt.decode(token)
+
+            let username = shortid.generate()
+            let profile = `${process.env.CLIENT_URL}/profile/${username}`
+
+
+            const user = new User({name, email, password, profile, username})
+
+            user.save((err, user) => {
+                if(err){
+                    res.status(400).json({
+                        error: dbErrorHandler(err)
+                    })
+                }
+                return res.json({
+                    message: "Sign up success! Please sign in."
+                })
             })
+
         })
-    })
+    }else{
+        return res.json({
+            message: "Something went wrong try again."
+        })
+    }
 }
 
 
