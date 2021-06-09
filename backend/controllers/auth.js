@@ -5,6 +5,8 @@ const shortid = require("shortid")
 const jwt = require("jsonwebtoken")
 const expressJwt = require("express-jwt")
 const _ = require('lodash')
+const {OAuth2Client} = require('google-auth-library')
+
 const {dbErrorHandler} = require("../helpers/dbErrosHelper");
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -164,24 +166,63 @@ exports.reset = (req, res) => {
 //     })
 // }
 
+const client = new OAuth2Client(process.env.OAUTH_CLIENTID)
+exports.googleSignin = (req, res) => {
+    const idToken = req.body.tokenId
+    client.verifyIdToken({idToken, audience: process.env.OAUTH_CLIENTID}).then((response) => {
+        const {email_verified, name, email, jti} = response.payload
+        if (email_verified) {
+            User.findOne({email}).exec((err, user) => {
+                if (user) {
+                    const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+                    res.cookie('token', token, {expiresIn: "1d"})
+                    const {_id, username, name, email, role} = user
+                    return res.json({token, user: {_id, name, email, role, username}})
+                }else{
+                    let username = shortid.generate()
+                    let profile = `${process.env.CLIENT_URL}/profile/${username}`
+                    let password = jti
+                    user = new User({name, email, password, profile, username})
+                    user.save((err, user) => {
+                        if(err || !user){
+                            return res.status(400).json({
+                                error: dbErrorHandler(err)
+                            })
+                        }
+                        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: "1d"})
+                        res.cookie('token', token, {expiresIn: "1d"})
+                        const {_id, username, name, email, role} = user
+                        return res.json({token, user: {_id, name, email, role, username}})
+                    })
+                }
+            })
+        }else{
+                return res.status(400).json({
+                    error: "Google login failed. Please try again."
+                })
+        }
+    })
+}
+
+
 exports.signup = (req, res) => {
     const {name, email, password} = req.body;
     if (name || email || password) {
-            let username = shortid.generate();
-            let profile = `${process.env.CLIENT_URL}/profile/${username}`;
+        let username = shortid.generate();
+        let profile = `${process.env.CLIENT_URL}/profile/${username}`;
 
-            const user = new User({ name, email, password, profile, username });
-            user.save((err, user) => {
-                if (err) {
-                    return res.status(401).json({
-                        error: dbErrorHandler(err)
-                    });
-                }
-                return res.json({
-                    message: 'Sing up success! Please signin'
+        const user = new User({name, email, password, profile, username});
+        user.save((err, user) => {
+            if (err) {
+                return res.status(401).json({
+                    error: dbErrorHandler(err)
                 });
+            }
+            return res.json({
+                message: 'Sing up success! Please signin'
             });
-        }
+        });
+    }
 };
 
 
@@ -200,7 +241,7 @@ exports.signin = (req, res) => {
                 error: 'Email and password do not match.'
             });
         }
-        // generate a token and send to client
+        // generate a token and send to
         const token = jwt.sign({_id: user._id, role: user.role}, `${process.env.JWT_SECRET}`, {expiresIn: '1d'});
 
         res.cookie('token', token, {expiresIn: '1d'});

@@ -11,3 +11,5 @@ export const DOMAIN = publicRuntimeConfig.PRODUCTION
 export const DisqusShortname = publicRuntimeConfig.DISQUS_SHORTNAME
 
 export const FB_APP_ID = publicRuntimeConfig.FB_APP_ID
+export const OAUTH_CLIENT_SECRET = publicRuntimeConfig.OAUTH_CLIENT_SECRET
+export const GOOGLE_CLIENT_ID = publicRuntimeConfig.GOOGLE_CLIENT_ID

@@ -1,6 +1,6 @@
 import Router from "next/router";
 import NProgress from 'nprogress';
-import React, {useState,useEffect, Fragment} from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import {
     Collapse,
     Navbar,
@@ -19,9 +19,9 @@ Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
 Router.onRouteChangeError = url => NProgress.done();
 const navigation = [
-    { name: 'Blog', href: '/blogs' },
-    { name: 'Contact Us', href: '/contact' },
-    { name: 'About us', href: '/about' },
+    {name: 'Blog', href: '/blogs'},
+    {name: 'Contact Us', href: '/contact'},
+    {name: 'About us', href: '/about'},
 ]
 
 const Example = (props) => {
@@ -34,7 +34,7 @@ const Example = (props) => {
     return (
         <>
             <Popover>
-                {({ open }) => (
+                {({open}) => (
                     <>
                         <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
                             <nav
@@ -51,20 +51,30 @@ const Example = (props) => {
                                             />
                                         </a>
                                         <div className="-mr-2 flex items-center md:hidden">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button
+                                                className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                                 <span className="sr-only">Open main menu</span>
-                                                <MenuIcon className="h-6 w-6" aria-hidden="true" />
+                                                <MenuIcon className="h-6 w-6" aria-hidden="true"/>
                                             </Popover.Button>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
                                     {navigation.map((item) => (
-                                        <Link key={item.name} href={item.href}
-                                              className="text-base font-medium text-gray-500 hover:text-gray-900">
-                                            <a>  {item.name}</a>
-                                        </Link>
+                                        <>
+                                            <Link key={item.name} href={item.href}
+                                                  className="text-base font-medium text-gray-500 hover:text-gray-900">
+                                                <a>  {item.name}</a>
+                                            </Link>
+                                        </>
                                     ))}
+                                    {isAuth() && (
+                                        <NavLink style={{cursor: 'pointer'}}
+                                                 className="text-base font-medium text-gray-500 hover:text-gray-900"
+                                                 onClick={() => signout(() => Router.replace(`/signin`))}>
+                                            Signout
+                                        </NavLink>
+                                    )}
                                 </div>
                             </nav>
 
@@ -86,7 +96,8 @@ const Example = (props) => {
                                 static
                                 className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
                             >
-                                <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                <div
+                                    className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                                     <div className="px-5 pt-4 flex items-center justify-between">
                                         <div>
                                             <img
@@ -96,9 +107,10 @@ const Example = (props) => {
                                             />
                                         </div>
                                         <div className="-mr-2">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button
+                                                className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                                 <span className="sr-only">Close main menu</span>
-                                                <XIcon className="h-6 w-6" aria-hidden="true" />
+                                                <XIcon className="h-6 w-6" aria-hidden="true"/>
                                             </Popover.Button>
                                         </div>
                                     </div>

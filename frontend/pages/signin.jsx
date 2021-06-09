@@ -22,6 +22,7 @@ const Signin = ({router}) => {
                     <div className="col-md-6 offset-md-3">
                         {ShowRedirectMessage()}
                     </div>
+
                     <div className="col-md-6 offset-md-3">
                         <SiginForm />
                     </div>

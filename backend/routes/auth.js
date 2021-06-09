@@ -1,5 +1,5 @@
 const express = require("express")
-const {signin, signup, signout, reset, forgot,preSignup} = require("../controllers/auth");
+const {signin, signup, signout, reset, forgot,preSignup, googleSignin} = require("../controllers/auth");
 
 const router = express.Router()
 
@@ -13,6 +13,8 @@ router.post('/signin', userSigninValidator, runValidation, signin)
 router.put('/forgot-password', forgotPasswordValidation, runValidation, forgot);
 router.put('/reset-password', resetPasswordValidation, runValidation, reset);
 router.post("/signout", signout)
+
+router.post("/google-login", googleSignin)
 
 // router.get("/users", requireSignin ,isAdmin ,(req,res) => {
 //     res.json({
