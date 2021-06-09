@@ -144,18 +144,18 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
             }
             blogs = data; // blogs
             // get all categories
-            Category.find({}).exec((err, c) => {
-                if (err) {
+            Category.find({}).exec((error, c) => {
+                if (error) {
                     return res.json({
-                        error: dbErrorHandler(err)
+                        error: dbErrorHandler(error)
                     });
                 }
                 categories = c; // categories
                 // get all tags
-                Tag.find({}).exec((err, t) => {
-                    if (err) {
+                Tag.find({}).exec((errs, t) => {
+                    if (errs) {
                         return res.status(400).json({
-                            error: dbErrorHandler(err)
+                            error: dbErrorHandler(errs)
                         });
                     }
                     tags = t;
