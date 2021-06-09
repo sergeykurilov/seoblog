@@ -98,11 +98,6 @@ const posts = [
 
 
 function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router}) {
-
-    const size = 3
-    const items = blogs.slice(0, size)
-
-    console.log(items)
     return <Layout>
         <div className="relative bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto">
@@ -211,7 +206,7 @@ function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, ro
                     </p>
                 </div>
                 <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-                    {items.map((post) => (
+                    {blogs.map((post) => (
                         <div key={post.title} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
                             <div className="flex-shrink-0">
                                 <img className="h-48 w-full object-cover" src={`${API}/blog/photo/${post.slug}`} alt="" />
@@ -259,7 +254,7 @@ function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, ro
 
 HomePage.getInitialProps = () => {
     let skip = 0;
-    let limit = 2;
+    let limit = 3;
     return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
         if (data.error) {
             console.log(data.error);
