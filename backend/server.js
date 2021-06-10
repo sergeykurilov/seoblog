@@ -66,12 +66,25 @@ function websocket() {
     const shareDBServer = new ShareDB();
     const connection = shareDBServer.connect();
     const doc = connection.get('documents', 'firstDocument');
+    const doc2 = connection.get('documents2', 'firstDocument2');
     console.log(doc)
     doc.fetch(function (err) {
         if (err) throw err;
         if (doc.type === null) {
-            doc.create([{ insert: 'I\'m baby literally banjo listicle distillery pug meditation fashion axe ugh disrupt copper mug small batch. Normcore cloud bread vexillologist unicorn +1 shabby chic wolf iPhone hot chicken cronut fam scenester chicharrones. Vexillologist mlkshk biodiesel narwhal try-hard swag green juice, YOLO freegan gluten-free banh mi aesthetic salvia waistcoat. Humblebrag direct trade vaporware jean shorts coloring book tilde blog chartreuse aesthetic next level authentic banh mi VHS actually shoreditch.' }], 'rich-text', () => {
+            doc.create([{
+                insert: 'Here is the place to write something amazing.'
+            }], 'rich-text', () => {
                 const wss = new WebSocket.Server({ port: 8090 });
+
+                wss.on('connection', function connection(ws) {
+                    const jsonStream = new WebSocketJSONStream(ws);
+                    shareDBServer.listen(jsonStream);
+                });
+            });
+            doc2.create([{
+                insert: 'Here is the place to write something amazing.'
+            }], 'rich-text', () => {
+                const wss = new WebSocket.Server({ port: 8080 });
 
                 wss.on('connection', function connection(ws) {
                     const jsonStream = new WebSocketJSONStream(ws);

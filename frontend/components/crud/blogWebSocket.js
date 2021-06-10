@@ -8,7 +8,7 @@ import withRouter from "next/dist/client/with-router";
 import {getAllTags} from "../../actions/tags"
 import {getAllCategories} from "../../actions/category"
 import {QuillModules, QuillFormats} from "../../helpers/quill"
-
+import deltaToHtml from 'delta-to-html-improved'
 const token = getCookie("token")
 const Quill = typeof window === 'object' ? require('quill') : () => false;
 import 'quill/dist/quill.bubble.css';
@@ -16,11 +16,6 @@ import Sharedb from 'sharedb-client';
 import richText from 'rich-text';
 
 const CreateBlog = () => {
-    const handleBody = e => {
-        // console.log(e);
-        setBody(e);
-        formData.set('body', e);
-    };
 
 
     const blogFromLS = () => {
@@ -36,9 +31,10 @@ const CreateBlog = () => {
     };
 
     const [body, setBody] = useState();
-    Sharedb.types.register(richText.type);
+
 
     useEffect(() => {
+        Sharedb.types.register(richText.type);
         const socket = new WebSocket('ws://127.0.0.1:8090');
         const connection = new Sharedb.Connection(socket);
         const doc = connection.get('documents', 'firstDocument');
@@ -79,11 +75,11 @@ const CreateBlog = () => {
              * On Initialising if data is present in server
              * Updaing its content to editor
              */
-            const formData = new FormData();
             quill.setContents(doc.data);
-            let quillText = quill.getText();
-            setBody(quillText);
-
+            let quillContent = quill.getContents();
+            let html = deltaToHtml(quillContent)
+            console.log(html)
+            setBody(html)
             /**
              * On Text change publishing to our server
              * so that it can be broadcasted to all other clients
