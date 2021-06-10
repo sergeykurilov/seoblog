@@ -156,6 +156,9 @@ Blogs.getInitialProps = () => {
         } else {
             return {
                 blogs: data.blogs,
+                categories: data.categories,
+                tags: data.tags,
+                totalBlogs: data.size,
                 blogsLimit: limit,
                 blogSkip: skip
             };

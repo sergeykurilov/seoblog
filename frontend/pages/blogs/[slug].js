@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import {Layout} from '../../components/Layout';
 import {useState, useEffect} from 'react';
-import {singleBlog, listRelated} from '../../actions/blog';
+import {singleBlog, listRelated, getPhoto} from '../../actions/blog';
 import {API, DOMAIN, APP_NAME} from '../../config';
 import renderHTML from 'react-render-html';
 import moment from 'moment';
@@ -12,6 +12,44 @@ import SmallCards from "../../components/Blog/Card/SmallCard";
 import DisqusThread from "../../components/DisqusThread";
 
 const SingleBlog = ({blog, query}) => {
+
+    const url = `${API}/blog/photo/${blog.slug}`
+    const [{
+        srcBlob,
+        srcDataUri
+    }, setSrc] = useState({
+        srcBlob: null,
+        srcDataUri: null
+    });
+
+    useEffect(() => {
+        let isUnmounted = false;
+
+        fetch(url, {
+        })
+            .then(response => response.blob())
+            .then(blob => blob.arrayBuffer())
+            .then(arrayBuffer => {
+
+                if(isUnmounted) {
+                    return;
+                }
+
+                const blob = new Blob([arrayBuffer])
+                const srcBlob = URL.createObjectURL(blob);
+
+                setSrc(state => ({
+                    ...state,
+                    srcBlob
+                }));
+
+            })
+
+        return () => {
+            isUnmounted = true;
+        }
+
+    }, [])
 
     const [related, setRelated] = useState([]);
 
@@ -40,9 +78,9 @@ const SingleBlog = ({blog, query}) => {
             <meta property="og:description" content={blog.mdesc}/>
             <meta property="og:type" content="webiste"/>
             <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`}/>
-            <meta property="og:site_name" content={`${APP_NAME}`}/>
-            <meta property="og:image" content={`${API}/blog/photo/${blog.slug}`}/>
-            <meta property="og:image:secure_url" ccontent={`${API}/blog/photo/${blog.slug}`}/>
+            <meta property="og:site_name" content={srcBlob}/>
+            <meta property="og:image" content={srcBlob}/>
+            <meta property="og:image:secure_url" content={srcBlob}/>
             <meta property="og:image:type" content="image/jpg"/>
             {/*<meta property="fb:app_id" content={`${FB_APP_ID}`} />*/}
         </Head>
@@ -89,7 +127,7 @@ const SingleBlog = ({blog, query}) => {
                             <section>
                                 <div className="row" style={{marginTop: '-30px'}}>
                                     <img
-                                        src={`${API}/blog/photo/${blog.slug}`}
+                                        src={srcBlob}
                                         alt={blog.title}
                                         className="img img-fluid featured-image"
                                     />

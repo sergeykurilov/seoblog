@@ -43,7 +43,7 @@ class MyDocument extends Document {
                           href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.2/utilities.min.css"/>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css"/>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css"/>
-                    <script dangerouslySetInnerHTML={this.setGoogleTags()}></script>
+                    {/*<script dangerouslySetInnerHTML={this.setGoogleTags()}></script>*/}
                 </Head>
                 <body>
                 <Main/>

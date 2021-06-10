@@ -1,7 +1,7 @@
 import React from "react";
 import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
-import CreateBlog from "../../../components/crud/Blog";
+import CreateBlog from "../../../components/crud/blogWebSocket";
 
 function Blog() {
     return (

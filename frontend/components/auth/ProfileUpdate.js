@@ -4,6 +4,7 @@ import {getCookie, isAuth} from "../../actions/auth";
 import {API} from "../../config";
 
 const ProfileUpdate = () => {
+
     const [values, setValues] = useState({
         username: '',
         name: '',
@@ -20,6 +21,45 @@ const ProfileUpdate = () => {
 
     let {username, name, email, password, success, error, loading, photo, userData, about} = values
 
+
+
+    const url = `${API}/user/photo/${username}`
+    const [{
+        srcBlob,
+        srcDataUri
+    }, setSrc] = useState({
+        srcBlob: null,
+        srcDataUri: null
+    });
+
+    useEffect(() => {
+        let isUnmounted = false;
+
+        fetch(url, {
+        })
+            .then(response => response.blob())
+            .then(blob => blob.arrayBuffer())
+            .then(arrayBuffer => {
+
+                if(isUnmounted) {
+                    return;
+                }
+
+                const blob = new Blob([arrayBuffer])
+                const srcBlob = URL.createObjectURL(blob);
+
+                setSrc(state => ({
+                    ...state,
+                    srcBlob
+                }));
+
+            })
+
+        return () => {
+            isUnmounted = true;
+        }
+
+    }, [])
 
     const init = () => {
         getProfile(token).then(profile => {
@@ -72,7 +112,7 @@ const ProfileUpdate = () => {
 
     useEffect(() => {
         init()
-    },[username, about, email,password, photo])
+    },[])
 
 
     const updateForm = () => (
@@ -136,7 +176,7 @@ const ProfileUpdate = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-4 mb-5">
-                        <img src={`${API}/user/photo/${username}`} alt={username} className="img img-fluid mb-3"/>
+                        <img src={srcBlob} alt={`${username}`} className="img img-fluid mb-3"/>
                     </div>
                     <div className="col-md-8">
                         {showError()}

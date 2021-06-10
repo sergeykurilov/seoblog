@@ -2,9 +2,49 @@ import Link from 'next/link';
 import renderHTML from 'react-render-html';
 import moment from 'moment';
 import {API} from '../../../config';
+import {useEffect, useState} from "react";
 
 export default function SmallCards ({blog}) {
-    console.log(blog)
+
+    const url = `${API}/blog/photo/${blog.slug}`
+    const [{
+        srcBlob,
+        srcDataUri
+    }, setSrc] = useState({
+        srcBlob: null,
+        srcDataUri: null
+    });
+
+    useEffect(() => {
+        let isUnmounted = false;
+
+        fetch(url, {
+        })
+            .then(response => response.blob())
+            .then(blob => blob.arrayBuffer())
+            .then(arrayBuffer => {
+
+                if(isUnmounted) {
+                    return;
+                }
+
+                const blob = new Blob([arrayBuffer])
+                const srcBlob = URL.createObjectURL(blob);
+
+                setSrc(state => ({
+                    ...state,
+                    srcBlob
+                }));
+
+            })
+
+        return () => {
+            isUnmounted = true;
+        }
+
+    }, [])
+
+
     return (
         <div className="card">
             <section>
@@ -13,7 +53,7 @@ export default function SmallCards ({blog}) {
                         <img
                             className="img img-fluid"
                             style={{ maxHeight: 'auto', width: '100%' }}
-                            src={`${API}/blog/photo/${blog.slug}`}
+                            src={srcBlob}
                             alt={blog.title}
                         />
                     </a>

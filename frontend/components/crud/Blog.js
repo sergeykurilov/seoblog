@@ -11,6 +11,7 @@ import {QuillModules, QuillFormats} from "../../helpers/quill"
 const ReactQuill = dynamic(() => import("react-quill"), {ssr: false})
 const token = getCookie("token")
 
+
 const CreateBlog = () => {    const blogFromLS = () => {
     if (typeof window === 'undefined') {
         return false;
