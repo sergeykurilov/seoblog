@@ -19,6 +19,7 @@ module.exports = {
             backgroundColor: ['checked'],
             borderColor: ['checked'],
             tableLayout: ['hover', 'focus'],
+            cyan: colors.cyan,
         }
     },
     variants: {

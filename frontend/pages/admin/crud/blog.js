@@ -1,11 +1,11 @@
 import React from "react";
-import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
 import CreateBlog from "../../../components/crud/blogWebSocket";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Blog() {
     return (
-        <Layout>
+        <AdminLayout>
             <Admin>
                 <div className="container">
                     <div className="row">
@@ -21,7 +21,7 @@ function Blog() {
 
                 </div>
             </Admin>
-        </Layout>
+        </AdminLayout>
     )
 }
 

@@ -3,10 +3,11 @@ import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
 import Link from "next/link";
 import Category from "../../../components/crud/Category";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Category1() {
     return (
-        <Layout>
+        <AdminLayout>
             <Admin>
                 <div className="container">
                     <div className="row">
@@ -22,7 +23,7 @@ function Category1() {
 
                 </div>
             </Admin>
-        </Layout>
+        </AdminLayout>
     )
 }
 

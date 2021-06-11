@@ -8,7 +8,7 @@ const path = require('path')
 const WebSocket = require('ws');
 const WebSocketJSONStream = require('@teamwork/websocket-json-stream');
 const ShareDB = require('sharedb');
-
+const richText = require("rich-text");
 // require("dotenv").config({path: path.join(__dirname, "..", ".." ,  ".env")}) ToDo
 require("dotenv").config()
 
@@ -62,12 +62,10 @@ async function start(){
     }
 }
 function websocket() {
-    ShareDB.types.register(require('rich-text').type);
+    ShareDB.types.register(richText.type);
     const shareDBServer = new ShareDB();
     const connection = shareDBServer.connect();
     const doc = connection.get('documents', 'firstDocument');
-    const doc2 = connection.get('documents2', 'firstDocument2');
-    console.log(doc)
     doc.fetch(function (err) {
         if (err) throw err;
         if (doc.type === null) {
@@ -75,17 +73,6 @@ function websocket() {
                 insert: 'Here is the place to write something amazing.'
             }], 'rich-text', () => {
                 const wss = new WebSocket.Server({ port: 8090 });
-
-                wss.on('connection', function connection(ws) {
-                    const jsonStream = new WebSocketJSONStream(ws);
-                    shareDBServer.listen(jsonStream);
-                });
-            });
-            doc2.create([{
-                insert: 'Here is the place to write something amazing.'
-            }], 'rich-text', () => {
-                const wss = new WebSocket.Server({ port: 8080 });
-
                 wss.on('connection', function connection(ws) {
                     const jsonStream = new WebSocketJSONStream(ws);
                     shareDBServer.listen(jsonStream);

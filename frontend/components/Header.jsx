@@ -68,13 +68,6 @@ const Example = (props) => {
                                             </Link>
                                         </>
                                     ))}
-                                    {isAuth() && (
-                                        <NavLink style={{cursor: 'pointer'}}
-                                                 className="text-base font-medium text-gray-500 hover:text-gray-900"
-                                                 onClick={() => signout(() => Router.replace(`/signin`))}>
-                                            Signout
-                                        </NavLink>
-                                    )}
                                 </div>
                             </nav>
 

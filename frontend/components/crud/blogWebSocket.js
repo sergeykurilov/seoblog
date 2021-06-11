@@ -17,6 +17,25 @@ import richText from 'rich-text';
 
 const CreateBlog = () => {
 
+    const [categories, setCategories] = useState([]);
+    const [tags, setTags] = useState([]);
+
+    const [checked, setChecked] = useState([]); // categories
+    const [checkedTag, setCheckedTag] = useState([]); // tags
+
+
+    const [values, setValues] = useState({
+        error: '',
+        sizeError: '',
+        success: '',
+        formData: '',
+        title: '',
+        hidePublishButton: false
+    });
+
+    const {error, sizeError, success, formData, title, hidePublishButton} = values;
+    const token = getCookie('token');
+
 
     const blogFromLS = () => {
         if (typeof window === 'undefined') {
@@ -40,7 +59,6 @@ const CreateBlog = () => {
         const doc = connection.get('documents', 'firstDocument');
         doc.subscribe(function (err) {
             if (err) throw err;
-
             const options = {
                 theme: 'snow',
                 modules: {
@@ -71,27 +89,15 @@ const CreateBlog = () => {
                 }
             };
             let quill = new Quill('#editor', options);
-            /**
-             * On Initialising if data is present in server
-             * Updaing its content to editor
-             */
             quill.setContents(doc.data);
             let quillContent = quill.getContents();
             let html = deltaToHtml(quillContent)
-            console.log(html)
+
             setBody(html)
-            /**
-             * On Text change publishing to our server
-             * so that it can be broadcasted to all other clients
-             */
             quill.on('text-change', function (delta, oldDelta, source) {
                 if (source !== 'user') return;
                 doc.submitOp(delta, {source: quill});
             });
-
-            /** listening to changes in the document
-             * that is coming from our server
-             */
             doc.on('op', function (op, source) {
                 if (source === quill) return;
                 quill.updateContents(op);
@@ -102,24 +108,7 @@ const CreateBlog = () => {
         };
     }, []);
 
-    const [categories, setCategories] = useState([]);
-    const [tags, setTags] = useState([]);
 
-    const [checked, setChecked] = useState([]); // categories
-    const [checkedTag, setCheckedTag] = useState([]); // tags
-
-
-    const [values, setValues] = useState({
-        error: '',
-        sizeError: '',
-        success: '',
-        formData: '',
-        title: '',
-        hidePublishButton: false
-    });
-
-    const {error, sizeError, success, formData, title, hidePublishButton} = values;
-    const token = getCookie('token');
 
     useEffect(() => {
         setValues({...values, formData: new FormData()});

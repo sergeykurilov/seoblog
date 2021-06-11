@@ -4,10 +4,11 @@ import {Admin} from "../../../actions/Admin";
 import Link from "next/link";
 import Category from "../../../components/crud/Category";
 import Tag from "../../../components/crud/Tag";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Tag1() {
     return (
-        <Layout>
+        <AdminLayout>
             <Admin>
                 <div className="container">
                     <div className="row">
@@ -23,7 +24,7 @@ function Tag1() {
 
                 </div>
             </Admin>
-        </Layout>
+        </AdminLayout>
     )
 }
 

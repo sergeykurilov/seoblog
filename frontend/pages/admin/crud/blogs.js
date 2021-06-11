@@ -4,11 +4,12 @@ import {Admin} from "../../../actions/Admin";
 import Link from "next/link";
 import Category from "../../../components/crud/Category";
 import BlogRead from "../../../components/crud/BlogRead";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Category1() {
     return (
         <Layout>
-            <Admin>
+            <AdminLayout>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 pt-4 pb-4">
@@ -21,7 +22,7 @@ function Category1() {
                         </div>
                     </div>
                 </div>
-            </Admin>
+            </AdminLayout>
         </Layout>
     )
 }
