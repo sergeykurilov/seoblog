@@ -11,8 +11,8 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'kurilovsergey15@gmail.com',
-        pass: 'q92e01kl'
+        user: process.env.MAIL_USERNAME,
+        pass: process.env.MAIL_PASSWORD
     }
 });
 

@@ -184,20 +184,16 @@ function AdminPage() {
                                                     </Menu.Item>
                                                     <Menu.Item>
 
-                                                        {({active}) => {
-                                                            {
-                                                                return isAuth() && (
-                                                                    <NavLink style={{cursor: 'pointer'}}
-                                                                             className={classNames(
-                                                                                 active ? 'bg-gray-100' : '',
-                                                                                 'block px-4 py-2 text-sm text-gray-700'
-                                                                             )}
-                                                                             onClick={() => signout(() => Router.replace(`/`))}>
-                                                                        Logout
-                                                                    </NavLink>
-                                                                )
-                                                            }
-                                                        }}
+                                                        {({active}) => (
+                                                            <NavLink style={{cursor: 'pointer'}}
+                                                                     className={classNames(
+                                                                         active ? 'bg-gray-100' : '',
+                                                                         'block px-4 py-2 text-sm text-gray-700'
+                                                                     )}
+                                                                     onClick={() => signout(() => Router.replace(`/signin`))}>
+                                                                Logout
+                                                            </NavLink>
+                                                        )}
                                                     </Menu.Item>
                                                 </Menu.Items>
                                             </Transition>
@@ -207,6 +203,10 @@ function AdminPage() {
                             </div>
                         </div>
                     </div>
+                    <NavLink style={{cursor: 'pointer'}}
+                             onClick={() => signout(() => Router.replace(`/signin`))}>
+                        Logout
+                    </NavLink>
                     <main className="flex-1 relative pb-8 z-0 overflow-y-auto">
                         {/* Page header */}
                         <div className="bg-white shadow">
@@ -273,8 +273,8 @@ function AdminPage() {
                                                         <dl>
                                                             <dt className="text-sm font-medium text-gray-500 truncate">{card.name}</dt>
                                                             <dd>
-                                                                <div
-                                                                    className="text-lg font-medium text-gray-900">{card.amount}</div>
+                                                                {/*<div*/}
+                                                                {/*    className="text-lg font-medium text-gray-900">{card.amount}</div>*/}
                                                             </dd>
                                                         </dl>
                                                     </div>

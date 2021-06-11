@@ -2,28 +2,16 @@ import {Dialog, Transition} from "@headlessui/react";
 import React, {Fragment, useState} from "react";
 import Link from "next/link";
 import {
-    BellIcon,
     ClockIcon,
     CogIcon,
     CreditCardIcon,
     DocumentReportIcon,
     HomeIcon,
-    MenuAlt1Icon,
     QuestionMarkCircleIcon,
     ScaleIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
     XIcon,
 } from '@heroicons/react/outline'
-import {
-    CashIcon,
-    CheckCircleIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    OfficeBuildingIcon,
-    SearchIcon,
-} from '@heroicons/react/solid'
-import {Admin} from "../actions/Admin";
+
 
 const navigation = [
     {name: 'Home', href: '/admin', icon: HomeIcon, current: true},
