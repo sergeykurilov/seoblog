@@ -203,10 +203,6 @@ function AdminPage() {
                             </div>
                         </div>
                     </div>
-                    <NavLink style={{cursor: 'pointer'}}
-                             onClick={() => signout(() => Router.replace(`/signin`))}>
-                        Logout
-                    </NavLink>
                     <main className="flex-1 relative pb-8 z-0 overflow-y-auto">
                         {/* Page header */}
                         <div className="bg-white shadow">

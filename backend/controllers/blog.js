@@ -15,7 +15,7 @@ const {smartTrim} = require("../helpers/blog")
 exports.create = (req, res) => {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
-    console.log()
+
     form.parse(req, (err, fields, files) => {
         if (err) {
             return res.status(400).json({
@@ -23,13 +23,8 @@ exports.create = (req, res) => {
             });
         }
 
-
-
         const {title, body, categories, tags} = fields;
 
-        console.log("Title: ", title)
-        console.log("Body: ", body)
-        console.log("Fields: ", fields)
         if (!title || !title.length) {
             return res.status(400).json({
                 error: 'title is required'
@@ -108,7 +103,6 @@ exports.create = (req, res) => {
     });
 };
 
-// list, listAllBlogsCategoriesTags, read, remove, update
 
 exports.list = (req, res) => {
     Blog.find({})

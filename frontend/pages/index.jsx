@@ -99,7 +99,7 @@ const posts = [
 
 function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router}) {
     return <Layout>
-        <div className="relative bg-white overflow-hidden">
+        <div className="relative bg-white">
             <div className="max-w-7xl mx-auto">
                 <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                     <svg
@@ -145,7 +145,7 @@ function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, ro
                 />
             </div>
         </div>
-        <div className="bg-gray-50 overflow-hidden">
+        <div className="bg-gray-50">
             <div className="relative max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <svg
                     className="absolute top-0 left-full transform -translate-x-1/2 -translate-y-3/4 lg:left-auto lg:right-full lg:translate-x-2/3 lg:translate-y-1/4"
@@ -207,7 +207,7 @@ function HomePage({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, ro
                 </div>
                 <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
                     {blogs.map((post) => (
-                        <div key={post.title} className="flex flex-col rounded-lg shadow-lg overflow-hidden">
+                        <div key={post.title} className="flex flex-col rounded-lg shadow-lg">
                             <div className="flex-shrink-0">
                                 <img className="h-48 w-full object-cover" src={`${API}/blog/photo/${post.slug}`} alt="" />
                             </div>

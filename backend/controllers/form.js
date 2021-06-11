@@ -86,6 +86,9 @@ exports.contactForm = (req, res) => {
 
 exports.contactBlogAuthorForm = (req, res) => {
     const {email, name, message, lastName} = req.body
+
+
+
     const emailData = {
         to: process.env.EMAIL_TO,
         from: req.body.email,
