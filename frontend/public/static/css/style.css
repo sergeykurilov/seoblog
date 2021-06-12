@@ -21,6 +21,10 @@ body::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
+#editor {
+    height: 375px;
+}
+
 body::-webkit-scrollbar-thumb {
     --tw-bg-opacity: 1;
     border: none;

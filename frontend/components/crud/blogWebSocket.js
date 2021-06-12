@@ -9,6 +9,7 @@ import {getAllTags} from "../../actions/tags"
 import {getAllCategories} from "../../actions/category"
 import {QuillModules, QuillFormats} from "../../helpers/quill"
 import deltaToHtml from 'delta-to-html-improved'
+
 const token = getCookie("token")
 const Quill = typeof window === 'object' ? require('quill') : () => false;
 import 'quill/dist/quill.bubble.css';
@@ -109,7 +110,6 @@ const CreateBlog = () => {
     }, []);
 
 
-
     useEffect(() => {
         setValues({...values, formData: new FormData()});
         initCategories();
@@ -196,7 +196,7 @@ const CreateBlog = () => {
             categories &&
             categories.map((c, i) => (
                 <li key={i} className="list-unstyled">
-                    <input onChange={handleToggle(c._id)} type="checkbox" className="mr-2"/>
+                    <input onChange={handleToggle(c._id)} type="checkbox" className="form-checkbox h-4 w-4 mr-2"/>
                     <label className="form-check-label">{c.name}</label>
                 </li>
             ))
@@ -208,7 +208,7 @@ const CreateBlog = () => {
             tags &&
             tags.map((t, i) => (
                 <li key={i} className="list-unstyled">
-                    <input onChange={handleTagsToggle(t._id)} type="checkbox" className="mr-2"/>
+                    <input onChange={handleTagsToggle(t._id)} type="checkbox" className="form-checkbox h-4 w-4 mr-2"/>
                     <label className="form-check-label">{t.name}</label>
                 </li>
             ))
@@ -231,8 +231,16 @@ const CreateBlog = () => {
         return (
             <form onSubmit={publishBlog}>
                 <div className="form-group">
-                    <label className="text-muted">Title</label>
-                    <input type="text" className="form-control" value={title} onChange={handleChange('title')}/>
+                    <input
+                        type="text"
+                        name="email"
+                        id="email"
+                        value={title}
+                        onChange={handleChange('title')}
+                        className="shadow-sm px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="Title"
+                        aria-describedby="email-optional"
+                    />
                 </div>
 
                 <div className="form-group">
@@ -244,7 +252,10 @@ const CreateBlog = () => {
                 </div>
 
                 <div>
-                    <button type="submit" className="btn btn-primary">
+                    <button
+                        type="submit"
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
                         Publish
                     </button>
                 </div>
@@ -266,14 +277,17 @@ const CreateBlog = () => {
                 <div className="col-md-4">
                     <div>
                         <div className="form-group pb-2">
-                            <h5>Featured image</h5>
+                            <h5 className="font-sans md:font-serif pb-1">Featured image</h5>
                             <hr/>
 
-                            <small className="text-muted">Max size: 1mb</small>
+                            <small className="text-muted font-sans md:font-serif pb-1">Max size: 1mb</small>
                             <br/>
-                            <label className="btn btn-outline-info">
+                            <label
+                                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            >
                                 Upload featured image
-                                <input onChange={handleChange('photo')} type="file" accept="image/*" hidden/>
+                                <input
+                                    onChange={handleChange('photo')} type="file" accept="image/*" hidden/>
                             </label>
                         </div>
                     </div>

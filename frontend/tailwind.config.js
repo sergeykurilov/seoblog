@@ -15,6 +15,9 @@ module.exports = {
             'secondary': '#ffed4a',
             'danger': '#e3342f',
         }),
+        fontFamily: {
+            'body': ['Open Sans']
+        },
         extend: {
             backgroundColor: ['checked'],
             borderColor: ['checked'],
@@ -23,7 +26,10 @@ module.exports = {
         }
     },
     variants: {
-        extend: {},
+        extend: {
+            backgroundColor: ['checked'],
+            borderColor: ['checked'],
+        },
     },
     plugins: [require('@tailwindcss/forms')],
 }

@@ -13,7 +13,7 @@ function Category1() {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 pt-4 pb-4">
-                            <h1>Manage Blogs</h1>
+                            <h1 className="font-sans md:font-serif">Manage Blogs</h1>
                         </div>
                         <div className="col-md-12">
                             <li className="list-group-item">
