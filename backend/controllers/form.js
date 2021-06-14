@@ -1,6 +1,8 @@
 const sgMail = require('@sendgrid/mail')
 const nodemailer = require('nodemailer');
 const {google} = require('googleapis');
+const formDataMessage = require('../models/formDataM')
+const {dbErrorHandler} = require("../helpers/dbErrosHelper");
 
 // These id's and secrets should come from .env file.
 const CLIENT_ID = process.env.CLIENT_ID
@@ -44,8 +46,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 
 exports.contactForm = (req, res) => {
-    const {authorEmail, email, name, message, clientEmail} = req.body
-
+    const {authorEmail, email, name, lastName, message, clientEmail} = req.body
+    console.log(req.body)
     // let maiList = [authorEmail, process.env.EMAIL_TO]
     const emailData = {
         to: process.env.MAIL_USERNAME,
@@ -55,6 +57,7 @@ exports.contactForm = (req, res) => {
         html: `
             <h4>Message received form: </h4>
             <p>Sender name: ${name}</p>
+            <p>Sender lastName: ${lastName}</p>
             <p>Sender email: ${clientEmail}</p>
             <p>Sender message: ${message}</p>
             <hr/>
@@ -69,9 +72,26 @@ exports.contactForm = (req, res) => {
             success: true,
         })
     }).catch((error) => {
-        console.log(error.response.body)
+        console.log(error.response)
         // console.log(error.response.body.errors[0].message)
     });
+
+    let form = new formDataMessage();
+    form.name = name;
+    form.lastName = lastName;
+    form.email = clientEmail;
+    form.message = message;
+
+    form.save((err, result) => {
+        if (err) {
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            });
+        }
+        res.json(result);
+    })
+
+
     // sgMail.send(emailData).then(() => {
     //     console.log('Message sent')
     //     return res.json({
@@ -81,12 +101,13 @@ exports.contactForm = (req, res) => {
     //     console.log(error.response.body)
     //     // console.log(error.response.body.errors[0].message)
     // })
+
+
 }
 
 
 exports.contactBlogAuthorForm = (req, res) => {
     const {email, name, message, lastName} = req.body
-
 
 
     const emailData = {
@@ -116,4 +137,20 @@ exports.contactBlogAuthorForm = (req, res) => {
         console.log(error.response.body)
         // console.log(error.response.body.errors[0].message)
     })
+
+
 }
+
+
+exports.listFormData = (req, res) => {
+    formDataMessage.find({})
+        .select('_id name email message createdAt updatedAt')
+        .exec((err, data) => {
+            if (err) {
+                return res.status(400).json({
+                    error: dbErrorHandler(err)
+                });
+            }
+            res.json(data);
+        });
+};

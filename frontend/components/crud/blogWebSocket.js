@@ -233,8 +233,8 @@ const CreateBlog = () => {
                 <div className="form-group">
                     <input
                         type="text"
-                        name="email"
-                        id="email"
+                        name="title"
+                        id="title"
                         value={title}
                         onChange={handleChange('title')}
                         className="shadow-sm px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
@@ -287,7 +287,7 @@ const CreateBlog = () => {
                             >
                                 Upload featured image
                                 <input
-                                    onChange={handleChange('photo')} type="file" accept="image/*" hidden/>
+                                    onChange={handleChange('photo')}  type="file" accept="image/*" hidden/>
                             </label>
                         </div>
                     </div>

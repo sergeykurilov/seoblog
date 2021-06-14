@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add sharedb/lib/client
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add AttributeGenericBinding
 
 PATH: 
   E:\seoblog\node_modules\.bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\kuril\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\PuTTY\;C:\Ruby30-x64\bin;C:\Users\kuril\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\kuril\AppData\Local\Programs\Python\Python39\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files (x86)\Yarn\bin\;C:\Users\kuril\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Users\kuril\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Microso;C:\Users\kuril\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\kuril\AppData\Local\Yarn\bin;C:\Program Files\JetBrains\WebStorm 2020.2.3\bin;;C:\Users\kuril\.dotnet\tools;C:\Users\kuril\AppData\Roaming\Composer\vendor\bin;C:\Users\kuril\AppData\Local\Microsoft\WindowsApps;
@@ -14,8 +14,8 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/sharedb%2flib/client: Request "https://registry.yarnpkg.com/sharedb%2flib/client" returned a 405
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66106:18)
+  Error: https://registry.yarnpkg.com/AttributeGenericBinding: Not found
+      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66097:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140749:22)
       at Request.emit (events.js:315:20)
       at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141721:10)
@@ -41,6 +41,7 @@ npm manifest:
       "@headlessui/react": "^1.2.0",
       "@heroicons/react": "^1.0.1",
       "@zeit/next-css": "^1.0.1",
+      "delta-to-html-improved": "^0.3.7",
       "isomorphic-fetch": "^3.0.0",
       "js-cookie": "^2.2.1",
       "jsonwebtoken": "^8.5.1",
@@ -48,6 +49,7 @@ npm manifest:
       "next": "^10.0.9",
       "nprogress": "^0.2.0",
       "query-string": "^7.0.0",
+      "quill": "^1.3.7",
       "react": "^17.0.1",
       "react-dom": "^17.0.1",
       "react-google-login": "^5.2.2",
@@ -55,6 +57,8 @@ npm manifest:
       "react-render-html": "^0.6.0",
       "reactstrap": "^8.9.0",
       "rich-text": "^4.1.0",
+      "sharedb-attribute-binding": "^0.1.12",
+      "sharedb-client": "^1.3.4",
       "webpack": "^4.46.0"
     },
     "devDependencies": {
@@ -1410,6 +1414,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
     integrity sha1-yY2bzvdWdBiOEQlpFRGZ45sfppM=
   
+  delta-to-html-improved@^0.3.7:
+    version "0.3.7"
+    resolved "https://registry.yarnpkg.com/delta-to-html-improved/-/delta-to-html-improved-0.3.7.tgz#039bccde52617d35e69c3961e0849a91b9d9c8a7"
+    integrity sha512-gAyt6D9+JCFm1Rw+Ff2yR3YEbSfpEGwDab1ejdgctzUDZ+I9HCMXUlGuqUvEMuX5XXvxA4luPCD6HRX2EDR7Hg==
+    dependencies:
+      fast-deep-equal "^2.0.1"
+  
   depd@~1.1.2:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
@@ -1662,6 +1673,11 @@ Lockfile:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/extracted-loader/-/extracted-loader-1.0.4.tgz#e1a3f1791813c14091a1959e261e23e95dd90115"
     integrity sha512-G8A0hT/WCWIjesZm7BwbWdST5dQ08GNnCpTrJT/k/FYzuiJwlV1gyWjnuoizOzAR4jpEYXG2J++JyEKN/EB26Q==
+  
+  fast-deep-equal@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
+    integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
   
   fast-deep-equal@^3.1.1:
     version "3.1.3"
@@ -4177,6 +4193,16 @@ Lockfile:
     dependencies:
       inherits "^2.0.1"
       safe-buffer "^5.0.1"
+  
+  sharedb-attribute-binding@^0.1.12:
+    version "0.1.12"
+    resolved "https://registry.yarnpkg.com/sharedb-attribute-binding/-/sharedb-attribute-binding-0.1.12.tgz#02be55e7c1e11f96e9a724d240dce8ee9ba78f39"
+    integrity sha512-QLlQ2bVt8GmzbCiANc5Fq4Yn5YIHMwMHwXIQ3wyXk3yHpGTVcl03dSISSrG7iqxLbzKvp/yQ5eTse1Of+0Vmtw==
+  
+  sharedb-client@^1.3.4:
+    version "1.3.4"
+    resolved "https://registry.yarnpkg.com/sharedb-client/-/sharedb-client-1.3.4.tgz#ae4f8130c49195f6ce589bfb6d8ece6b9dad9ba6"
+    integrity sha512-SH94EvgGyfgA81gWClYsGOlBvM3nl7FqP2ZGYVuN7VrbnI6NWhTgD1ieZEReUbRlAJgBCAJgWWDkN2rXyx5GFA==
   
   shell-quote@1.7.2:
     version "1.7.2"

@@ -146,7 +146,7 @@ exports.listAllBlogsCategoriesTags = (req, res) => {
             // get all categories
             Category.find({}).exec((error, c) => {
                 if (error) {
-                    return res.json({
+                    return res.status(400).json({
                         error: dbErrorHandler(error)
                     });
                 }

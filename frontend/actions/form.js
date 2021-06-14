@@ -22,3 +22,14 @@ export const emailContactForm = (data) => {
         })
         .catch(err => console.log(err));
 };
+
+export const leadList = () => {
+
+    return fetch(`${API}/get-form-data`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};

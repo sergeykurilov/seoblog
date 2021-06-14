@@ -19,6 +19,7 @@ const navigation = [
     {name: 'Create Tag', href: '/admin/crud/tag', icon: ScaleIcon, current: false},
     {name: 'Create Blog', href: '/admin/crud/blog', icon: CreditCardIcon, current: false},
     {name: 'Update/Delete Blog', href: '/admin/crud/blogs', icon: DocumentReportIcon, current: false},
+    {name: 'Leads', href: '/admin/crud/leads', icon: DocumentReportIcon, current: false},
 ]
 
 const secondaryNavigation = [

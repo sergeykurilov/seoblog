@@ -29,7 +29,7 @@ const WithoutAuthorEmail = () => {
     const clickSubmit = (e) => {
         e.preventDefault()
         setValues({...values, buttonText: "Sending..."})
-        emailContactForm({name, email: senderEmail, lastName, message, clientEmail}).then(data => {
+        emailContactForm({name, email: senderEmail, lastName: lastName, message, clientEmail}).then(data => {
             console.log(data)
             if (data.error) {
                 setValues({...values, error: data.error})
@@ -51,7 +51,6 @@ const WithoutAuthorEmail = () => {
 
     const [open, setOpen] = useState(true)
 
-    const cancelButtonRef = useRef(null)
 
     const showError = () => <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>{error}</div>
     const showSuccess = () => success &&
@@ -206,6 +205,8 @@ const WithoutAuthorEmail = () => {
                                 <input
                                     type="text"
                                     name="last_name"
+                                    value={lastName}
+                                    onChange={handleChange('lastName')}
                                     id="last_name"
                                     autoComplete="family-name"
                                     className="py-3 px-4 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
