@@ -2,7 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/admin/crud/category": "pages/admin/crud/category.js",
-  "/admin/crud/leads": "pages/admin/crud/leads.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/user": "pages/user.js",
+  "/signin": "pages/signin.js"
 }
