@@ -58,6 +58,7 @@ const CreateBlog = () => {
         const socket = new WebSocket('ws://127.0.0.1:8090');
         const connection = new Sharedb.Connection(socket);
         const doc = connection.get('documents', 'firstDocument');
+        const docs = connection.get('document', 'firstDocuments');
         doc.subscribe(function (err) {
             if (err) throw err;
             const options = {
