@@ -346,25 +346,6 @@ clone@^2.1.1:
   resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
 
-collab-react-components@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/collab-react-components/-/collab-react-components-0.0.7.tgz#d4d4d9a2c30992617a2c674a42026210171da082"
-  integrity sha1-1NTZosMJkmF6LGdKQgJiEBcdoII=
-  dependencies:
-    babel-runtime "^6.6.1"
-    http "0.0.0"
-    prop-types "^15.5.9"
-    react-jsonschema-form "^0.48.2"
-    react-quill "^1.0.0-rc.2"
-    reconnecting-websocket "^3.0.5"
-    rich-text "^3.1.0"
-    sharedb "^1.0.0-beta.7"
-    sharedb-mongo "^1.0.0-beta.3"
-    sharedb-string-binding "^1.0.0"
-    underscore "^1.8.3"
-    websocket-json-stream "0.0.3"
-    ws "^3.0.0"
-
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -1217,6 +1198,11 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
+lint@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/lint/-/lint-1.1.2.tgz#35ed064f322547c331358d899868664968ba371f"
+  integrity sha1-Ne0GTzIlR8MxNY2JmGhmSWi6Nx8=
+
 lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
@@ -1755,6 +1741,25 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-collab-components@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-collab-components/-/react-collab-components-0.0.9.tgz#db1c75e782eb84f915ab01facc9a043f64ee5ee4"
+  integrity sha1-2xx154LrhPkVqwH6zJoEP2TuXuQ=
+  dependencies:
+    babel-runtime "^6.6.1"
+    http "0.0.0"
+    prop-types "^15.5.9"
+    react-jsonschema-form "^0.48.2"
+    react-quill "^1.0.0-rc.2"
+    reconnecting-websocket "^3.0.5"
+    rich-text "^3.1.0"
+    sharedb "^1.0.0-beta.7"
+    sharedb-mongo "^1.0.0-beta.3"
+    sharedb-string-binding "^1.0.0"
+    underscore "^1.8.3"
+    websocket-json-stream "0.0.3"
+    ws "^3.0.0"
+
 react-dom-factories@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-dom-factories/-/react-dom-factories-1.0.2.tgz#eb7705c4db36fb501b3aa38ff759616aa0ff96e0"
@@ -1811,11 +1816,6 @@ reconnecting-websocket@^3.0.5:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/reconnecting-websocket/-/reconnecting-websocket-3.2.2.tgz#8097514e926e9855e03c39e76efa2e3d1f371bee"
   integrity sha512-SWSfoXiaHVOqXuPWFgGWeUxKnb5HIY7I/Fh5C/hy4wUOgeOh7YIMXEiv5/eHBlNs4tNzCrO5YDR9AH62NWle0Q==
-
-reconnecting-websocket@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/reconnecting-websocket/-/reconnecting-websocket-4.4.0.tgz#3b0e5b96ef119e78a03135865b8bb0af1b948783"
-  integrity sha512-D2E33ceRPga0NvTDhJmphEgJ7FUYF0v4lr1ki0csq06OdlxKfugGzN0dSkxM/NfqCxYELK4KcaTOUOjTV6Dcng==
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"
@@ -1960,6 +1960,13 @@ setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
+
+sharedb-generic-binding@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/sharedb-generic-binding/-/sharedb-generic-binding-0.1.0.tgz#9051247b8e4550c7f051befc20653c6b3fa59467"
+  integrity sha512-m4x5qfX6XBhMYhDZNXa7mfUC1+VJ0/0POs5qbxlSCqi/M5AUrOwg+VTSJnYRl9X4zHA0EGYT19MkXkoUvBQZDQ==
+  dependencies:
+    lint "^1.1.2"
 
 sharedb-mongo@^1.0.0-beta.3:
   version "1.0.0-beta.17"

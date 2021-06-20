@@ -12,6 +12,7 @@ const richText = require("rich-text");
 // require("dotenv").config({path: path.join(__dirname, "..", ".." ,  ".env")}) ToDo
 require("dotenv").config()
 
+
 /// bring routes
 
 const blogRoutes = require("./routes/blog")
@@ -32,21 +33,58 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 //cors
-if(process.env.NODE_ENV === "development"){
+if (process.env.NODE_ENV === "development") {
     app.use(cors({origin: `${process.env.CLIENT_URL}`}))
 }
 app.use(cors())
 
 //routes middleware
-app.use("/api",blogRoutes)
-app.use("/api",authRoutes)
-app.use("/api",userRoutes)
-app.use("/api",categoryRoutes)
-app.use("/api",tagsRoutes)
-app.use("/api",formRoutes)
+app.use(express.static('static'));
+app.use("/api", blogRoutes)
+app.use("/api", authRoutes)
+app.use("/api", userRoutes)
+app.use("/api", categoryRoutes)
+app.use("/api", tagsRoutes)
+app.use("/api", formRoutes)
 //port
 
 const port = process.env.PORT || 8000
+
+function websocket() {
+    ShareDB.types.register(require('rich-text').type);
+    const shareDBServer = new ShareDB();
+    const connection = shareDBServer.connect();
+    const doc = connection.get('documents', 'firstDocument');
+    const example = connection.get('example', 'title');
+    example.fetch(function(err) {
+        if (err) throw err;
+        if (example.type === null) {
+            example.create({content: ''}, () => {
+                const wss = new WebSocket.Server({ port: 8080 });
+                wss.on('connection', function connection(ws) {
+                    const jsonStream = new WebSocketJSONStream(ws);
+                    shareDBServer.listen(jsonStream);
+                });
+            });
+            return;
+        }
+    });
+    doc.fetch(function (err) {
+        if (err) throw err;
+        if (doc.type === null) {
+            doc.create([{ insert: '' }], 'rich-text', () => {
+                const wss = new WebSocket.Server({ port: 8090 });
+                wss.on('connection', function connection(ws) {
+                    const jsonStream = new WebSocketJSONStream(ws);
+                    shareDBServer.listen(jsonStream);
+                });
+            });
+            return;
+        }
+    });
+}
+
+
 async function start(){
     try {
         //db
@@ -60,27 +98,6 @@ async function start(){
         //resolve error
         console.log(e.message)
     }
-}
-function websocket() {
-    ShareDB.types.register(richText.type);
-    const shareDBServer = new ShareDB();
-    const connection = shareDBServer.connect();
-    const doc = connection.get('documents', 'firstDocument');
-    doc.fetch(function (err) {
-        if (err) throw err;
-        if (doc.type === null) {
-            doc.create([{
-                insert: 'Here is the place to write something amazing.'
-            }], 'rich-text', () => {
-                const wss = new WebSocket.Server({ port: 8090 });
-                wss.on('connection', function connection(ws) {
-                    const jsonStream = new WebSocketJSONStream(ws);
-                    shareDBServer.listen(jsonStream);
-                });
-            });
-            return;
-        }
-    });
 }
 
 websocket()

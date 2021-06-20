@@ -2495,6 +2495,11 @@ line-column@^1.0.2:
     isarray "^1.0.0"
     isobject "^2.0.0"
 
+lint@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/lint/-/lint-1.1.2.tgz#35ed064f322547c331358d899868664968ba371f"
+  integrity sha1-Ne0GTzIlR8MxNY2JmGhmSWi6Nx8=
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -4288,6 +4293,13 @@ sharedb-client@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/sharedb-client/-/sharedb-client-1.3.4.tgz#ae4f8130c49195f6ce589bfb6d8ece6b9dad9ba6"
   integrity sha512-SH94EvgGyfgA81gWClYsGOlBvM3nl7FqP2ZGYVuN7VrbnI6NWhTgD1ieZEReUbRlAJgBCAJgWWDkN2rXyx5GFA==
+
+sharedb-generic-binding@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/sharedb-generic-binding/-/sharedb-generic-binding-0.1.0.tgz#9051247b8e4550c7f051befc20653c6b3fa59467"
+  integrity sha512-m4x5qfX6XBhMYhDZNXa7mfUC1+VJ0/0POs5qbxlSCqi/M5AUrOwg+VTSJnYRl9X4zHA0EGYT19MkXkoUvBQZDQ==
+  dependencies:
+    lint "^1.1.2"
 
 sharedb-mongo@^1.0.0-beta.3:
   version "1.0.0-beta.17"

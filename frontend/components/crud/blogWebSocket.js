@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Link from "next/link";
 import {createBlog} from "../../actions/blog";
 import {isAuth, getCookie} from "../../actions/auth";
@@ -9,12 +9,12 @@ import {getAllTags} from "../../actions/tags"
 import {getAllCategories} from "../../actions/category"
 import {QuillModules, QuillFormats} from "../../helpers/quill"
 import deltaToHtml from 'delta-to-html-improved'
-
 const token = getCookie("token")
 const Quill = typeof window === 'object' ? require('quill') : () => false;
 import 'quill/dist/quill.bubble.css';
 import Sharedb from 'sharedb-client';
 import richText from 'rich-text';
+import StringBinding from "sharedb-string-binding";
 
 const CreateBlog = () => {
 
@@ -51,14 +51,21 @@ const CreateBlog = () => {
     };
 
     const [body, setBody] = useState();
-
+    const textInput = useRef("");
 
     useEffect(() => {
         Sharedb.types.register(richText.type);
         const socket = new WebSocket('ws://127.0.0.1:8090');
         const connection = new Sharedb.Connection(socket);
         const doc = connection.get('documents', 'firstDocument');
-        const docs = connection.get('document', 'firstDocuments');
+        const example = connection.get('example', 'title');
+
+        example.subscribe(function (err) {
+            if (err) throw err;
+            var content = ['content']
+            var binding = new StringBinding(textInput.current, example, content);
+            binding.setup();
+        });
         doc.subscribe(function (err) {
             if (err) throw err;
             const options = {
@@ -94,7 +101,6 @@ const CreateBlog = () => {
             quill.setContents(doc.data);
             let quillContent = quill.getContents();
             let html = deltaToHtml(quillContent)
-
             setBody(html)
             quill.on('text-change', function (delta, oldDelta, source) {
                 if (source !== 'user') return;
@@ -237,6 +243,7 @@ const CreateBlog = () => {
                         name="title"
                         id="title"
                         value={title}
+                        ref={textInput}
                         onChange={handleChange('title')}
                         className="shadow-sm px-4 py-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         placeholder="Title"
@@ -288,7 +295,7 @@ const CreateBlog = () => {
                             >
                                 Upload featured image
                                 <input
-                                    onChange={handleChange('photo')}  type="file" accept="image/*" hidden/>
+                                    onChange={handleChange('photo')} type="file" accept="image/*" hidden/>
                             </label>
                         </div>
                     </div>
