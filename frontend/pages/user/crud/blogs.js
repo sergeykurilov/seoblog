@@ -3,12 +3,13 @@ import {Layout} from "../../../components/Layout";
 import BlogRead from "../../../components/crud/BlogRead";
 import {Private} from "../../../actions/Private";
 import {isAuth} from "../../../actions/auth";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Category1() {
     const username = isAuth() && isAuth().username
     console.log(username)
     return (
-        <Layout>
+        <AdminLayout>
             <Private>
                 <div className="container">
                     <div className="row">
@@ -24,7 +25,7 @@ function Category1() {
 
                 </div>
             </Private>
-        </Layout>
+        </AdminLayout>
     )
 }
 

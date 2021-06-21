@@ -5,45 +5,23 @@ import Link from "next/link";
 
 
 import {Fragment, useState} from 'react'
-import {Dialog, Menu, Transition} from '@headlessui/react'
+import {Menu, Transition} from '@headlessui/react'
 import {
     BellIcon,
-    ClockIcon,
-    CogIcon,
-    CreditCardIcon,
-    DocumentReportIcon,
-    HomeIcon,
     MenuAlt1Icon,
-    QuestionMarkCircleIcon,
     ScaleIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
-    XIcon,
 } from '@heroicons/react/outline'
 import {
-    CashIcon,
     CheckCircleIcon,
     ChevronDownIcon,
-    ChevronRightIcon,
     OfficeBuildingIcon,
     SearchIcon,
 } from '@heroicons/react/solid'
-import {isAuth, signout} from "../../actions/auth";
+import {signout} from "../../actions/auth";
 import {NavLink} from "reactstrap";
 import Router from "next/router";
 
-const navigation = [
-    {name: 'Home', href: '#', icon: HomeIcon, current: true},
-    {name: 'Create Category', href: '/admin/crud/category', icon: ClockIcon, current: false},
-    {name: 'Create Tag', href: '/admin/crud/tag', icon: ScaleIcon, current: false},
-    {name: 'Create Blog', href: '/admin/crud/blog', icon: CreditCardIcon, current: false},
-    {name: 'Update/Delete Blog', href: '/admin/crud/blogs', icon: DocumentReportIcon, current: false},
-    {name: 'Leads', href: '/admin/crud/leads', icon: DocumentReportIcon, current: false},
-]
-const secondaryNavigation = [
-    {name: 'Update profile', href: '/user/update', icon: CogIcon},
-    {name: 'Help', href: '#', icon: QuestionMarkCircleIcon},
-]
+
 const cards = [
     {name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45'},
     // More items...

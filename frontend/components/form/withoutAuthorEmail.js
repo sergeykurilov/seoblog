@@ -43,7 +43,7 @@ const WithoutAuthorEmail = () => {
                     message: "",
                     clientEmail: "",
                     buttonText: "Sent",
-                    success: data.success
+                    success: true
                 })
             }
         })
@@ -259,24 +259,6 @@ const WithoutAuthorEmail = () => {
                 </div>
             </div>
         </div>
-
-        // <form onSubmit={clickSubmit} className="pb-5">
-        //     <div className="form-group">
-        //         <label className="lead">Name</label>
-        //         <input className="form-control" value={name} required type="text" onChange={handleChange('name')} />
-        //     </div>
-        //     <div className="form-group">
-        //         <label className="lead">Email</label>
-        //         <input className="form-control" value={clientEmail} required type="email" onChange={handleChange('clientEmail')} />
-        //     </div>
-        //     <div className="form-group">
-        //         <label className="lead">Message</label>
-        //         <textarea className="form-control" value={message} required type="text" rows="10" onChange={handleChange('message')} />
-        //     </div>
-        //     <div>
-        //         <button className="btn btn-primary">{buttonText}</button>
-        //     </div>
-        // </form>
     )
 
 

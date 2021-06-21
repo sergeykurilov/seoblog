@@ -5,10 +5,11 @@ import Link from "next/link";
 import Category from "../../../components/crud/Category";
 import BlogUpdate from "../../../components/crud/BlogUpdate";
 import {Private} from "../../../actions/Private";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Blog() {
     return (
-        <Layout>
+        <AdminLayout>
             <Private>
                 <div className="container">
                     <div className="row">
@@ -24,7 +25,7 @@ function Blog() {
 
                 </div>
             </Private>
-        </Layout>
+        </AdminLayout>
     )
 }
 

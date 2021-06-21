@@ -21,8 +21,6 @@ const ProfileUpdate = () => {
 
     let {username, name, email, password, success, error, loading, photo, userData, about} = values
 
-
-
     const url = `${API}/user/photo/${username}`
     const [{
         srcBlob,
@@ -45,7 +43,7 @@ const ProfileUpdate = () => {
                     return;
                 }
 
-                const blob = new Blob([arrayBuffer])
+                const blob = new Blob([arrayBuffer], {type: "image/jpg"})
                 const srcBlob = URL.createObjectURL(blob);
 
                 setSrc(state => ({
@@ -59,7 +57,7 @@ const ProfileUpdate = () => {
             isUnmounted = true;
         }
 
-    }, [])
+    }, [username])
 
     const init = () => {
         getProfile(token).then(profile => {
@@ -140,10 +138,10 @@ const ProfileUpdate = () => {
                 <label className="text-muted">About</label>
                 <input type="textarea" className="form-control" value={about} onChange={handleChange('about')}/>
             </div>
-            <div className="form-group">
-                <label className="text-muted">Username</label>
-                <input type="text" className="form-control" value={username} onChange={handleChange('username')}/>
-            </div>
+            {/*<div className="form-group">*/}
+            {/*    <label className="text-muted">Username</label>*/}
+            {/*    <input type="text" className="form-control" value={username} onChange={handleChange('username')}/>*/}
+            {/*</div>*/}
             <div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </div>
@@ -168,15 +166,12 @@ const ProfileUpdate = () => {
         </div>
     );
 
-
-
-
     return (
         <>
             <div className="container">
                 <div className="row">
                     <div className="col-md-4 mb-5">
-                        <img src={srcBlob} alt={`${username}`} className="img img-fluid mb-3"/>
+                        {srcBlob ?  <img src={srcBlob} alt={`${username}`} className="img img-fluid mb-3"/> : "🤷 Can't find the user image"}
                     </div>
                     <div className="col-md-8">
                         {showError()}

@@ -42,7 +42,7 @@ transporter.verify(function (error, success) {
         console.log("Server is ready to take our messages");
     }
 });
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 
 
 exports.contactForm = (req, res) => {
@@ -153,4 +153,19 @@ exports.listFormData = (req, res) => {
             }
             res.json(data);
         });
+};
+
+
+exports.removeFormData = (req, res) => {
+    const id = req.body.id
+    formDataMessage.findOneAndRemove({id}).exec((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: dbErrorHandler(err)
+            });
+        }
+        res.json({
+            message: 'Form data deleted successfully.'
+        });
+    });
 };

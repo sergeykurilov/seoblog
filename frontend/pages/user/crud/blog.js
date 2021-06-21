@@ -3,10 +3,11 @@ import {Layout} from "../../../components/Layout";
 import {Admin} from "../../../actions/Admin";
 import CreateBlog from "../../../components/crud/Blog";
 import {Private} from "../../../actions/Private";
+import {AdminLayout} from "../../../components/AdminLayout";
 
 function Blog() {
     return (
-        <Layout>
+        <AdminLayout>
             <Private>
                 <div className="container">
                     <div className="row">
@@ -22,7 +23,7 @@ function Blog() {
 
                 </div>
             </Private>
-        </Layout>
+        </AdminLayout>
     )
 }
 

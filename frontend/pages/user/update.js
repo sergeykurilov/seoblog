@@ -1,10 +1,11 @@
 import {Layout} from "../../components/Layout";
 import {Private} from "../../actions/Private";
 import ProfileUpdate from "../../components/auth/ProfileUpdate";
+import {AdminLayout} from "../../components/AdminLayout";
 
 function UserUpdate() {
     return(
-        <Layout>
+        <AdminLayout>
             <Private>
                 <div className="container-fluid">
                     <div className="row">
@@ -12,7 +13,7 @@ function UserUpdate() {
                     </div>
                 </div>
             </Private>
-        </Layout>
+        </AdminLayout>
     )
 }
 

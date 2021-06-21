@@ -11,9 +11,8 @@ import {
     ScaleIcon,
     XIcon,
 } from '@heroicons/react/outline'
-
-
-const navigation = [
+import {isAuth} from "../actions/auth";
+const navigationAdmin = [
     {name: 'Home', href: '/admin', icon: HomeIcon, current: true},
     {name: 'Create Category', href: '/admin/crud/category', icon: ClockIcon, current: false},
     {name: 'Create Tag', href: '/admin/crud/tag', icon: ScaleIcon, current: false},
@@ -21,6 +20,13 @@ const navigation = [
     {name: 'Update/Delete Blog', href: '/admin/crud/blogs', icon: DocumentReportIcon, current: false},
     {name: 'Leads', href: '/admin/crud/leads', icon: DocumentReportIcon, current: false},
 ]
+const navigationUser = [
+    {name: 'Home', href: '/user', icon: HomeIcon, current: true},
+    {name: 'Create Blog', href: '/user/crud/blog', icon: CreditCardIcon, current: false},
+    {name: 'Update/Delete Blog', href: '/user/crud/blogs', icon: DocumentReportIcon, current: false},
+]
+
+const nav = isAuth().role === 1 ? navigationAdmin : navigationUser
 
 const secondaryNavigation = [
     {name: 'Update profile', href: '/user/update', icon: CogIcon},
@@ -95,7 +101,7 @@ export const AdminLayout = ({children}) => {
                                 <nav className="mt-5 flex-shrink-0 h-full divide-y divide-cyan-800 overflow-y-auto"
                                      aria-label="Sidebar">
                                     <div className="px-2 space-y-1">
-                                        {navigation.map((item) => (
+                                        {nav.map((item) => (
                                             <Link href={item.href}>
                                                 <a
                                                     key={item.name}
@@ -150,7 +156,7 @@ export const AdminLayout = ({children}) => {
                             <nav className="mt-5 flex-1 flex flex-col divide-y divide-cyan-800 overflow-y-auto"
                                  aria-label="Sidebar">
                                 <div className="px-2 space-y-1">
-                                    {navigation.map((item) => (
+                                    {nav.map((item) => (
                                         <Link href={item.href}>
                                             <a
                                                 key={item.name}

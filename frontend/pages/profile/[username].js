@@ -66,7 +66,7 @@ const UserProfile = ({ user, blogs, query }) => {
                                     </div>
                                     <div className="col-md-12">
                                         <h5>Author email</h5>
-                                        <p>{user.email}</p>
+                                        <p>{user.email ?? "🤷 Can't find the user email"}</p>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ const UserProfile = ({ user, blogs, query }) => {
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title bg-primary pt-4 pb-4 pl-4 pr-4 text-white">
-                                        Recent blogs by {user.name}
+                                        Recent blogs by {user.name ?? "🤷 Can't find the user name"}
                                     </h5>
 
                                     {showUserBlogs()}
@@ -94,10 +94,10 @@ const UserProfile = ({ user, blogs, query }) => {
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title bg-primary pt-4 pb-4 pl-4 pr-4 text-light">
-                                        Message {user.name}
+                                        Message {user.name ?? "🤷 Can't find the user name"}
                                     </h5>
                                     <br />
-                                    <ContactForm authorEmail={user.email} />
+                                    <ContactForm authorEmail={user.email ?? "🤷 Can't find the user email"} />
                                 </div>
                             </div>
                         </div>

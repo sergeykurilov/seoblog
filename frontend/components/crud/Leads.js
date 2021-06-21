@@ -3,8 +3,10 @@ import {create, deleteSingleTag, getAllTags} from "../../actions/tags";
 import {isAuth, getCookie, signup} from "../../actions/auth";
 import Router from "next/router";
 import {deleteCategory} from "../../actions/category";
-import {leadList} from "../../actions/form";
+import {leadList, removeFormData} from "../../actions/form";
 import moment from "moment";
+import {singleBlog} from "../../actions/blog";
+const token = getCookie("token")
 
 const Leads = () => {
     const [value, setValue] = useState({
@@ -12,11 +14,12 @@ const Leads = () => {
         "error": false,
         "leads": [],
         "success": false,
+        "message": "",
         "removed": false,
         "reload": false
     })
 
-    const {name, success, error, removed, leads, reload} = value
+    const {name, success, error, removed, leads, reload, message} = value
 
 
     const AllLeads = () => {
@@ -24,7 +27,7 @@ const Leads = () => {
             if (data.error) {
                 setValue({...value, error: data.error, reload: false})
             } else {
-                setValue({...value, leads: data, reload: true})
+                setValue({...value, leads: data, reload: true, success: true, message: data.message})
             }
         })
     }
@@ -32,6 +35,19 @@ const Leads = () => {
     useEffect(() => {
         AllLeads()
     }, [reload])
+
+
+    const handlerClickRemove = (currentId) => {
+        const current = leads.filter((item, i) => i === currentId);
+
+        removeFormData(current[0]._id).then(data => {
+            if (data.error) {
+                console.log(data.error);
+            } else {
+                setValue({...value, success: true, message: data.message})
+            }
+        });
+    }
 
     function LeadsBlock() {
         return (
@@ -79,15 +95,13 @@ const Leads = () => {
                             <th className="px-6 py-3 border-b-2 border-gray-300"></th>
                         </tr>
                         </thead>
-                        {JSON.stringify(leads.lastName)}
                         {leads.map((person, i ) => (
-
                             <tbody className="bg-white">
                             <tr>
                                 <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                                     <div className="flex items-center">
                                         <div>
-                                            <div className="text-sm leading-5 text-gray-800">{i + 1}</div>
+                                            <div className="text-sm leading-5 text-gray-800">{i+1}</div>
                                         </div>
                                     </div>
                                 </td>
@@ -102,12 +116,17 @@ const Leads = () => {
                                     <p>{moment(person.createdAt).format("YYYY-MM-DD")}</p>
                                     <p> {moment(person.createdAt).format("HH:mm:ss")}</p>
                                 </td>
+                                <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                                    <button
+                                        onClick={() => handlerClickRemove(i)}
+                                            className="rounded px-3 py-2 m-1 border-b-4 border-l-2 shadow-lg bg-blue-800 border-blue-900 text-white">
+                                        Remove
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         ))}
-
                     </table>
-
                 </div>
             </div>
         )
@@ -116,7 +135,7 @@ const Leads = () => {
 
     const showSuccess = () => {
         if (success) {
-            return <p className="text-success">Category successfully created.</p>
+            return <p className="text-success">{message}</p>
         }
     }
     const showError = () => {
