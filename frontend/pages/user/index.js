@@ -14,7 +14,9 @@ const cards = [
     {name: 'Account balance', href: '#', icon: ScaleIcon, amount: '$30,659.45'},
     // More items...
 ]
-
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 function UserPage() {
     return (
         <AdminLayout>

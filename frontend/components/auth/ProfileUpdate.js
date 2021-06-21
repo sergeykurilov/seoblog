@@ -68,6 +68,7 @@ const ProfileUpdate = () => {
                     ...values,
                     name: profile.name,
                     username: profile.username,
+                    email: profile.email,
                     senderEmail: profile.email,
                     about: profile.about,
                 })
@@ -100,6 +101,7 @@ const ProfileUpdate = () => {
                         senderEmail: data.email,
                         about: data.about,
                         photo: data.photo,
+                        password: data.password,
                         success: true,
                         loading: false
                     })
@@ -124,19 +126,20 @@ const ProfileUpdate = () => {
             </div>
             <div className="form-group">
                 <label className="text-muted">Name</label>
-                <input type="text" className="form-control" value={name} onChange={handleChange('name')}/>
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Password</label>
-                <input type="password" className="form-control" value={password} onChange={handleChange('password')}/>
+                <input type="text" autocomplete="off" className="form-control" value={name} onChange={handleChange('name')}/>
             </div>
             <div className="form-group">
                 <label className="text-muted">Email</label>
-                <input type="email" className="form-control" value={email} onChange={handleChange('email')}/>
+                <input type="email" autocomplete="off" className="form-control" value={email} onChange={handleChange('email')}/>
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Password</label>
+                <input autocomplete="off" type="password" autoComplete="off" className="form-control" value={password}
+                       onChange={handleChange('password')}/>
             </div>
             <div className="form-group">
                 <label className="text-muted">About</label>
-                <input type="textarea" className="form-control" value={about} onChange={handleChange('about')}/>
+                <input type="textarea" autocomplete="off" className="form-control" value={about} onChange={handleChange('about')}/>
             </div>
             {/*<div className="form-group">*/}
             {/*    <label className="text-muted">Username</label>*/}
