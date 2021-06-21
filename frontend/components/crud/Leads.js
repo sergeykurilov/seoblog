@@ -55,7 +55,7 @@ const Leads = () => {
                 <div
                     className="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
                     <div className="flex justify-between">
-                        <div className="inline-flex border rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">
+                        <div className="inline-flex rounded w-7/12 px-2 lg:px-6 h-12 bg-transparent">
                             <div className="flex flex-wrap items-stretch w-full h-full mb-6 relative">
                                 <div className="flex">
                                     <span
