@@ -1,18 +1,14 @@
 import React from "react"
 import {Layout} from "../components/Layout";
-
+import {PageHeader} from "../components/pagesHeader";
 import {SigupForm} from "../components/SignupForm";
 
 const Signup = () => {
     return (
         <Layout>
+            <PageHeader/>
             <div className="container">
-                <h2 className={"text-center pt-4 pb-4"}>Singup</h2>
-                <div className="row">
-                    <div className="col-md-6 offset-md-3">
-                        <SigupForm/>
-                    </div>
-                </div>
+                <SigupForm/>
             </div>
         </Layout>
     )

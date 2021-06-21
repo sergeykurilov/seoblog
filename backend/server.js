@@ -56,6 +56,7 @@ function websocket() {
     const connection = shareDBServer.connect();
     const doc = connection.get('documents', 'firstDocument');
     const example = connection.get('example', 'title');
+    var wss = new WebSocket.Server({ port: 8090 });
     example.fetch(function(err) {
         if (err) throw err;
         if (example.type === null) {
@@ -73,7 +74,7 @@ function websocket() {
         if (err) throw err;
         if (doc.type === null) {
             doc.create([{ insert: '' }], 'rich-text', () => {
-                const wss = new WebSocket.Server({ port: 8090 });
+
                 wss.on('connection', function connection(ws) {
                     const jsonStream = new WebSocketJSONStream(ws);
                     shareDBServer.listen(jsonStream);
