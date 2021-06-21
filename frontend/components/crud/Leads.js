@@ -39,7 +39,6 @@ const Leads = () => {
 
     const handlerClickRemove = (currentId) => {
         const current = leads.filter((item, i) => i === currentId);
-
         removeFormData(current[0]._id).then(data => {
             if (data.error) {
                 console.log(data.error);

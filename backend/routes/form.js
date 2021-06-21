@@ -11,7 +11,7 @@ const {contactformValidator} = require("../validators/form")
 
 router.post('/contact', contactformValidator, runValidation, contactForm)
 router.get('/get-form-data', listFormData)
-router.delete('/remove-form-data',requireSignin, adminMiddleWare, removeFormData);
+router.delete('/remove-form-data', removeFormData);
 router.post('/contact-blog-author', contactformValidator, runValidation, contactBlogAuthorForm)
 
 module.exports = router

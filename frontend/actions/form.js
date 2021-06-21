@@ -38,11 +38,6 @@ export const leadList = () => {
 export const removeFormData = (id) => {
     return fetch(`${API}remove-form-data`, {
         method: 'DELETE',
-        // headers: {
-        //     Accept: 'application/json',
-        //     'Content-Type': 'application/json',
-        //     Authorization: `Bearer ${token}`
-        // },
         body: id
     })
         .then(response => {
