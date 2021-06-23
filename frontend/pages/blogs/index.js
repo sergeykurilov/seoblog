@@ -72,7 +72,6 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
         const showAllBlogs = () => {
 
             return blogs.map((blog, i) => {
-                console.log(blog)
                 return (
                     <div className="max-w-7xl mx-auto bg-red">
                         <div key={i} className="flex flex-wrap -mx-6 overflow-hidden sm:-mx-8 md:-mx-8 lg:-mx-6 xl:-mx-5">
@@ -87,7 +86,6 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
         const showAllCategories = () => {
 
             return categories.map((c, i) => {
-                console.log(c.slug)
                 return <Link href={`/categories/${c.slug}`} key={i}>
                     <a className="btn btn-primary mr-1 ml-1 mt-3">{c.name}</a>
                 </Link>
@@ -127,13 +125,6 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
                                             Company Blog
                                         </h1>
                                     </div>
-                                    {/*<section>*/}
-                                    {/*    <div className="pb-5 text-center">*/}
-                                    {/*        {showAllCategories()}*/}
-                                    {/*        <br/>*/}
-                                    {/*        {showAllTags()}*/}
-                                    {/*    </div>*/}
-                                    {/*</section>*/}
                                 </header>
                             </div>
                             {showAllBlogs()}

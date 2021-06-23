@@ -26,20 +26,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/leads": [
+    "/blogs": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/leads.js"
+      "static/chunks/pages/blogs.js"
     ],
-    "/signin": [
+    "/blogs/[slug]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/signin.js"
-    ],
-    "/signup": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/signup.js"
+      "static/chunks/pages/blogs/[slug].js"
     ]
   },
   "ampFirstPages": []

@@ -26,7 +26,7 @@ const navigationUser = [
     {name: 'Update/Delete Blog', href: '/user/crud/blogs', icon: DocumentReportIcon, current: false},
 ]
 
-const nav = isAuth().role === 1 ? navigationAdmin : navigationUser
+const nav = isAuth()?.role === 1 ? navigationAdmin : navigationUser
 
 const secondaryNavigation = [
     {name: 'Update profile', href: '/user/update', icon: CogIcon},
