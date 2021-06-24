@@ -11,8 +11,8 @@ import SmallCard from '../../components/Blog/Card/SmallCard';
 import SmallCards from "../../components/Blog/Card/SmallCard";
 import DisqusThread from "../../components/DisqusThread";
 
-const SingleBlog = ({blog, query}) => {
-
+const SingleBlog = React.memo(({blog, query}) => {
+    console.log(blog)
     const url = `${API}/blog/photo/${blog.slug}`
     const [{
         srcBlob,
@@ -25,13 +25,12 @@ const SingleBlog = ({blog, query}) => {
     useEffect(() => {
         let isUnmounted = false;
 
-        fetch(url, {
-        })
+        fetch(url, {})
             .then(response => response.blob())
             .then(blob => blob.arrayBuffer())
             .then(arrayBuffer => {
 
-                if(isUnmounted) {
+                if (isUnmounted) {
                     return;
                 }
 
@@ -101,29 +100,33 @@ const SingleBlog = ({blog, query}) => {
         ));
 
     const showComments = () => {
-        return(
+        return (
             <DisqusThread id={blog.id} title={blog.title} path={`/blog/${blog.slug}`}/>
         )
     }
 
 
     const showRelatedBlog = () => {
-        return related.map((blog, i) => (
+        return (
             <div className="bg-white pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
                 <div className="relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl">
                     <div>
-                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">Recent publications</h2>
+                        <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">Recent
+                            publications</h2>
                         <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                            Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet. Sapien tortor lacus
+                            Nullam risus blandit ac aliquam justo ipsum. Quam mauris volutpat massa dictumst amet.
+                            Sapien tortor lacus
                             arcu.
                         </p>
                     </div>
-                    <div key={i} className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
-                        <SmallCards blog={blog}/>
-                    </div>
+
+                    {related.map((blog, i) => (
+                        <div key={i} className="mt-12 grid gap-16 pt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+                            <SmallCards blog={blog}/>
+                        </div>
+                    ))}
                 </div>
-            </div>
-        ));
+            </div>);
     };
 
     return (
@@ -164,7 +167,6 @@ const SingleBlog = ({blog, query}) => {
 
                         <div className="container">
                             <section>
-
                                 <div className="col-md-12 lead">{renderHTML(blog.body)}</div>
                             </section>
                         </div>
@@ -175,7 +177,6 @@ const SingleBlog = ({blog, query}) => {
                                 showRelatedBlog()
                             }</div>
                         </div>
-
                         <div className="container pb-5">
                             {showComments()}
                         </div>
@@ -184,7 +185,7 @@ const SingleBlog = ({blog, query}) => {
             </Layout>
         </React.Fragment>
     );
-};
+});
 
 SingleBlog.getInitialProps = ({query}) => {
     return singleBlog(query.slug).then(data => {
