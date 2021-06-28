@@ -26,17 +26,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/crud/blog": [
+    "/blogs": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/chunks/pages/admin/crud/blog.js"
+      "static/chunks/pages/blogs.js"
     ],
-    "/admin/crud/leads": [
+    "/blogs/[slug]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/leads.js"
+      "static/chunks/pages/blogs/[slug].js"
     ]
   },
   "ampFirstPages": []
