@@ -32,5 +32,8 @@ module.exports = {
             tableLayout: ['hover', 'focus'],
         },
     },
-    plugins: [require('@tailwindcss/forms')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),]
+    ,
+
 }
