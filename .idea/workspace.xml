@@ -26,7 +26,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/chunks/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/chunks/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.next/static/development/_buildManifest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/components/Blog/Card/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Blog/Card/Card.js" afterDir="false" />
@@ -236,14 +235,7 @@
       <workItem from="1625492902705" duration="1498000" />
       <workItem from="1625498261600" duration="3355000" />
       <workItem from="1625515778713" duration="4491000" />
-      <workItem from="1625576764536" duration="804000" />
-    </task>
-    <task id="LOCAL-00055" summary="blogUpdate">
-      <created>1621879176882</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1621879176882</updated>
+      <workItem from="1625576764536" duration="2245000" />
     </task>
     <task id="LOCAL-00056" summary="Search">
       <created>1621893708645</created>
@@ -581,7 +573,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625526830507</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="front">
+      <created>1625577757016</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1625577757017</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +600,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="auth fix" />
     <MESSAGE value="back pre sign up" />
     <MESSAGE value="pre sign up" />
     <MESSAGE value="pre sign up done" />
@@ -626,7 +624,8 @@
     <MESSAGE value="fix blog page" />
     <MESSAGE value="blog index - slug" />
     <MESSAGE value="back" />
-    <option name="LAST_COMMIT_MESSAGE" value="back" />
+    <MESSAGE value="front" />
+    <option name="LAST_COMMIT_MESSAGE" value="front" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="53" key="#Plugins" timestamp="1620307081300">
@@ -689,10 +688,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="251" y="27" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1621891010849" />
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1625526853123">
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1625577842076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1625526853123" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1625577842076" />
     <state x="409" y="27" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1624219732079">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
